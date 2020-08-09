@@ -1,7 +1,5 @@
 package org.blaec.movies.enums;
 
-import lombok.AllArgsConstructor;
-
 import java.util.Arrays;
 
 public enum Resolution {

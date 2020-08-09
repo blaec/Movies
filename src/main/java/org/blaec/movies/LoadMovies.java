@@ -1,6 +1,8 @@
 package org.blaec.movies;
 
+import com.typesafe.config.Config;
 import org.blaec.movies.objects.Movie;
+import org.blaec.movies.utils.Configs;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -10,12 +12,15 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LoadMovies {
+    private static final String VIDEOS = "C:/Users/blaec/Videos";
     private static final String MOVIES = "//LDLKONSTANTIN/Movies";
     private static final String CARTOONS = "//LDLKONSTANTIN/Cartoons";
 
     public static void main(String[] args) {
-        getMoviesFromFolder(MOVIES).forEach(System.out::println);
-        getMoviesFromFolder(CARTOONS).forEach(System.out::println);
+        System.out.println(MovieConfig.getInstance().toString());
+        getMoviesFromFolder(VIDEOS).forEach(System.out::println);
+//        getMoviesFromFolder(MOVIES).forEach(System.out::println);
+//        getMoviesFromFolder(CARTOONS).forEach(System.out::println);
     }
 
     /**

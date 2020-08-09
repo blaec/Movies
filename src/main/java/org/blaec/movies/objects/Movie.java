@@ -21,7 +21,7 @@ public class Movie {
     private final String description;
     private final int frameRate;
 
-    public Movie(String name,
+    private Movie(String name,
                  String description,
                  int year,
                  Resolution resolution,
