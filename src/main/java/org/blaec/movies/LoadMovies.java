@@ -12,8 +12,8 @@ public class LoadMovies {
         Set<String> movies = new TreeSet<>();
         LoadMovies.getFilesFromFolder(VIDEOS, movies);
         movies.forEach(System.out::println);
-//        Movie from = Movie.from("Dumb & Dumber [Unrated] (1994) [720p] [60fps].mkv");
-//        System.out.println(from);
+        Movie from = Movie.from("Dumb & Dumber [Unrated] (1994) [720p] [60fps].mkv");
+        System.out.println(from);
     }
 
     /**
