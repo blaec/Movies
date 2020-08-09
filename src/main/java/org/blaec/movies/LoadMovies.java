@@ -1,19 +1,19 @@
 package org.blaec.movies;
 
+import org.blaec.movies.objects.Movie;
+
 import java.io.File;
 import java.io.FileFilter;
-import java.util.*;
-import java.util.regex.Pattern;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LoadMovies {
     private static final String VIDEOS = "//LDLKONSTANTIN/Movies";
 
     public static void main(String[] args) {
-        Set<String> movies = new TreeSet<>();
+        Set<File> movies = new TreeSet<>();
         LoadMovies.getFilesFromFolder(VIDEOS, movies);
-        movies.forEach(System.out::println);
-        Movie from = Movie.from("Dumb & Dumber [Unrated] (1994) [720p] [60fps].mkv");
-        System.out.println(from);
+        movies.forEach(m -> System.out.println(Movie.from(m)));
     }
 
     /**
@@ -22,13 +22,13 @@ public class LoadMovies {
      * @param dirPath folder absolute path
      * @param movies  set of movie names
      */
-    public static void getFilesFromFolder(String dirPath, Set<String> movies) {
+    public static void getFilesFromFolder(String dirPath, Set<File> movies) {
         File[] files;
         FileFilter filter = pathname -> pathname.isDirectory() || pathname.getName().endsWith("mkv");
         if ((files = (new File(dirPath)).listFiles(filter)) != null) {
             for (File file : files) {
                 if (file.isFile()) {
-                    movies.add(file.getName());
+                    movies.add(file);
                 } else if (file.isDirectory()) {
                     getFilesFromFolder(file.getAbsolutePath(), movies);
                 }
