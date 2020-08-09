@@ -15,18 +15,26 @@ public class Movie {
     private final int year;
     private final Resolution resolution;
     private final String size;
+    private final String location;
 
     // optional properties
     private final String description;
     private final int frameRate;
 
-    public Movie(String name, String description, int year, Resolution resolution, int frameRate, String size) {
+    public Movie(String name,
+                 String description,
+                 int year,
+                 Resolution resolution,
+                 int frameRate,
+                 String size,
+                 String location) {
         this.name = name;
         this.description = description;
         this.year = year;
         this.resolution = resolution;
         this.frameRate = frameRate;
         this.size = size;
+        this.location = location;
     }
 
     private static final Pattern MOVIE = Pattern.compile(
@@ -49,7 +57,8 @@ public class Movie {
                               parseInt(matcher, "year"),
                               Resolution.getResolution(matcher.group("resolution")),
                               parseInt(matcher, "frameRate"),
-                              FileUtils.byteCountToDisplaySize(file.length()));
+                              FileUtils.byteCountToDisplaySize(file.length()),
+                              file.getParent());
         }
         return movie;
     }
@@ -61,7 +70,8 @@ public class Movie {
 
     @Override
     public String toString() {
-        return String.format("%s%s (%d) [%s]%s | %s",
+        return String.format("%s | %s%s (%d) [%s]%s | %s",
+                location,
                 name,
                 description == null ? "" : String.format(" [%s]", description),
                 year,
