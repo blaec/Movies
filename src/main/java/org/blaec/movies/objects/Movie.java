@@ -1,5 +1,6 @@
 package org.blaec.movies.objects;
 
+import org.apache.commons.io.FileUtils;
 import org.blaec.movies.enums.Resolution;
 
 import java.io.File;
@@ -48,7 +49,7 @@ public class Movie {
                               parseInt(matcher, "year"),
                               Resolution.getResolution(matcher.group("resolution")),
                               parseInt(matcher, "frameRate"),
-                              getSize(file));
+                              FileUtils.byteCountToDisplaySize(file.length()));
         }
         return movie;
     }
@@ -56,22 +57,6 @@ public class Movie {
     private static int parseInt(Matcher matcher, String group) {
         String value = matcher.group(group);
         return value == null ? 0 : Integer.parseInt(value);
-    }
-
-    private static String getSize(File file) {
-        long bytes = file.length();
-        long absB = bytes == Long.MIN_VALUE ? Long.MAX_VALUE : Math.abs(bytes);
-        if (absB < 1024) {
-            return bytes + " B";
-        }
-        long value = absB;
-        CharacterIterator ci = new StringCharacterIterator("KMGTPE");
-        for (int i = 40; i >= 0 && absB > 0xfffccccccccccccL >> i; i -= 10) {
-            value >>= 10;
-            ci.next();
-        }
-        value *= Long.signum(bytes);
-        return String.format("%.1f %ciB", value / 1024.0, ci.current());
     }
 
     @Override
