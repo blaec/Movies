@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @AllArgsConstructor
 @ToString
-public class MovieRequestObject {
+public class MovieJsonObject {
     private final String Title;
     private final String Year;
     private final String Rated;

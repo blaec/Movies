@@ -1,8 +1,11 @@
-package org.blaec.movies;
+package org.blaec.movies.configs;
 
+import com.google.common.collect.ImmutableMap;
 import com.typesafe.config.Config;
 import org.blaec.movies.objects.MovieFileObject;
-import org.blaec.movies.utils.Configs;
+
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MovieConfig {
     private static final MovieConfig INSTANCE = new MovieConfig(Configs.getConfig("movie.conf", "omdbapi"));
@@ -21,13 +24,31 @@ public class MovieConfig {
         valueApikey = conf.getString("paramValue.apikey");
     }
 
-    public static String getRequestUrl(MovieFileObject movieFileObject)
-    {
-        return String.format("%s?%s=%s&%s=%d&%s=%s",
-                INSTANCE.endpoint,
+    /**
+     * Create request api url from movie file object (name and year)
+     * sample url: http://www.omdbapi.com/?t=As+Good+as+It+Gets&y=1997&apikey=22ea6ede
+     *
+     * @param movieFileObject movie file object
+     * @return url for api-request
+     */
+    public static String getApiRequestUrl(MovieFileObject movieFileObject) {
+        String params = joinParams(ImmutableMap.of(
                 INSTANCE.paramTitle, movieFileObject.getName().replace(" ", "+"),
-                INSTANCE.paramYear, movieFileObject.getYear(),
-                INSTANCE.paramApikey, INSTANCE.valueApikey);
+                INSTANCE.paramYear, String.valueOf(movieFileObject.getYear()),
+                INSTANCE.paramApikey, INSTANCE.valueApikey));
+        return String.format("%s?%s", INSTANCE.endpoint, params);
+    }
+
+    /**
+     * Convert map with key-value parameters into string like key1=value1&key2=value2...
+     *
+     * @param params map with key-value parameters
+     * @return parameters string
+     */
+    private static String joinParams(Map<String, String> params) {
+        return params.keySet().stream()
+                .map(k -> String.format("%s=%s", k, params.get(k)))
+                .collect(Collectors.joining("&"));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package org.blaec.movies.utils;
+package org.blaec.movies.configs;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;

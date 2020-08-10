@@ -2,7 +2,8 @@ package org.blaec.movies;
 
 import com.google.gson.Gson;
 import org.blaec.movies.objects.MovieFileObject;
-import org.blaec.movies.objects.MovieRequestObject;
+import org.blaec.movies.objects.MovieJsonObject;
+import org.blaec.movies.configs.MovieConfig;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -18,11 +19,12 @@ public class LoadMovies {
     private static final String CARTOONS = "//LDLKONSTANTIN/Cartoons";
 
     public static void main(String[] args) {
-        String url = MovieConfig.getRequestUrl(getMoviesFromFolder(MOVIES).get(33));
+        String url = MovieConfig.getApiRequestUrl(getMoviesFromFolder(MOVIES).get(33));
         HttpResponse<String> stringHttpResponse = Request.sendRequest(url);
         Gson g = new Gson();
-        MovieRequestObject person = g.fromJson(stringHttpResponse.body(), MovieRequestObject.class);
+        MovieJsonObject person = g.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
         System.out.println(stringHttpResponse.body());
+        System.out.println(person);
 
 //        getMoviesFromFolder(VIDEOS).forEach(System.out::println);
 //        getMoviesFromFolder(MOVIES).forEach(System.out::println);
