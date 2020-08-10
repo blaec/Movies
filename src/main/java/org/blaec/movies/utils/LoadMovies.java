@@ -1,36 +1,15 @@
-package org.blaec.movies;
+package org.blaec.movies.utils;
 
-import com.google.gson.Gson;
 import org.blaec.movies.objects.MovieFileObject;
-import org.blaec.movies.objects.MovieJsonObject;
-import org.blaec.movies.configs.MovieConfig;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LoadMovies {
-    private static final String VIDEOS = "C:/Users/blaec/Videos";
-    private static final String MOVIES = "//LDLKONSTANTIN/Movies";
-    private static final String CARTOONS = "//LDLKONSTANTIN/Cartoons";
-
-    public static void main(String[] args) {
-        String url = MovieConfig.getApiRequestUrl(getMoviesFromFolder(MOVIES).get(33));
-        HttpResponse<String> stringHttpResponse = Request.sendRequest(url);
-        Gson g = new Gson();
-        MovieJsonObject person = g.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
-        System.out.println(stringHttpResponse.body());
-        System.out.println(person);
-
-//        getMoviesFromFolder(VIDEOS).forEach(System.out::println);
-//        getMoviesFromFolder(MOVIES).forEach(System.out::println);
-//        getMoviesFromFolder(CARTOONS).forEach(System.out::println);
-    }
-
     /**
      * Returns sorted list of movies from folder
      *

@@ -1,4 +1,4 @@
-package org.blaec.movies;
+package org.blaec.movies.utils;
 
 import java.io.IOException;
 import java.net.URI;
@@ -7,7 +7,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Objects;
 
-public class Request {
+public class ApiRequest {
     public static HttpResponse<String> sendRequest(String url) {
         // http://zetcode.com/java/getpostrequest/
         HttpClient client = HttpClient.newHttpClient();
