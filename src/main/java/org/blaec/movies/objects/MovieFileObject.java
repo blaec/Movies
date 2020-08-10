@@ -1,5 +1,7 @@
 package org.blaec.movies.objects;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.apache.commons.io.FileUtils;
 import org.blaec.movies.enums.Resolution;
 
@@ -7,8 +9,10 @@ import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Getter
+@AllArgsConstructor
 public class MovieFileObject {
-    // mandotary properties
+    // mandatory properties
     private final String name;
     private final int year;
     private final Resolution resolution;
@@ -19,36 +23,12 @@ public class MovieFileObject {
     private final String description;
     private final int frameRate;
 
-    private MovieFileObject(String name,
-                            String description,
-                            int year,
-                            Resolution resolution,
-                            int frameRate,
-                            String size,
-                            String location) {
-        this.name = name;
-        this.description = description;
-        this.year = year;
-        this.resolution = resolution;
-        this.frameRate = frameRate;
-        this.size = size;
-        this.location = location;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
     private static final Pattern MOVIE = Pattern.compile(
             "(?<name>[ ,-.\\w'&amp;]+?) " +
-            "(\\[(?<description>.*)\\] )?" +
+            "(\\[(?<description>.*)] )?" +
             "\\((?<year>\\d{4})\\) " +
-            "\\[(?<resolution>\\d+p)\\]" +
-            "( \\[(?<frameRate>\\d+)fps\\])?");
+            "\\[(?<resolution>\\d+p)]" +
+            "( \\[(?<frameRate>\\d+)fps])?");
 
     public static MovieFileObject from(File file) {
         String fileName = file.getName();
@@ -59,12 +39,12 @@ public class MovieFileObject {
             System.out.println(fileName);
         } else {
             movieFileObject = new MovieFileObject(matcher.group("name"),
-                              matcher.group("description"),
-                              parseInt(matcher, "year"),
-                              Resolution.getResolution(matcher.group("resolution")),
-                              parseInt(matcher, "frameRate"),
-                              FileUtils.byteCountToDisplaySize(file.length()),
-                              file.getParent());
+                                                  parseInt(matcher, "year"),
+                                                  Resolution.getResolution(matcher.group("resolution")),
+                                                  FileUtils.byteCountToDisplaySize(file.length()),
+                                                  file.getParent(),
+                                                  matcher.group("description"),
+                                                  parseInt(matcher, "frameRate"));
         }
         return movieFileObject;
     }

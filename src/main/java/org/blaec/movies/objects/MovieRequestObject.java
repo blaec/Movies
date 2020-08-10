@@ -1,5 +1,12 @@
 package org.blaec.movies.objects;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+@AllArgsConstructor
+@ToString
 public class MovieRequestObject {
     private final String Title;
     private final String Year;
@@ -14,20 +21,4 @@ public class MovieRequestObject {
     private final String Poster;
     private final String imdbVotes;
     private final String Type;
-
-    public MovieRequestObject(String title, String year, String rated, String runtime, String genre, String actors, String language, String awards, String imdbRating, String imdbID, String poster, String imdbVotes, String type) {
-        Title = title;
-        Year = year;
-        Rated = rated;
-        Runtime = runtime;
-        Genre = genre;
-        Actors = actors;
-        Language = language;
-        Awards = awards;
-        this.imdbRating = imdbRating;
-        this.imdbID = imdbID;
-        Poster = poster;
-        this.imdbVotes = imdbVotes;
-        Type = type;
-    }
 }
