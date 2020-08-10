@@ -4,12 +4,10 @@ import org.apache.commons.io.FileUtils;
 import org.blaec.movies.enums.Resolution;
 
 import java.io.File;
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Movie {
+public class MovieFileObject {
     // mandotary properties
     private final String name;
     private final int year;
@@ -21,13 +19,13 @@ public class Movie {
     private final String description;
     private final int frameRate;
 
-    private Movie(String name,
-                 String description,
-                 int year,
-                 Resolution resolution,
-                 int frameRate,
-                 String size,
-                 String location) {
+    private MovieFileObject(String name,
+                            String description,
+                            int year,
+                            Resolution resolution,
+                            int frameRate,
+                            String size,
+                            String location) {
         this.name = name;
         this.description = description;
         this.year = year;
@@ -37,6 +35,14 @@ public class Movie {
         this.location = location;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
     private static final Pattern MOVIE = Pattern.compile(
             "(?<name>[ ,-.\\w'&amp;]+?) " +
             "(\\[(?<description>.*)\\] )?" +
@@ -44,15 +50,15 @@ public class Movie {
             "\\[(?<resolution>\\d+p)\\]" +
             "( \\[(?<frameRate>\\d+)fps\\])?");
 
-    public static Movie from(File file) {
+    public static MovieFileObject from(File file) {
         String fileName = file.getName();
         Matcher matcher = MOVIE.matcher(fileName);
-        Movie movie = null;
+        MovieFileObject movieFileObject = null;
         if (!matcher.find()) {
             // TODO log error
             System.out.println(fileName);
         } else {
-            movie = new Movie(matcher.group("name"),
+            movieFileObject = new MovieFileObject(matcher.group("name"),
                               matcher.group("description"),
                               parseInt(matcher, "year"),
                               Resolution.getResolution(matcher.group("resolution")),
@@ -60,7 +66,7 @@ public class Movie {
                               FileUtils.byteCountToDisplaySize(file.length()),
                               file.getParent());
         }
-        return movie;
+        return movieFileObject;
     }
 
     private static int parseInt(Matcher matcher, String group) {

@@ -1,9 +1,8 @@
 package org.blaec.movies;
 
 import com.typesafe.config.Config;
+import org.blaec.movies.objects.MovieFileObject;
 import org.blaec.movies.utils.Configs;
-
-import java.nio.charset.StandardCharsets;
 
 public class MovieConfig {
     private static final MovieConfig INSTANCE = new MovieConfig(Configs.getConfig("movie.conf", "omdbapi"));
@@ -22,8 +21,13 @@ public class MovieConfig {
         valueApikey = conf.getString("paramValue.apikey");
     }
 
-    public static MovieConfig getInstance() {
-        return INSTANCE;
+    public static String getRequestUrl(MovieFileObject movieFileObject)
+    {
+        return String.format("%s?%s=%s&%s=%d&%s=%s",
+                INSTANCE.endpoint,
+                INSTANCE.paramTitle, movieFileObject.getName().replace(" ", "+"),
+                INSTANCE.paramYear, movieFileObject.getYear(),
+                INSTANCE.paramApikey, INSTANCE.valueApikey);
     }
 
     @Override

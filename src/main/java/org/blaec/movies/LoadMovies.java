@@ -1,11 +1,12 @@
 package org.blaec.movies;
 
-import com.typesafe.config.Config;
-import org.blaec.movies.objects.Movie;
-import org.blaec.movies.utils.Configs;
+import com.google.gson.Gson;
+import org.blaec.movies.objects.MovieFileObject;
+import org.blaec.movies.objects.MovieRequestObject;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -17,8 +18,13 @@ public class LoadMovies {
     private static final String CARTOONS = "//LDLKONSTANTIN/Cartoons";
 
     public static void main(String[] args) {
-        System.out.println(MovieConfig.getInstance().toString());
-        getMoviesFromFolder(VIDEOS).forEach(System.out::println);
+        String url = MovieConfig.getRequestUrl(getMoviesFromFolder(MOVIES).get(33));
+        HttpResponse<String> stringHttpResponse = Request.sendRequest(url);
+        Gson g = new Gson();
+        MovieRequestObject person = g.fromJson(stringHttpResponse.body(), MovieRequestObject.class);
+        System.out.println(stringHttpResponse.body());
+
+//        getMoviesFromFolder(VIDEOS).forEach(System.out::println);
 //        getMoviesFromFolder(MOVIES).forEach(System.out::println);
 //        getMoviesFromFolder(CARTOONS).forEach(System.out::println);
     }
@@ -29,11 +35,11 @@ public class LoadMovies {
      * @param dirPath absolute path to folder with video-files
      * @return sorted list of movie objects
      */
-    public static List<Movie> getMoviesFromFolder(String dirPath) {
+    public static List<MovieFileObject> getMoviesFromFolder(String dirPath) {
         Set<File> movies = new TreeSet<>();
         LoadMovies.getFilesFromFolder(dirPath, movies);
         return movies.stream()
-                .map(Movie::from)
+                .map(MovieFileObject::from)
                 .collect(Collectors.toList());
     }
 
