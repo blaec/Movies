@@ -9,16 +9,18 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-public class LoadMovies {
+public class FilesUtils {
+    private static final FileFilter filter = pathname -> pathname.isDirectory() || pathname.getName().endsWith("mkv");
+    private static final Set<File> movies = new TreeSet<>();
+
     /**
      * Returns sorted list of movies from folder
      *
      * @param dirPath absolute path to folder with video-files
-     * @return sorted list of movie objects
+     * @return sorted list of movie objects or empty list
      */
     public static List<MovieFileObject> getMoviesFromFolder(String dirPath) {
-        Set<File> movies = new TreeSet<>();
-        LoadMovies.getFilesFromFolder(dirPath, movies);
+        getFilesFromFolder(dirPath);
         return movies.stream()
                 .map(MovieFileObject::from)
                 .collect(Collectors.toList());
@@ -28,17 +30,15 @@ public class LoadMovies {
      * Extracts recursively mkv-files from folder, including sub-folders
      *
      * @param dirPath absolute path to folder with video-files
-     * @param movies  set of movie names
      */
-    private static void getFilesFromFolder(String dirPath, Set<File> movies) {
-        File[] files;
-        FileFilter filter = pathname -> pathname.isDirectory() || pathname.getName().endsWith("mkv");
-        if ((files = (new File(dirPath)).listFiles(filter)) != null) {
+    private static void getFilesFromFolder(String dirPath) {
+        File[] files = (new File(dirPath)).listFiles(filter);
+        if (files != null) {
             for (File file : files) {
                 if (file.isFile()) {
                     movies.add(file);
                 } else if (file.isDirectory()) {
-                    getFilesFromFolder(file.getAbsolutePath(), movies);
+                    getFilesFromFolder(file.getAbsolutePath());
                 }
             }
         }
