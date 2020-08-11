@@ -25,6 +25,5 @@ public class AppMain {
         MovieJsonObject person = g.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
         System.out.println(stringHttpResponse.body());
         System.out.println(person);
-
     }
 }

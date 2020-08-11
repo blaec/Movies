@@ -38,13 +38,15 @@ public class MovieFileObject {
             // TODO log error
             System.out.println(fileName);
         } else {
-            movieFileObject = new MovieFileObject(matcher.group("name"),
-                                                  parseInt(matcher, "year"),
-                                                  Resolution.getResolution(matcher.group("resolution")),
-                                                  FileUtils.byteCountToDisplaySize(file.length()),
-                                                  file.getParent(),
-                                                  matcher.group("description"),
-                                                  parseInt(matcher, "frameRate"));
+            movieFileObject = new MovieFileObject(
+                matcher.group("name"),
+                parseInt(matcher, "year"),
+                Resolution.getResolution(matcher.group("resolution")),
+                FileUtils.byteCountToDisplaySize(file.length()),
+                file.getParent(),
+                matcher.group("description"),
+                parseInt(matcher, "frameRate")
+            );
         }
         return movieFileObject;
     }
