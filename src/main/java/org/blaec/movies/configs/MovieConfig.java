@@ -27,16 +27,24 @@ public class MovieConfig {
     /**
      * Create request api url from movie file object (name and year)
      * sample url: http://www.omdbapi.com/?t=As+Good+as+It+Gets&y=1997&apikey=22ea6ede
-     *
+     * TODO replace ' with %27, space with +
      * @param movieFileObject movie file object
      * @return url for api-request
      */
     public static String getApiRequestUrl(MovieFileObject movieFileObject) {
         String params = joinParams(ImmutableMap.of(
-                INSTANCE.paramTitle, movieFileObject.getName().replace(" ", "+"),
+                INSTANCE.paramTitle, encodeTitle(movieFileObject.getName()),
                 INSTANCE.paramYear, String.valueOf(movieFileObject.getYear()),
                 INSTANCE.paramApikey, INSTANCE.valueApikey));
         return String.format("%s?%s", INSTANCE.endpoint, params);
+    }
+
+    private static String encodeTitle(String name) {
+        return name.replace(" ", "+")
+                   .replace("..", "%3A")
+                   .replace("'", "%27")
+                   .replace("é", "%C3%A9")
+                   .replace("&", "%26");
     }
 
     /**

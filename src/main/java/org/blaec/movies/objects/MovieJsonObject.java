@@ -9,17 +9,17 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class MovieJsonObject {
-    private final @Column("id") String Title;
-    private final @Column("title") String Year;
-    private final @Column("year") String Rated;
-    private final @Column("rated") String Runtime;
-    private final @Column("runtime") String Genre;
-    private final @Column("genre") String Actors;
-    private final @Column("actors") String Language;
-    private final @Column("language") String Awards;
-    private final @Column("awards") String imdbRating;
-    private final @Column("imdb_rating") String imdbID;
-    private final @Column("imdb_id") String Poster;
-    private final @Column("poster") String imdbVotes;
-    private final @Column("imdb_votes") String Type;
+    private final @Column("title") String Title;
+    private final @Column("year") String Year;
+    private final @Column("rated") String Rated;
+    private final @Column("runtime") String Runtime;
+    private final @Column("genre") String Genre;
+    private final @Column("actors") String Actors;
+    private final @Column("language") String Language;
+    private final @Column("awards") String Awards;
+    private final @Column("imdb_rating") String imdbRating;
+    private final @Column("imdb_id") String imdbID;
+    private final @Column("poster") String Poster;
+    private final @Column("imdb_votes") String imdbVotes;
+    private final @Column("type") String Type;
 }

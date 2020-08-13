@@ -1,11 +1,9 @@
 package org.blaec.movies.dao;
 
 import com.bertoncelj.jdbi.entitymapper.EntityMapperFactory;
-import org.blaec.movies.objects.TestMovie;
-import org.skife.jdbi.v2.sqlobject.BindBean;
-import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.blaec.movies.objects.MovieJsonObject;
+import org.blaec.movies.objects.MovieDbObject;
+import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 
 import java.util.List;
@@ -18,19 +16,16 @@ public abstract class MovieDao implements AbstractDao {
     public abstract void clean();
 
     @SqlQuery("SELECT * FROM movies")
-    public abstract List<TestMovie> getAll();
+    public abstract List<MovieDbObject> getAll();
 
-//    public Map<String, City> getAsMap() {
-//        return StreamEx.of(getAll()).toMap(City::getRef, identity());
-//    }
-//
-    @SqlUpdate("INSERT INTO movies (title) VALUES (:title)")
+//    @SqlQuery("SELECT * FROM movies WHERE title like :title")
+//    @SqlQuery("SELECT m FROM movies m WHERE m.title=:title")
+//    public abstract MovieDataObject getByTitle(@Bind("title") String title);
+
+    @SqlUpdate("INSERT INTO movies (title, year, rated, runtime, genre, actors, language, awards, imdb_rating, imdb_id, poster, imdb_votes, type) " +
+                    "VALUES (:title, :year, :rated, :runtime, :genre, :actors, :language, :awards, :imdbRating, :imdbID, :poster, :imdbVotes, :type)")
     @GetGeneratedKeys
-    public abstract int insert(@BindBean TestMovie movies);
-//    @SqlUpdate("INSERT INTO movies (title, year, rated, runtime, genre, actors, language, awards, imdb_rating, imdb_id, poster, imdb_votes, type) " +
-//                    "VALUES (:Title, :Year, :Rated, :Runtime, :Genre, :Actors, :Language, :Awards, :imdbRating, :imdbID, :Poster, :imdbVotes, :Type)")
-//    @GetGeneratedKeys
-//    public abstract int insert(@BindBean MovieJsonObject movies);
+    public abstract int insert(@BindBean MovieJsonObject movies);
 //
 //    @SqlBatch("INSERT INTO movies (ref, name) VALUES (:ref, :name)")
 //    public abstract void insertBatch(@BindBean Collection<City> cities);
