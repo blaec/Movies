@@ -11,6 +11,7 @@ import org.blaec.movies.persist.DBIProvider;
 import org.blaec.movies.persist.DBITestProvider;
 import org.blaec.movies.utils.ApiUtils;
 import org.blaec.movies.utils.FilesUtils;
+import org.blaec.movies.utils.MovieConverter;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -33,7 +34,6 @@ public class AppMain {
         List<MovieFileObject> folderMovies = FilesUtils.getMoviesFromFolder(MOVIES);
         MovieDao dao = DBIProvider.getDao(MovieDao.class);
         List<MovieDbObject> dbMovies = dao.getAll();
-
         for (MovieFileObject movieFile : folderMovies) {
             boolean movieNotExistInDb = dbMovies.stream()
                     .noneMatch(m -> StringUtils.containsIgnoreCase(
@@ -44,9 +44,8 @@ public class AppMain {
                 HttpResponse<String> stringHttpResponse = ApiUtils.sendRequest(url);
                 Gson g = new Gson();
                 try {
-                    System.out.println("not found " + movieFile.getName());
                     MovieJsonObject movie = g.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
-                    dao.insert(movie);
+                    dao.insert(MovieConverter.combine(movie, movieFile));
                 } catch (Exception e) {
                     System.out.println(url);
                 }
