@@ -4,6 +4,8 @@ import org.blaec.movies.objects.MovieFileObject;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -11,6 +13,16 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class FilesUtils {
+    public static final long ONE_KB = 1024;
+    public static final long ONE_MB = ONE_KB * ONE_KB;
+    public static final long ONE_GB = ONE_KB * ONE_MB;
+    public static final long ONE_TB = ONE_KB * ONE_GB;
+
+    public static final BigDecimal ONE_KB_BD = BigDecimal.valueOf(ONE_KB);
+    public static final BigDecimal ONE_MB_BD = BigDecimal.valueOf(ONE_MB);
+    public static final BigDecimal ONE_GB_BD = BigDecimal.valueOf(ONE_GB);
+    public static final BigDecimal ONE_TB_BD = BigDecimal.valueOf(ONE_TB);
+
     private static final FileFilter filter = pathname -> pathname.isDirectory() || pathname.getName().endsWith("mkv");
     private static final Set<File> movies = new TreeSet<>();
 
@@ -44,5 +56,17 @@ public class FilesUtils {
                 }
             }
         }
+    }
+
+    /**
+     * Calculate file size in gb
+     *
+     * @param size file size in bytes
+     * @return file size rounded to 2 digits after the decimal point
+     */
+    public static double byteToGb(long size) {
+        return BigDecimal.valueOf(size)
+                .divide(ONE_GB_BD, 2, RoundingMode.DOWN)
+                .doubleValue();
     }
 }

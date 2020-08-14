@@ -3,8 +3,8 @@ package org.blaec.movies.objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
 import org.blaec.movies.enums.Resolution;
+import org.blaec.movies.utils.FilesUtils;
 
 import java.io.File;
 import java.util.regex.Matcher;
@@ -18,7 +18,7 @@ public class MovieFileObject {
     private final String name;
     private final int year;
     private final Resolution resolution;
-    private final String size;
+    private final double size;
     private final String location;
 
     // optional properties
@@ -45,14 +45,15 @@ public class MovieFileObject {
         if (!matcher.find()) {
             log.error("failed to parse movie {}{}{}", file.getParent(), File.separator, fileName);
         } else {
+            int frameRate = parseInt(matcher, "frameRate");
             movieFileObject = new MovieFileObject(
                 matcher.group("name"),
                 parseInt(matcher, "year"),
                 Resolution.getResolution(matcher.group("resolution")),
-                FileUtils.byteCountToDisplaySize(file.length()),
+                FilesUtils.byteToGb(file.length()),
                 file.getParent(),
                 matcher.group("description"),
-                parseInt(matcher, "frameRate")
+                frameRate == 0 ? 24 : frameRate
             );
         }
         return movieFileObject;
@@ -87,7 +88,7 @@ public class MovieFileObject {
 
     @Override
     public String toString() {
-        return String.format("%s | %s%s (%d) [%s]%s | %s",
+        return String.format("%s | %s%s (%d) [%s]%s | %f Gb",
                 location,
                 name,
                 description == null ? "" : String.format(" [%s]", description),
