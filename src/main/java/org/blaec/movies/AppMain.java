@@ -34,11 +34,15 @@ public class AppMain {
 //        LoadMovies.getMoviesFromFolder(VIDEOS).forEach(System.out::println);
 //        LoadMovies.getMoviesFromFolder(CARTOONS).forEach(System.out::println);
 
+        List<MovieFileObject> videos = FilesUtils.getMoviesFromFolder(VIDEOS);
+        for (MovieFileObject video : videos) {
+            log.info(video.toString());
+        }
+
         List<MovieFileObject> folderMovies = FilesUtils.getMoviesFromFolder(MOVIES);
         MovieDao dao = DBIProvider.getDao(MovieDao.class);
         List<MovieDbObject> dbMovies = dao.getAll();
         for (MovieFileObject movieFile : folderMovies) {
-            log.info(movieFile.toString());
             boolean movieNotExistInDb = dbMovies.stream()
                     .noneMatch(m -> StringUtils.containsIgnoreCase(m.getTitle(), movieFile.getNameDbStyled()));
             if (movieNotExistInDb) {
