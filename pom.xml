@@ -31,8 +31,6 @@
         <!-- Logging -->
         <logback.version>1.2.3</logback.version>
         <slf4j.version>1.7.25</slf4j.version>
-
-        <movie.config>/Users/blaec/Documents/javaProjects/apps/movies/config/</movie.config>
     </properties>
 
     <build>
@@ -49,19 +47,6 @@
                 </configuration>
             </plugin>
         </plugins>
-
-        <resources>
-            <resource>
-                <directory>${movie.config}</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>logback.xml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
     </build>
 
     <dependencies>
@@ -88,8 +73,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
         </dependency>
-
-
 
         <!-- parsers -->
         <dependency>
