@@ -24,7 +24,7 @@ public class MovieFileObject {
     private final int frameRate;
 
     private static final Pattern MOVIE = Pattern.compile(
-            "(?<name>[ ,-.\\w'&amp;]+?) " +
+            "(?<name>[ ,-.\\w'&ampéÆ;]+?) " +
             "(\\[(?<description>.*)] )?" +
             "\\((?<year>\\d{4})\\) " +
             "\\[(?<resolution>\\d+p)]" +
@@ -54,6 +54,28 @@ public class MovieFileObject {
     private static int parseInt(Matcher matcher, String group) {
         String value = matcher.group(group);
         return value == null ? 0 : Integer.parseInt(value);
+    }
+
+    /**
+     * Replace some symbols in file name to new symbols as they are saved in db
+     *
+     * @return file movie name converted for comparing with db movie name
+     */
+    public String getNameDbStyled() {
+        return name.replace("..", ":");
+    }
+
+    /**
+     * Replace some symbols in file name to new symbols allowed in url link
+     *
+     * @return file movie name converted to url file name
+     */
+    public String getNameUrlStyled() {
+        return name.replace(" ", "+")
+                   .replace("..", "%3A")
+                   .replace("'", "%27")
+                   .replace("é", "%C3%A9")
+                   .replace("&", "%26");
     }
 
     @Override

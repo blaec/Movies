@@ -5,7 +5,7 @@ import org.blaec.movies.configs.Configs;
 
 import java.sql.DriverManager;
 
-public class DBITestProvider {
+public class DBILocalProvider {
     public static void initDBI() {
         Config db = Configs.getConfig("persist.conf","db");
         initDBI(db.getString("url"), db.getString("user"), db.getString("password"));

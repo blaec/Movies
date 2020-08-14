@@ -29,4 +29,4 @@ CREATE TABLE movies
     frame_rate  INTEGER
 );
 
-CREATE UNIQUE INDEX title_idx ON movies (title);
+CREATE UNIQUE INDEX movies_unique_title_year_idx ON movies (title, year);
