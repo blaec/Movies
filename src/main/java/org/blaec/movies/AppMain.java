@@ -1,14 +1,15 @@
 package org.blaec.movies;
 
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.blaec.movies.configs.MovieConfig;
 import org.blaec.movies.dao.MovieDao;
 import org.blaec.movies.objects.MovieDbObject;
 import org.blaec.movies.objects.MovieFileObject;
 import org.blaec.movies.objects.MovieJsonObject;
-import org.blaec.movies.persist.DBIProvider;
 import org.blaec.movies.persist.DBILocalProvider;
+import org.blaec.movies.persist.DBIProvider;
 import org.blaec.movies.utils.ApiUtils;
 import org.blaec.movies.utils.FilesUtils;
 import org.blaec.movies.utils.MovieConverter;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.util.List;
 
+@Slf4j
 public class AppMain {
     private static final String VIDEOS = "C:/Users/blaec/Videos";
     private static final String MOVIES = "//LDLKONSTANTIN/Movies";
@@ -45,7 +47,7 @@ public class AppMain {
                     MovieJsonObject movieJson = gson.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
                     dao.insert(MovieConverter.combine(movieJson, movieFile));
                 } catch (Exception e) {
-                    System.out.println(url);
+                    log.error("failed to save movie {} into db", movieFile, e);
                 }
             }
         }

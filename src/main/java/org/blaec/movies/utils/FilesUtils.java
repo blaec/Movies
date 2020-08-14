@@ -5,6 +5,7 @@ import org.blaec.movies.objects.MovieFileObject;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -23,6 +24,7 @@ public class FilesUtils {
         getFilesFromFolder(dirPath);
         return movies.stream()
                 .map(MovieFileObject::from)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 

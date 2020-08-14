@@ -2,6 +2,7 @@ package org.blaec.movies.objects;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.blaec.movies.enums.Resolution;
 
@@ -9,6 +10,7 @@ import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Slf4j
 @Getter
 @AllArgsConstructor
 public class MovieFileObject {
@@ -30,13 +32,18 @@ public class MovieFileObject {
             "\\[(?<resolution>\\d+p)]" +
             "( \\[(?<frameRate>\\d+)fps])?");
 
+    /**
+     * Creates movie file object from movie file
+     *
+     * @param file movie file
+     * @return MovieFileObject and may return null
+     */
     public static MovieFileObject from(File file) {
         String fileName = file.getName();
         Matcher matcher = MOVIE.matcher(fileName);
         MovieFileObject movieFileObject = null;
         if (!matcher.find()) {
-            // TODO log error
-            System.out.println(fileName);
+            log.error("failed to parse movie {}{}{}", file.getParent(), File.separator, fileName);
         } else {
             movieFileObject = new MovieFileObject(
                 matcher.group("name"),
