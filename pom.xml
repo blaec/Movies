@@ -22,6 +22,7 @@
         <!-- utils -->
         <apache.commons.version>2.4</apache.commons.version>
         <guava.version>29.0-jre</guava.version>
+        <commons-lang3.version>3.11</commons-lang3.version>
 
         <!-- parsers -->
         <config.version>1.4.0</config.version>
@@ -63,6 +64,12 @@
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
 
 
         <!-- parsers -->
@@ -75,6 +82,29 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>${gson.version}</version>
+        </dependency>
+
+        <!-- database -->
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi</artifactId>
+            <version>2.78</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bertoncelj.jdbi.entitymapper</groupId>
+            <artifactId>jdbi-entity-mapper</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jdbi</groupId>
+                    <artifactId>jdbi</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.1.4</version>
         </dependency>
     </dependencies>
 </project>

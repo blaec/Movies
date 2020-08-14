@@ -26,14 +26,14 @@ public class MovieConfig {
 
     /**
      * Create request api url from movie file object (name and year)
-     * sample url: http://www.omdbapi.com/?t=As+Good+as+It+Gets&y=1997&apikey=22ea6ede
+     * sample url: http://www.omdbapi.com/?t=As+Good+as+It+Gets&y=1997&apikey=33ca5cbc
      *
      * @param movieFileObject movie file object
      * @return url for api-request
      */
     public static String getApiRequestUrl(MovieFileObject movieFileObject) {
         String params = joinParams(ImmutableMap.of(
-                INSTANCE.paramTitle, movieFileObject.getName().replace(" ", "+"),
+                INSTANCE.paramTitle, movieFileObject.getNameUrlStyled(),
                 INSTANCE.paramYear, String.valueOf(movieFileObject.getYear()),
                 INSTANCE.paramApikey, INSTANCE.valueApikey));
         return String.format("%s?%s", INSTANCE.endpoint, params);

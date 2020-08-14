@@ -1,5 +1,6 @@
 package org.blaec.movies.objects;
 
+import com.bertoncelj.jdbi.entitymapper.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -8,17 +9,17 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class MovieJsonObject {
-    private final String Title;
-    private final String Year;
-    private final String Rated;
-    private final String Runtime;
-    private final String Genre;
-    private final String Actors;
-    private final String Language;
-    private final String Awards;
-    private final String imdbRating;
-    private final String imdbID;
-    private final String Poster;
-    private final String imdbVotes;
-    private final String Type;
+    private final @Column("title") String Title;
+    private final @Column("year") String Year;
+    private final @Column("rated") String Rated;
+    private final @Column("runtime") String Runtime;
+    private final @Column("genre") String Genre;
+    private final @Column("actors") String Actors;
+    private final @Column("language") String Language;
+    private final @Column("awards") String Awards;
+    private final @Column("imdb_rating") String imdbRating;
+    private final @Column("imdb_id") String imdbID;
+    private final @Column("poster") String Poster;
+    private final @Column("imdb_votes") String imdbVotes;
+    private final @Column("type") String Type;
 }
