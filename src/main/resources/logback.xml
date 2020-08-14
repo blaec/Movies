@@ -4,15 +4,23 @@
     <!-- To enable JMX Management -->
     <jmxConfigurator/>
 
-    <property name="LOG_DIR" value="/Users/blaec/Documents/javaProjects/apps/movies/logs/"/>
+    <property name="LOG_DIR" value="/Users/blaec/Documents/javaProjects/apps/movies/logs"/>
 
-    <appender name="file" class="ch.qos.logback.core.FileAppender">
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_DIR}/movies.log</file>
-
-        <encoder>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <charset>UTF-8</charset>
             <pattern>%date %-5level %logger{50}.%M:%L - %msg%n</pattern>
         </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_DIR}/archived/movies.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>5MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
     </appender>
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">

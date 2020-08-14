@@ -34,11 +34,6 @@ public class AppMain {
 //        LoadMovies.getMoviesFromFolder(VIDEOS).forEach(System.out::println);
 //        LoadMovies.getMoviesFromFolder(CARTOONS).forEach(System.out::println);
 
-        List<MovieFileObject> videos = FilesUtils.getMoviesFromFolder(VIDEOS);
-        for (MovieFileObject video : videos) {
-            log.info(video.toString());
-        }
-
         List<MovieFileObject> folderMovies = FilesUtils.getMoviesFromFolder(MOVIES);
         MovieDao dao = DBIProvider.getDao(MovieDao.class);
         List<MovieDbObject> dbMovies = dao.getAll();
@@ -52,7 +47,7 @@ public class AppMain {
                     MovieJsonObject movieJson = gson.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
                     dao.insert(MovieConverter.combine(movieJson, movieFile));
                 } catch (Exception e) {
-                    System.out.println(url);
+                    log.error("failed to save movie {} into db", movieFile, e);
                 }
             }
         }
