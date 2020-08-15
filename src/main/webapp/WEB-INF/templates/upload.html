@@ -1,16 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Upload XML</title>
+    <title>Users</title>
 </head>
+<!--https://code.jquery.com/-->
+<!--http://stackoverflow.com/a/24070373/548473-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous" async>
+</script>
 <body>
-<form action="" method="post" enctype="multipart/form-data">
-    <h3>Select xml file to upload</h3>
-    <p>
-        <input type="file" name="fileToUpload" id="fileToUpload"><br/>
-    </p>
-    <p>
-        <input type="submit" value="Upload" name="submit">
-    </p>
-</form>
+<section>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Size</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="movies" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"*/-->
+        <tr th:each="movie,iter: ${movies}">
+            <td th:text="${iter.count}"></td>
+            <td th:text="${movie.title}"></td>
+            <td th:utext="${movie.year}"></td>
+            <td th:text="${movie.size}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <hr/>
+</section>
 </body>
 </html>
