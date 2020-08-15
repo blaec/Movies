@@ -4,6 +4,7 @@ import org.blaec.movies.objects.MovieDbObject;
 import org.blaec.movies.objects.MovieFileObject;
 import org.blaec.movies.objects.MovieJsonObject;
 
+import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
@@ -32,6 +33,9 @@ public class MovieConverter {
         movieDbObject.setSize(movieFileObject.getSize());
         movieDbObject.setLocation(movieFileObject.getLocation());
         movieDbObject.setFrameRate(movieFileObject.getFrameRate());
+
+        // additional fields
+        movieDbObject.setUpdated(new Timestamp(System.currentTimeMillis()));
         return movieDbObject;
     }
 }

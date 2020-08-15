@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -51,11 +51,14 @@
                         <span class="badge badge-pill badge-success mr-2">actors</span>
                         <p class="card-text font-light-weight font-italic" th:text="${movie.actors}">actors</p>
                     </div>
-                    <div class="mb-0 d-flex">
+                    <div class="mb-1 d-flex">
                         <span class="badge badge-pill badge-info mr-2">genre</span>
                         <p class="card-text font-light-weight font-italic" th:text="${movie.genre}">genre</p>
                     </div>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <div class="mb-0 d-flex">
+                        <p class="card-text"><small class="text-muted mr-1">Last updated</small></p>
+                        <p class="card-text"><small class="text-muted" th:text="${#dates.format(movie.updated, 'yyyy-MM-dd HH:mm:ss')}">3 mins ago</small></p>
+                    </div>
                 </div>
             </div>
         </div>

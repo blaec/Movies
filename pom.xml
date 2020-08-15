@@ -18,7 +18,7 @@
         <lombok.version>1.18.12</lombok.version>
 
         <!-- utils -->
-        <apache.commons.version>2.4</apache.commons.version>
+<!--        <apache.commons.version>2.4</apache.commons.version>-->
         <guava.version>29.0-jre</guava.version>
         <commons-lang3.version>3.11</commons-lang3.version>
 
@@ -68,11 +68,11 @@
         </dependency>
 
         <!-- utils -->
-        <dependency>
-            <groupId>org.apache.directory.studio</groupId>
-            <artifactId>org.apache.commons.io</artifactId>
-            <version>${apache.commons.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.directory.studio</groupId>-->
+<!--            <artifactId>org.apache.commons.io</artifactId>-->
+<!--            <version>${apache.commons.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>

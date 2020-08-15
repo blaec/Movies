@@ -38,7 +38,8 @@ public abstract class MovieDao implements AbstractDao {
                             "size, " +
                             "location, " +
                             "description, " +
-                            "frame_rate) " +
+                            "frame_rate, " +
+                            "updated) " +
                "VALUES      (:title, " +
                             ":year, " +
                             ":rated, " +
@@ -56,7 +57,8 @@ public abstract class MovieDao implements AbstractDao {
                             ":size, " +
                             ":location, " +
                             ":description," +
-                            ":frameRate)")
+                            ":frameRate, " +
+                            ":updated)")
     @GetGeneratedKeys
     public abstract int insert(@BindBean MovieDbObject movies);
 }
