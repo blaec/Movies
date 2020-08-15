@@ -7,17 +7,27 @@
     <title>Movies</title>
 
     <style>
-        .card:hover .poster{
-            left:-70px;
+        /* movie hover shadow */
+        .movie {
+            transition: box-shadow .5s;
+        }
+        .movie:hover {
+            box-shadow: 7px 10px 12px gray;
+        }
+
+        /* poster hover effect */
+        .card:hover .poster {
+            left: -70px;
             transform: scale(2.5);
-            transition:
-                    .5s transform cubic-bezier(.155,1.105,.295,1.12),
-                    .5s box-shadow,
-                    .5s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+            transition: .5s transform cubic-bezier(.155, 1.105, .295, 1.12),
+                        .5s box-shadow,
+                        .5s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
             z-index: 1;
         }
-        .card:hover .poster img{
-            box-shadow: 0.3rem .5rem .3rem rgba(0,0,0,.15);
+        .card:hover .poster img {
+            box-shadow: 1px 1px 2px black,
+                        0 0 25px gray,
+                        0 0 5px darkblue;
         }
     </style>
 
@@ -30,15 +40,21 @@
 <div class="container">
     <!--/*@thymesVar id="movies" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"*/-->
     <div class="card shadow-sm bg-white rounded mb-3" th:each="movie,iter: ${movies}">
-        <div class="row no-gutters">
+        <div class="row no-gutters movie align-items-center">
             <div class="poster col-md-1">
                 <img th:src="${movie.poster}" class="card-img" alt="...">
             </div>
             <div class="col-md-11">
                 <div class="card-body">
                     <h5 class="card-title" th:text="|${movie.title} (${movie.year})|">title</h5>
-                    <p class="mb-0 card-text" th:text="|genre ${movie.genre}|">genre</p>
-                    <p class="mb-0 card-text" th:text="|actors ${movie.actors}|">actors</p>
+                    <div class="mb-1 d-flex">
+                        <span class="badge badge-pill badge-success mr-2">actors</span>
+                        <p class="card-text font-light-weight font-italic" th:text="${movie.actors}">actors</p>
+                    </div>
+                    <div class="mb-0 d-flex">
+                        <span class="badge badge-pill badge-info mr-2">genre</span>
+                        <p class="card-text font-light-weight font-italic" th:text="${movie.genre}">genre</p>
+                    </div>
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
             </div>
