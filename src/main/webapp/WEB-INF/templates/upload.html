@@ -16,6 +16,53 @@
             margin: 0 20rem !important;
             font: 12px system-ui;
         }
+
+        .card-img {
+            width: 200px;
+            height: 300px;
+        }
+
+        .flip-container {
+            perspective: 1000px;
+        }
+        /* flip the pane when hovered */
+        .flip-container:hover .flipper, .flip-container.hover .flipper {
+            transform: rotateY(180deg);
+        }
+
+        .flip-container, .front, .back {
+            /*width: 320px;*/
+            height: 300px;
+        }
+
+        /* flip speed goes here */
+        .flipper {
+            transition: 0.6s;
+            transform-style: preserve-3d;
+
+            position: relative;
+        }
+
+        /* hide back of pane during swap */
+        .front, .back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* front pane, placed above back */
+        .front {
+            z-index: 2;
+            /* for firefox 31 */
+            transform: rotateY(0deg);
+        }
+
+        /* back, initially hidden pane */
+        .back {
+            transform: rotateY(180deg);
+        }
+
     </style>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -26,9 +73,38 @@
 <div class="grid">
     <!--/*@thymesVar id="movies" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"*/-->
         <div class="shadow p-1" th:each="movie,iter: ${movies}">
-            <div class="card">
-                <input th:id="${movie.getImdbId()}" th:value="${movie.id}" type="hidden">
-                <img th:src="${movie.poster}" class="card-img" alt="...">
+            <input th:id="${movie.getImdbId()}" th:value="${movie.id}" type="hidden">
+            <div class="card flip-container">
+                <div class="flipper">
+                    <div class="card-img front">
+                        <img th:src="${movie.poster}" class="card-img" alt="https://via.placeholder.com/200x300.png?text=No%20Image">
+                    </div>
+                    <div class="card-body back p-2">
+<!--                        <div class="mb-1 d-flex">-->
+<!--                            <h6 class="card-title mr-1 mb-0" th:text="${movie.title}">title</h6>-->
+<!--                        </div>-->
+                        <div class="mb-1 d-flex">
+                            <p class="card-text font-light-weight mb-0 mr-1" th:text="${movie.rated}">rated</p>
+                            <p class="card-text font-light-weight mb-0 mr-1">|</p>
+                            <p class="card-text font-light-weight mb-0" th:text="${movie.runtime}">runtime</p>
+                            <p class="card-text font-light-weight mb-0 mr-1">min |</p>
+                            <p class="card-text font-light-weight mb-0" th:text="${movie.year}">year</p>
+                        </div>
+                        <div class="mb-1 d-flex">
+                            <p class="card-text font-light-weight mb-0" th:text="${movie.genre}">genre</p>
+                        </div>
+<!--                        <div class="mb-1 d-flex">-->
+<!--                            <span class="badge badge-pill badge-success mr-2">actors</span>-->
+<!--                            <p class="card-text font-light-weight font-italic" th:text="${movie.actors}">actors</p>-->
+<!--                        </div>-->
+                        <div class="mb-0 d-flex">
+                            <p class="card-text mb-0"><small class="text-muted mr-1">Last updated</small></p>
+                            <p class="card-text mb-0"><small class="text-muted"
+                                                             th:text="${#dates.format(movie.updated, 'yyyy-MM-dd HH:mm:ss')}">3
+                                mins ago</small></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
