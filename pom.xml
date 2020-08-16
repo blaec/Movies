@@ -6,10 +6,8 @@
 
     <groupId>org.blaec</groupId>
     <artifactId>movies</artifactId>
-    <packaging>war</packaging>
-
     <version>1.0-SNAPSHOT</version>
-
+    <packaging>war</packaging>
     <name>Movies Library</name>
 
     <properties>
@@ -20,7 +18,7 @@
         <lombok.version>1.18.12</lombok.version>
 
         <!-- utils -->
-        <apache.commons.version>2.4</apache.commons.version>
+<!--        <apache.commons.version>2.4</apache.commons.version>-->
         <guava.version>29.0-jre</guava.version>
         <commons-lang3.version>3.11</commons-lang3.version>
 
@@ -31,6 +29,10 @@
         <!-- Logging -->
         <logback.version>1.2.3</logback.version>
         <slf4j.version>1.7.25</slf4j.version>
+
+        <!-- front -->
+        <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
+        <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
     </properties>
 
     <build>
@@ -46,6 +48,14 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -58,11 +68,11 @@
         </dependency>
 
         <!-- utils -->
-        <dependency>
-            <groupId>org.apache.directory.studio</groupId>
-            <artifactId>org.apache.commons.io</artifactId>
-            <version>${apache.commons.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.directory.studio</groupId>-->
+<!--            <artifactId>org.apache.commons.io</artifactId>-->
+<!--            <version>${apache.commons.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -127,6 +137,19 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
             <scope>runtime</scope>
+        </dependency>
+
+        <!-- front -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>${thymeleaf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet-api.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

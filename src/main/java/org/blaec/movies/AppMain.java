@@ -34,9 +34,8 @@ public class AppMain {
 //        LoadMovies.getMoviesFromFolder(VIDEOS).forEach(System.out::println);
 //        LoadMovies.getMoviesFromFolder(CARTOONS).forEach(System.out::println);
 
-        List<MovieFileObject> folderMovies = FilesUtils.getMoviesFromFolder(VIDEOS);
+        List<MovieFileObject> folderMovies = FilesUtils.getMoviesFromFolder(CARTOONS);
         MovieDao dao = DBIProvider.getDao(MovieDao.class);
-        dao.clean();
         List<MovieDbObject> dbMovies = dao.getAll();
         for (MovieFileObject movieFile : folderMovies) {
             boolean movieNotExistInDb = dbMovies.stream()
@@ -47,6 +46,7 @@ public class AppMain {
                 try {
                     MovieJsonObject movieJson = gson.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
                     dao.insert(MovieConverter.combine(movieJson, movieFile));
+                    log.info("new movie added {} ({}) {}Gb", movieJson.getTitle(), movieJson.getYear(), movieFile.getSize());
                 } catch (Exception e) {
                     log.error("failed to save movie {} into db", movieFile, e);
                 }

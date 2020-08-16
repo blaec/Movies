@@ -26,7 +26,8 @@ CREATE TABLE movies
     size        DECIMAL         NOT NULL,
     location    TEXT            NOT NULL,
     description TEXT,
-    frame_rate  INTEGER
+    frame_rate  INTEGER,
+    updated     TIMESTAMP       NOT NULL
 );
 
 CREATE UNIQUE INDEX movies_unique_title_year_idx ON movies (title, year);

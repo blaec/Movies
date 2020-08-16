@@ -4,6 +4,8 @@ import com.bertoncelj.jdbi.entitymapper.Column;
 import lombok.*;
 import org.blaec.movies.enums.Resolution;
 
+import java.sql.Timestamp;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,6 +30,7 @@ public class MovieDbObject extends BaseEntity {
     @Column("location") private @NonNull String location;
     @Column("description") private String description;
     @Column("frame_rate") private int frameRate;
+    @Column("updated") private Timestamp updated;
 
     public MovieDbObject(Integer id,
                          String title,
@@ -47,7 +50,8 @@ public class MovieDbObject extends BaseEntity {
                          Double size,
                          String location,
                          String description,
-                         int frameRate) {
+                         int frameRate,
+                         Timestamp updated) {
         this(title,
              year,
              rated,
@@ -65,7 +69,8 @@ public class MovieDbObject extends BaseEntity {
              size,
              location,
              description,
-             frameRate);
+             frameRate,
+             updated);
         this.id = id;
     }
 }
