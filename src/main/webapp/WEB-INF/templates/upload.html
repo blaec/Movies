@@ -7,42 +7,44 @@
     <title>Movies</title>
 
     <style>
+
+        /* general grid movie-page */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            grid-gap: 0.7rem;
         }
         body {
+            background: #24282f !important;
             margin: 0 20rem !important;
-            font: 12px system-ui;
         }
 
+        /* general movie card */
+        .card {
+            border: none !important;
+        }
         .card-img {
             width: 200px;
             height: 300px;
         }
 
+        /* flip movie card */
         .flip-container {
+            background: #24282f !important;
             perspective: 1000px;
         }
         /* flip the pane when hovered */
         .flip-container:hover .flipper, .flip-container.hover .flipper {
             transform: rotateY(180deg);
         }
-
         .flip-container, .front, .back {
-            /*width: 320px;*/
             height: 300px;
         }
-
         /* flip speed goes here */
         .flipper {
             transition: 0.6s;
             transform-style: preserve-3d;
-
             position: relative;
         }
-
         /* hide back of pane during swap */
         .front, .back {
             backface-visibility: hidden;
@@ -50,59 +52,93 @@
             top: 0;
             left: 0;
         }
-
         /* front pane, placed above back */
         .front {
             z-index: 2;
             /* for firefox 31 */
             transform: rotateY(0deg);
         }
-
         /* back, initially hidden pane */
         .back {
             transform: rotateY(180deg);
+            /*display: grid;*/
+            /*grid-template-columns: 1fr 1fr 1fr 1fr;*/
+            /*grid-template-rows: 1fr 1fr 8fr;*/
+            /*grid-template-areas:*/
+            /*    "rated runtime year size"*/
+            /*    "genre genre genre genre"*/
+            /*    "updated updated updated updated";*/
+            /*justify-items: center;*/
+            background: #1d2124;
+            /*font-family: 'Kanit', sans-serif;*/
         }
+
+        /*.movie-rated {*/
+        /*    grid-area: rated;*/
+        /*    font-size: 0.8em;*/
+        /*    color: #adb5bd;*/
+        /*}*/
+
+        /*.movie-runtime {*/
+        /*    grid-area: runtime;*/
+        /*    font-size: 0.8em;*/
+        /*    color: #adb5bd;*/
+        /*}*/
+
+        /*.movie-year {*/
+        /*    grid-area: year;*/
+        /*    font-size: 0.8em;*/
+        /*    color: #adb5bd;*/
+        /*}*/
+
+        /*.movie-size {*/
+        /*    grid-area: size;*/
+        /*    font-size: 0.8em;*/
+        /*    color: #adb5bd;*/
+        /*}*/
+
+        /*.movie-genre {*/
+        /*    grid-area: genre;*/
+        /*    font-size: 0.8em;*/
+        /*    justify-self: center;*/
+        /*    color: #adb5bd;*/
+        /*}*/
+
+        /*.movie-updated {*/
+        /*    grid-area: updated;*/
+        /*    font-size: 0.8em;*/
+        /*    align-self: end;*/
+        /*}*/
 
     </style>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap" rel="stylesheet">
 </head>
 
 <body>
 <div class="grid">
     <!--/*@thymesVar id="movies" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"*/-->
-        <div class="shadow p-1" th:each="movie,iter: ${movies}">
+        <div class="shadow" th:each="movie,iter: ${movies}">
             <input th:id="${movie.getImdbId()}" th:value="${movie.id}" type="hidden">
             <div class="card flip-container">
                 <div class="flipper">
                     <div class="card-img front">
                         <img th:src="${movie.poster}" class="card-img" alt="https://via.placeholder.com/200x300.png?text=No%20Image">
                     </div>
-                    <div class="card-body back p-2">
-<!--                        <div class="mb-1 d-flex">-->
-<!--                            <h6 class="card-title mr-1 mb-0" th:text="${movie.title}">title</h6>-->
-<!--                        </div>-->
-                        <div class="mb-1 d-flex">
-                            <p class="card-text font-light-weight mb-0 mr-1" th:text="${movie.rated}">rated</p>
-                            <p class="card-text font-light-weight mb-0 mr-1">|</p>
-                            <p class="card-text font-light-weight mb-0" th:text="${movie.runtime}">runtime</p>
-                            <p class="card-text font-light-weight mb-0 mr-1">min |</p>
-                            <p class="card-text font-light-weight mb-0" th:text="${movie.year}">year</p>
-                        </div>
-                        <div class="mb-1 d-flex">
-                            <p class="card-text font-light-weight mb-0" th:text="${movie.genre}">genre</p>
-                        </div>
-<!--                        <div class="mb-1 d-flex">-->
-<!--                            <span class="badge badge-pill badge-success mr-2">actors</span>-->
-<!--                            <p class="card-text font-light-weight font-italic" th:text="${movie.actors}">actors</p>-->
-<!--                        </div>-->
-                        <div class="mb-0 d-flex">
-                            <p class="card-text mb-0"><small class="text-muted mr-1">Last updated</small></p>
-                            <p class="card-text mb-0"><small class="text-muted"
-                                                             th:text="${#dates.format(movie.updated, 'yyyy-MM-dd HH:mm:ss')}">3
-                                mins ago</small></p>
-                        </div>
+                    <div class="card-body back">
+                        <p class="movie-rated" th:text="${movie.rated}">rated</p>
+                        <p class="movie-runtime" th:text="|${movie.runtime}min|">runtime</p>
+                        <p class="movie-year" th:text="${movie.year}">year</p>
+                        <p class="movie-size" th:text="|${movie.size}Gb|">size</p>
+                        <p class="movie-genre" th:text="${movie.genre}">genre</p>
+                        <p class="movie-updated mb-0">
+                            <small class="text-muted"
+                                   th:text="|Last updated ${#dates.format(movie.updated, 'yyyy-MM-dd HH:mm:ss')}|">
+                                3 mins ago
+                            </small>
+                        </p>
                     </div>
                 </div>
             </div>
