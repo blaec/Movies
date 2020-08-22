@@ -120,26 +120,25 @@
 <body>
 <div class="grid">
     <!--/*@thymesVar id="movies" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"*/-->
-        <div class="shadow" th:each="movie,iter: ${movies}">
-            <input th:id="${movie.getImdbId()}" th:value="${movie.id}" type="hidden">
-            <div class="card flip-container">
-                <div class="flipper">
-                    <div class="card-img front">
-                        <img th:src="${movie.poster}" class="card-img" alt="https://via.placeholder.com/200x300.png?text=No%20Image">
-                    </div>
-                    <div class="card-body back">
-                        <p class="movie-rated" th:text="${movie.rated}">rated</p>
-                        <p class="movie-runtime" th:text="|${movie.runtime}min|">runtime</p>
-                        <p class="movie-year" th:text="${movie.year}">year</p>
-                        <p class="movie-size" th:text="|${movie.size}Gb|">size</p>
-                        <p class="movie-genre" th:text="${movie.genre}">genre</p>
-                        <p class="movie-updated mb-0">
-                            <small class="text-muted"
-                                   th:text="|Last updated ${#dates.format(movie.updated, 'yyyy-MM-dd HH:mm:ss')}|">
-                                3 mins ago
-                            </small>
-                        </p>
-                    </div>
+    <div th:each="movie,iter: ${movies}">
+        <input th:id="${movie.getImdbId()}" th:value="${movie.id}" type="hidden">
+        <div class="card flip-container">
+            <div class="flipper">
+                <div class="card-img front">
+                    <img th:src="${movie.poster}" class="card-img" alt="https://via.placeholder.com/200x300.png?text=No%20Image">
+                </div>
+                <div class="card-body back p-0">
+<!--                        <p class="movie-rated" th:text="${movie.rated}">rated</p>-->
+<!--                        <p class="movie-runtime" th:text="|${movie.runtime}min|">runtime</p>-->
+<!--                        <p class="movie-year" th:text="${movie.year}">year</p>-->
+<!--                        <p class="movie-size" th:text="|${movie.size}Gb|">size</p>-->
+<!--                        <p class="movie-genre" th:text="${movie.genre}">genre</p>-->
+<!--                        <p class="movie-updated mb-0">-->
+<!--                            <small class="text-muted"-->
+<!--                                   th:text="|Last updated ${#dates.format(movie.updated, 'yyyy-MM-dd HH:mm:ss')}|">-->
+<!--                                3 mins ago-->
+<!--                            </small>-->
+<!--                        </p>-->
                 </div>
             </div>
         </div>
