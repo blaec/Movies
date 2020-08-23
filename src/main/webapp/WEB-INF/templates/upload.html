@@ -63,46 +63,75 @@
         .back {
             transform: rotateY(180deg);
             display: grid;
-            grid-template-columns: 25% 25% 25% 25%;
-            grid-template-rows: 10% 10% 80%;
+            grid-template-columns: 33.3% 33.4% 33.3%;
+            grid-template-rows: 5% 10% 5% 10% 10% 60%;
             grid-template-areas:
-                "rated runtime year size"
-                "genre genre genre genre"
-                "updated updated updated updated";
+                "rated-capt rate-capt votes-capt"
+                "rated rate votes"
+                "runtime-capt year-capt size-capt"
+                "runtime year size"
+                "genre genre genre"
+                "updated updated updated";
             justify-items: center;
             background: #1d2124;
             font-family: 'Kanit', sans-serif;
         }
 
+        .movie-rated, .movie-rate, .movie-votes, .movie-runtime, .movie-year, .movie-size, .movie-genre {
+            font-size: 0.8em;
+            color: #adb5bd;
+        }
+
+        .movie-rated-caption, .movie-rate-caption, .movie-votes-caption, .movie-runtime-caption, .movie-year-caption, .movie-size-caption, .movie-genre-caption {
+            font-size: 0.6em;
+            color: #adb5bd;
+        }
+
+        .movie-rated-caption {
+            grid-area: rated-capt;
+        }
         .movie-rated {
             grid-area: rated;
-            font-size: 0.6em;
-            color: #adb5bd;
         }
 
+        .movie-rate-caption {
+            grid-area: rate-capt;
+        }
+        .movie-rate {
+            grid-area: rate;
+        }
+
+        .movie-votes-caption {
+            grid-area: votes-capt;
+        }
+        .movie-votes {
+            grid-area: votes;
+        }
+
+        .movie-runtime-caption {
+            grid-area: runtime-capt;
+        }
         .movie-runtime {
             grid-area: runtime;
-            font-size: 0.6em;
-            color: #adb5bd;
         }
 
+        .movie-year-caption {
+            grid-area: year-capt;
+        }
         .movie-year {
             grid-area: year;
-            font-size: 0.6em;
-            color: #adb5bd;
         }
 
+        .movie-size-caption {
+            grid-area: size-capt;
+        }
         .movie-size {
             grid-area: size;
-            font-size: 0.6em;
-            color: #adb5bd;
         }
 
         .movie-genre {
             grid-area: genre;
-            font-size: 0.8em;
             justify-self: center;
-            color: #adb5bd;
             text-align: center;
         }
 
@@ -130,9 +159,17 @@
                     <img class="movie-img" th:src="${movie.poster}" alt="https://via.placeholder.com/200x300.png?text=No%20Image">
                 </div>
                 <div class="back p-2">
+                    <p class="movie-rated-caption">rated</p>
                     <p class="movie-rated" th:text="${movie.rated}">rated</p>
+                    <p class="movie-rate-caption">rate</p>
+                    <p class="movie-rate" th:text="${movie.getImdbRating()}">rate</p>
+                    <p class="movie-votes-caption">votes</p>
+                    <p class="movie-votes" th:text="${#numbers.formatInteger(movie.imdbVotes, 3 ,'COMMA')}">votes</p>
+                    <p class="movie-runtime-caption">runtime</p>
                     <p class="movie-runtime" th:text="|${movie.runtime}min|">runtime</p>
+                    <p class="movie-year-caption">year</p>
                     <p class="movie-year" th:text="${movie.year}">year</p>
+                    <p class="movie-size-caption">size</p>
                     <p class="movie-size" th:text="|${movie.size}Gb|">size</p>
                     <p class="movie-genre" th:text="${movie.genre}">genre</p>
                     <p class="movie-updated mb-0">
