@@ -11,7 +11,7 @@
         /* general grid movie-page */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, 200px);
         }
         body {
             background: #24282f !important;
@@ -22,7 +22,7 @@
         .card {
             border: none !important;
         }
-        .card-img {
+        .movie-img {
             width: 200px;
             height: 300px;
         }
@@ -37,6 +37,7 @@
             transform: rotateY(180deg);
         }
         .flip-container, .front, .back {
+            width: 200px;
             height: 300px;
         }
         /* flip speed goes here */
@@ -61,54 +62,55 @@
         /* back, initially hidden pane */
         .back {
             transform: rotateY(180deg);
-            /*display: grid;*/
-            /*grid-template-columns: 1fr 1fr 1fr 1fr;*/
-            /*grid-template-rows: 1fr 1fr 8fr;*/
-            /*grid-template-areas:*/
-            /*    "rated runtime year size"*/
-            /*    "genre genre genre genre"*/
-            /*    "updated updated updated updated";*/
-            /*justify-items: center;*/
+            display: grid;
+            grid-template-columns: 25% 25% 25% 25%;
+            grid-template-rows: 10% 10% 80%;
+            grid-template-areas:
+                "rated runtime year size"
+                "genre genre genre genre"
+                "updated updated updated updated";
+            justify-items: center;
             background: #1d2124;
-            /*font-family: 'Kanit', sans-serif;*/
+            font-family: 'Kanit', sans-serif;
         }
 
-        /*.movie-rated {*/
-        /*    grid-area: rated;*/
-        /*    font-size: 0.8em;*/
-        /*    color: #adb5bd;*/
-        /*}*/
+        .movie-rated {
+            grid-area: rated;
+            font-size: 0.6em;
+            color: #adb5bd;
+        }
 
-        /*.movie-runtime {*/
-        /*    grid-area: runtime;*/
-        /*    font-size: 0.8em;*/
-        /*    color: #adb5bd;*/
-        /*}*/
+        .movie-runtime {
+            grid-area: runtime;
+            font-size: 0.6em;
+            color: #adb5bd;
+        }
 
-        /*.movie-year {*/
-        /*    grid-area: year;*/
-        /*    font-size: 0.8em;*/
-        /*    color: #adb5bd;*/
-        /*}*/
+        .movie-year {
+            grid-area: year;
+            font-size: 0.6em;
+            color: #adb5bd;
+        }
 
-        /*.movie-size {*/
-        /*    grid-area: size;*/
-        /*    font-size: 0.8em;*/
-        /*    color: #adb5bd;*/
-        /*}*/
+        .movie-size {
+            grid-area: size;
+            font-size: 0.6em;
+            color: #adb5bd;
+        }
 
-        /*.movie-genre {*/
-        /*    grid-area: genre;*/
-        /*    font-size: 0.8em;*/
-        /*    justify-self: center;*/
-        /*    color: #adb5bd;*/
-        /*}*/
+        .movie-genre {
+            grid-area: genre;
+            font-size: 0.8em;
+            justify-self: center;
+            color: #adb5bd;
+            text-align: center;
+        }
 
-        /*.movie-updated {*/
-        /*    grid-area: updated;*/
-        /*    font-size: 0.8em;*/
-        /*    align-self: end;*/
-        /*}*/
+        .movie-updated {
+            grid-area: updated;
+            font-size: 0.8em;
+            align-self: end;
+        }
 
     </style>
 
@@ -122,23 +124,23 @@
     <!--/*@thymesVar id="movies" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"*/-->
     <div th:each="movie,iter: ${movies}">
         <input th:id="${movie.getImdbId()}" th:value="${movie.id}" type="hidden">
-        <div class="card flip-container">
+        <div class="flip-container">
             <div class="flipper">
-                <div class="card-img front">
-                    <img th:src="${movie.poster}" class="card-img" alt="https://via.placeholder.com/200x300.png?text=No%20Image">
+                <div class="front">
+                    <img class="movie-img" th:src="${movie.poster}" alt="https://via.placeholder.com/200x300.png?text=No%20Image">
                 </div>
-                <div class="card-body back p-0">
-<!--                        <p class="movie-rated" th:text="${movie.rated}">rated</p>-->
-<!--                        <p class="movie-runtime" th:text="|${movie.runtime}min|">runtime</p>-->
-<!--                        <p class="movie-year" th:text="${movie.year}">year</p>-->
-<!--                        <p class="movie-size" th:text="|${movie.size}Gb|">size</p>-->
-<!--                        <p class="movie-genre" th:text="${movie.genre}">genre</p>-->
-<!--                        <p class="movie-updated mb-0">-->
-<!--                            <small class="text-muted"-->
-<!--                                   th:text="|Last updated ${#dates.format(movie.updated, 'yyyy-MM-dd HH:mm:ss')}|">-->
-<!--                                3 mins ago-->
-<!--                            </small>-->
-<!--                        </p>-->
+                <div class="back p-2">
+                    <p class="movie-rated" th:text="${movie.rated}">rated</p>
+                    <p class="movie-runtime" th:text="|${movie.runtime}min|">runtime</p>
+                    <p class="movie-year" th:text="${movie.year}">year</p>
+                    <p class="movie-size" th:text="|${movie.size}Gb|">size</p>
+                    <p class="movie-genre" th:text="${movie.genre}">genre</p>
+                    <p class="movie-updated mb-0">
+                        <small class="text-muted"
+                               th:text="|Last updated ${#dates.format(movie.updated, 'yyyy-MM-dd HH:mm:ss')}|">
+                            3 mins ago
+                        </small>
+                    </p>
                 </div>
             </div>
         </div>
