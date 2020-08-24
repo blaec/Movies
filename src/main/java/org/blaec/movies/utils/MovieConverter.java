@@ -24,7 +24,9 @@ public class MovieConverter {
         movieDbObject.setAwards(movieJsonObject.getAwards());
         movieDbObject.setImdbRating(Double.parseDouble(movieJsonObject.getImdbRating()));
         movieDbObject.setImdbId(movieJsonObject.getImdbID());
-        movieDbObject.setPoster(movieJsonObject.getPoster());
+        movieDbObject.setPoster(movieJsonObject.getPoster().equals("N/A")
+                ? String.format("https://via.placeholder.com/200x300.png?text=%s", movieJsonObject.getTitle().replace(" ", "%20"))
+                : movieJsonObject.getPoster());
         movieDbObject.setImdbVotes(NumberFormat.getNumberInstance(Locale.US).parse(movieJsonObject.getImdbVotes()).intValue());
         movieDbObject.setType(movieJsonObject.getType());
 
