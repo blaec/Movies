@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<%--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">--%>
     <title>Movies</title>
 
     <style>
@@ -82,7 +84,7 @@
             color: #adb5bd;
         }
 
-        .movie-rated-caption, .movie-rate-caption, .movie-votes-caption, .movie-runtime-caption, .movie-year-caption, .movie-size-caption, .movie-genre-caption {
+        .movie-rated-caption, .movie-rate-caption, .movie-votes-caption, .movie-runtime-caption, .movie-year-caption, .movie-size-caption, .movie-updated {
             font-size: 0.6em;
             color: #adb5bd;
         }
@@ -137,7 +139,7 @@
 
         .movie-updated {
             grid-area: updated;
-            font-size: 0.8em;
+            justify-self: center;
             align-self: end;
         }
 
@@ -150,38 +152,37 @@
 
 <body>
 <div class="grid">
-    <!--/*@thymesVar id="movies" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"*/-->
-    <div th:each="movie,iter: ${movies}">
-        <input th:id="${movie.getImdbId()}" th:value="${movie.id}" type="hidden">
+    <c:forEach items="${movies}" var="movie">
+        <jsp:useBean id="movie" type="org.blaec.movies.objects.MovieDbObject"/>
+        <input id="${movie.imdbId}" value="${movie.id}" type="hidden">
         <div class="flip-container">
             <div class="flipper">
                 <div class="front">
-                    <img class="movie-img" th:src="${movie.poster}" alt="https://via.placeholder.com/200x300.png?text=No%20Image">
+                    <img class="movie-img" src="${movie.poster}" alt="https://via.placeholder.com/200x300.png?text=No%20Image">
                 </div>
                 <div class="back p-2">
-                    <p class="movie-rated-caption">rated</p>
-                    <p class="movie-rated" th:text="${movie.rated}">rated</p>
-                    <p class="movie-rate-caption">rate</p>
-                    <p class="movie-rate" th:text="${movie.getImdbRating()}">rate</p>
-                    <p class="movie-votes-caption">votes</p>
-                    <p class="movie-votes" th:text="${#numbers.formatInteger(movie.imdbVotes, 3 ,'COMMA')}">votes</p>
-                    <p class="movie-runtime-caption">runtime</p>
-                    <p class="movie-runtime" th:text="|${movie.runtime}min|">runtime</p>
-                    <p class="movie-year-caption">year</p>
-                    <p class="movie-year" th:text="${movie.year}">year</p>
-                    <p class="movie-size-caption">size</p>
-                    <p class="movie-size" th:text="|${movie.size}Gb|">size</p>
-                    <p class="movie-genre" th:text="${movie.genre}">genre</p>
-                    <p class="movie-updated mb-0">
-                        <small class="text-muted"
-                               th:text="|Last updated ${#dates.format(movie.updated, 'yyyy-MM-dd HH:mm:ss')}|">
-                            3 mins ago
-                        </small>
+                    <p class="m-0 movie-rated-caption">rated</p>
+                    <p class="m-0 movie-rated">${movie.rated}</p>
+                    <p class="m-0 movie-rate-caption">rate</p>
+                    <p class="m-0 movie-rate">${movie.imdbRating}</p>
+                    <p class="m-0 movie-votes-caption">votes</p>
+                    <p class="m-0 movie-votes">
+                        <fmt:formatNumber type = "number" value = "${movie.imdbVotes}" />
+                    </p>
+                    <p class="m-0 movie-runtime-caption">runtime</p>
+                    <p class="m-0 movie-runtime">${movie.runtime}min</p>
+                    <p class="m-0 movie-year-caption">year</p>
+                    <p class="m-0 movie-year">${movie.year}</p>
+                    <p class="m-0 movie-size-caption">size</p>
+                    <p class="m-0 movie-size">${movie.size}Gb</p>
+                    <p class="m-0 movie-genre">${movie.genre}</p>
+                    <p class="m-0 movie-updated">
+                        Last updated <fmt:formatDate value="${movie.updated}" pattern="yyyy-MM-dd HH:mm:ss"/>
                     </p>
                 </div>
             </div>
         </div>
-    </div>
+    </c:forEach>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
