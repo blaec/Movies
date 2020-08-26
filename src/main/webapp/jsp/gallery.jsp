@@ -6,6 +6,7 @@
 <jsp:include page="fragments/headTag.jsp"/>
 
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <div class="grid">
     <jsp:useBean id="movies" scope="request" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"/>
     <c:forEach items="${movies}" var="movie">
