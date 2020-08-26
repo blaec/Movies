@@ -19,7 +19,7 @@ public class MovieServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<MovieDbObject> dbMovies = dao.getAll();
         req.setAttribute("movies", dbMovies);
-        req.getRequestDispatcher("/gallery.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/gallery.jsp").forward(req, resp);
     }
 
     @Override
