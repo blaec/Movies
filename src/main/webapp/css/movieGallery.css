@@ -1,0 +1,123 @@
+:root {
+    --movie-card-width: 200px;
+    --movie-card-height: 300px;
+    --movie-gallery-background: #24282f;
+}
+
+/* ================== movie-gallery general ================== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, var(--movie-card-width));
+}
+body {
+    background: var(--movie-gallery-background);
+    margin: 0 20rem !important;
+}
+.movie-img {
+    width: var(--movie-card-width);
+    height: var(--movie-card-height);
+}
+
+/* ================== flip movie card ================== */
+.flip-container {
+    background: var(--movie-gallery-background);
+    perspective: 1000px;
+}
+.flip-container:hover .flipper {        /* flip the pane when hovered */
+    transform: rotateY(180deg);
+}
+.flip-container,
+.front,
+.back {
+    width: var(--movie-card-width);
+    height: var(--movie-card-height);
+}
+.flipper {                              /* flip speed goes here */
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+.front,
+.back {                                 /* hide back of pane during swap */
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.front {                                /* front pane, placed above back */
+    z-index: 2;
+    transform: rotateY(0deg);           /* for firefox 31 */
+}
+.back {                                 /* back, initially hidden pane */
+    transform: rotateY(180deg);
+}
+
+/* ================== back movie card grid ================== */
+.movie-details {
+    display: grid;
+    grid-template-columns: 33.3% 33.4% 33.3%;
+    grid-template-rows: 5% 10% 5% 10% 10% 60%;
+    grid-template-areas:
+                "rated-caption rate-caption votes-caption"
+                "rated rate votes"
+                "runtime-caption year-caption size-caption"
+                "runtime year size"
+                "genre genre genre"
+                "updated updated updated";
+    justify-items: center;
+    background: #1d2124;
+    font-family: 'Kanit', sans-serif;
+    color: #adb5bd;
+}
+.font-6 {
+    font-size: 0.6em;
+}
+.font-8 {
+    font-size: 0.8em;
+}
+.movie-rated-caption {
+    grid-area: rated-caption;
+}
+.movie-rated {
+    grid-area: rated;
+}
+.movie-rate-caption {
+    grid-area: rate-caption;
+}
+.movie-rate {
+    grid-area: rate;
+}
+.movie-votes-caption {
+    grid-area: votes-caption;
+}
+.movie-votes {
+    grid-area: votes;
+}
+.movie-runtime-caption {
+    grid-area: runtime-caption;
+}
+.movie-runtime {
+    grid-area: runtime;
+}
+.movie-year-caption {
+    grid-area: year-caption;
+}
+.movie-year {
+    grid-area: year;
+}
+.movie-size-caption {
+    grid-area: size-caption;
+}
+.movie-size {
+    grid-area: size;
+}
+.movie-genre {
+    grid-area: genre;
+    justify-self: center;
+    text-align: center;
+}
+.movie-updated {
+    grid-area: updated;
+    justify-self: center;
+    align-self: end;
+}
