@@ -11,6 +11,8 @@
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/movieGallery.css" type="text/css">
+    <link rel="shortcut icon" href="images/movie.png">
+
 </head>
 
 <body>
