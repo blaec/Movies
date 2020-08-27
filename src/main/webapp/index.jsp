@@ -2,7 +2,6 @@
 <html>
 <jsp:include page="jsp/fragments/headTag.jsp"/>
 <body>
-<jsp:include page="jsp/fragments/bodyHeader.jsp"/>
-
+    <jsp:include page="jsp/fragments/bodyHeader.jsp"/>
 </body>
 </html>
