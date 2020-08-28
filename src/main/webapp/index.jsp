@@ -4,4 +4,5 @@
 <body>
     <jsp:include page="jsp/fragments/bodyHeader.jsp"/>
 </body>
+<script type="text/javascript" src="js/home.js" defer></script>
 </html>

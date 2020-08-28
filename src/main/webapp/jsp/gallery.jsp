@@ -42,4 +42,5 @@
         </c:forEach>
     </main>
 </body>
+<script type="text/javascript" src="js/gallery.js" defer></script>
 </html>
