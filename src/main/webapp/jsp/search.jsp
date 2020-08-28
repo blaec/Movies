@@ -8,11 +8,20 @@
 <body>
     <jsp:include page="fragments/bodyHeader.jsp"/>
 
-    <jsp:useBean id="genres" scope="request" type="java.util.Set<java.lang.String>"/>
-    <c:forEach items="${genres}" var="genre">
-        <jsp:useBean id="genre" type="java.lang.String"/>
-        <p style="color: white">${genre}</p>
-    </c:forEach>
+    <form>
+        <div class="form-group">
+            <label for="movie-genre" style="color: white">Movie genre</label>
+            <select id="movie-genre" class="form-control">
+                <option selected>Select movie genre</option>
+                <jsp:useBean id="genres" scope="request" type="java.util.Set<java.lang.String>"/>
+                <c:forEach items="${genres}" var="genre">
+                    <jsp:useBean id="genre" type="java.lang.String"/>
+                    <option>${genre}</option>
+                </c:forEach>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Search</button>
+    </form>
 
 </body>
 <script type="text/javascript" src="js/search.js" defer></script>
