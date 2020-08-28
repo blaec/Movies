@@ -20,7 +20,9 @@ public class MovieServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<MovieDbObject> dbMovies = dao.getAll();
         dbMovies.sort(Comparator
-                .comparing((MovieDbObject m) -> m.getTitle().startsWith("The ") ? m.getTitle().replace("The ", "") : m.getTitle())
+                .comparing((MovieDbObject m) -> m.getTitle().startsWith("The ")
+                                                    ? m.getTitle().replace("The ", "")
+                                                    : m.getTitle())
                 .thenComparing(MovieDbObject::getYear));
         req.setAttribute("movies", dbMovies);
         req.getRequestDispatcher("/jsp/gallery.jsp").forward(req, resp);
