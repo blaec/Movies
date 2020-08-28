@@ -17,20 +17,20 @@ public class MovieServlet extends HttpServlet {
     private final MovieDao dao = DBIProvider.getDao(MovieDao.class);
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<MovieDbObject> dbMovies = dao.getAll();
         dbMovies.sort(Comparator
                 .comparing((MovieDbObject m) -> m.getTitle().startsWith("The ")
                                                     ? m.getTitle().replace("The ", "")
                                                     : m.getTitle())
                 .thenComparing(MovieDbObject::getYear));
-        req.setAttribute("movies", dbMovies);
-        req.getRequestDispatcher("/jsp/gallery.jsp").forward(req, resp);
+        request.setAttribute("movies", dbMovies);
+        request.getRequestDispatcher("/jsp/gallery.jsp").forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        final WebContext webContext = new WebContext(req, resp, req.getServletContext(), req.getLocale());
-//        engine.process("upload", webContext, resp.getWriter());
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        final WebContext webContext = new WebContext(request, response, request.getServletContext(), request.getLocale());
+//        engine.process("upload", webContext, response.getWriter());
     }
 }
