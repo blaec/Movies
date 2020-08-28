@@ -2,10 +2,7 @@
 <html>
 <jsp:include page="jsp/fragments/headTag.jsp"/>
 <body>
-<h3>Movies</h3>
-<hr>
-<ul>
-    <li><a href="gallery">Go to movie-gallery</a></li>
-</ul>
+    <jsp:include page="jsp/fragments/bodyHeader.jsp"/>
 </body>
+<script type="text/javascript" src="js/home.js" defer></script>
 </html>
