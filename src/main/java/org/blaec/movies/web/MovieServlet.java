@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -18,6 +19,9 @@ public class MovieServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<MovieDbObject> dbMovies = dao.getAll();
+        dbMovies.sort(Comparator
+                .comparing((MovieDbObject m) -> m.getTitle().startsWith("The ") ? m.getTitle().replace("The ", "") : m.getTitle())
+                .thenComparing(MovieDbObject::getYear));
         req.setAttribute("movies", dbMovies);
         req.getRequestDispatcher("/jsp/gallery.jsp").forward(req, resp);
     }
