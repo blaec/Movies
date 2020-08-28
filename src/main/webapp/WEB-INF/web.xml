@@ -7,6 +7,16 @@
     <display-name>Movies</display-name>
 
     <servlet>
+        <servlet-name>searchServlet</servlet-name>
+        <servlet-class>org.blaec.movies.web.SearchServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>searchServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>movieServlet</servlet-name>
         <servlet-class>org.blaec.movies.web.MovieServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
