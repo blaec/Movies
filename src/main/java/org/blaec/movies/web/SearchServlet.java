@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -23,11 +24,17 @@ public class SearchServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Set<String> genres = dao.getAll().stream()
+        List<MovieDbObject> movies = dao.getAll();
+        Set<String> genres = movies.stream()
                 .map(MovieDbObject::getGenre)
                 .flatMap(g -> Arrays.stream(g.split(", ")))
                 .collect(Collectors.toCollection(TreeSet::new));
+        Set<String> actors = movies.stream()
+                .map(MovieDbObject::getActors)
+                .flatMap(g -> Arrays.stream(g.split(", ")))
+                .collect(Collectors.toCollection(TreeSet::new));
         request.setAttribute("genres", genres);
+        request.setAttribute("actors", actors);
         request.setAttribute("notSelected", NOT_SELECTED);
         request.getRequestDispatcher("/jsp/search.jsp").forward(request, response);
     }
