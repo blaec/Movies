@@ -10,7 +10,7 @@
     <jsp:include page="fragments/bodyHeader.jsp"/>
 
     <jsp:useBean id="movies" scope="request" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"/>
-    <p>Found ${fn:length(movies)} movies</p>
+    <p class="movie-count m-1">${fn:length(movies)} movies found</p>
     <main class="gallery">
         <c:forEach items="${movies}" var="movie">
             <jsp:useBean id="movie" type="org.blaec.movies.objects.MovieDbObject"/>
