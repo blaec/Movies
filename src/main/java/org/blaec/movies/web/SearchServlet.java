@@ -14,6 +14,8 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import static org.blaec.movies.definitions.Definitions.NOT_SELECTED;
+
 public class SearchServlet extends HttpServlet {
     private final MovieDao dao = DBIProvider.getDao(MovieDao.class);
 
@@ -26,6 +28,7 @@ public class SearchServlet extends HttpServlet {
                 .flatMap(g -> Arrays.stream(g.split(", ")))
                 .collect(Collectors.toCollection(TreeSet::new));
         request.setAttribute("genres", genres);
+        request.setAttribute("notSelected", NOT_SELECTED);
         request.getRequestDispatcher("/jsp/search.jsp").forward(request, response);
     }
 }

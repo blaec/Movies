@@ -12,7 +12,7 @@
         <div class="form-group">
             <label for="movie-genre" style="color: white">Movie genre</label>
             <select id="movie-genre" class="form-control" name="selected-genre">
-                <option selected>Select movie genre</option>
+                <option selected>${notSelected}</option>
                 <jsp:useBean id="genres" scope="request" type="java.util.Set<java.lang.String>"/>
                 <c:forEach items="${genres}" var="genre">
                     <jsp:useBean id="genre" type="java.lang.String"/>

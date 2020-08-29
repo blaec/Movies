@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import static org.blaec.movies.definitions.Definitions.NOT_SELECTED;
 
 
 public class MovieServlet extends HttpServlet {
@@ -27,9 +30,7 @@ public class MovieServlet extends HttpServlet {
                 .thenComparing(MovieDbObject::getYear));
         if (request.getParameterMap().size() > 0) {
             String selectedGenre = request.getParameter("selected-genre");
-            dbMovies = dbMovies.stream()
-                    .filter(m -> m.getGenre().contains(selectedGenre))
-                    .collect(Collectors.toList());
+            dbMovies = filterMovies(selectedGenre, dbMovies, m -> m.getGenre().contains(selectedGenre));
         }
         request.setAttribute("movies", dbMovies);
         request.getRequestDispatcher("/jsp/gallery.jsp").forward(request, response);
@@ -39,5 +40,14 @@ public class MovieServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        final WebContext webContext = new WebContext(request, response, request.getServletContext(), request.getLocale());
 //        engine.process("upload", webContext, response.getWriter());
+    }
+
+    private List<MovieDbObject> filterMovies(String selectParam, List<MovieDbObject> dbMovies, Predicate<MovieDbObject> filter) {
+        if (!selectParam.equals(NOT_SELECTED)) {
+            dbMovies = dbMovies.stream()
+                    .filter(filter)
+                    .collect(Collectors.toList());
+        }
+        return dbMovies;
     }
 }
