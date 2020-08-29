@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class MovieServlet extends HttpServlet {
@@ -21,9 +22,15 @@ public class MovieServlet extends HttpServlet {
         List<MovieDbObject> dbMovies = dao.getAll();
         dbMovies.sort(Comparator
                 .comparing((MovieDbObject m) -> m.getTitle().startsWith("The ")
-                                                    ? m.getTitle().replace("The ", "")
-                                                    : m.getTitle())
+                        ? m.getTitle().replace("The ", "")
+                        : m.getTitle())
                 .thenComparing(MovieDbObject::getYear));
+        if (request.getParameterMap().size() > 0) {
+            String selectedGenre = request.getParameter("selected-genre");
+            dbMovies = dbMovies.stream()
+                    .filter(m -> m.getGenre().contains(selectedGenre))
+                    .collect(Collectors.toList());
+        }
         request.setAttribute("movies", dbMovies);
         request.getRequestDispatcher("/jsp/gallery.jsp").forward(request, response);
     }

@@ -8,10 +8,10 @@
 <body>
     <jsp:include page="fragments/bodyHeader.jsp"/>
 
-    <form>
+    <form method="get" action="gallery">
         <div class="form-group">
             <label for="movie-genre" style="color: white">Movie genre</label>
-            <select id="movie-genre" class="form-control">
+            <select id="movie-genre" class="form-control" name="selected-genre">
                 <option selected>Select movie genre</option>
                 <jsp:useBean id="genres" scope="request" type="java.util.Set<java.lang.String>"/>
                 <c:forEach items="${genres}" var="genre">
