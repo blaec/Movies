@@ -32,7 +32,7 @@
                 </c:forEach>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary mb-2">Search</button>
+        <button type="submit" class="btn btn-outline-secondary float-right col-2">Search</button>
     </form>
 
 </body>
