@@ -26,6 +26,7 @@ public class MovieFileObject {
     private final int frameRate;
 
     private static final Pattern MOVIE = Pattern.compile(
+            "(?<order>\\d{3}. )?" +
             "(?<name>[ ,-.\\w'&ampéÆ;]+?) " +
             "(\\[(?<description>.*)] )?" +
             "\\((?<year>\\d{4})\\) " +

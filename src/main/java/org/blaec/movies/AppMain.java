@@ -16,8 +16,7 @@ import org.blaec.movies.utils.MovieConverter;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
 
 @Slf4j
 public class AppMain {
@@ -36,13 +35,9 @@ public class AppMain {
 //        LoadMovies.getMoviesFromFolder(VIDEOS).forEach(System.out::println);
 //        LoadMovies.getMoviesFromFolder(CARTOONS).forEach(System.out::println);
 
-        List<MovieFileObject> folderMovies = FilesUtils.getMoviesFromFolder(SERIAL_MOVIES);
+        List<MovieFileObject> folderMovies = FilesUtils.getMoviesFromFolder(CARTOONS);
         MovieDao dao = DBIProvider.getDao(MovieDao.class);
         List<MovieDbObject> dbMovies = dao.getAll();
-        Set<String> genres = dbMovies.stream()
-                .map(MovieDbObject::getGenre)
-                .flatMap(g -> Arrays.stream(g.split(", ")))
-                .collect(Collectors.toCollection(TreeSet::new));
         for (MovieFileObject movieFile : folderMovies) {
             boolean movieNotExistInDb = dbMovies.stream()
                     .noneMatch(m -> StringUtils.containsIgnoreCase(m.getTitle(), movieFile.getNameDbStyled()) && m.getYear() == movieFile.getYear());
