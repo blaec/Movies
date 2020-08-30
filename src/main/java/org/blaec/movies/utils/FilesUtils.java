@@ -23,7 +23,9 @@ public class FilesUtils {
     public static final BigDecimal ONE_GB_BD = BigDecimal.valueOf(ONE_GB);
     public static final BigDecimal ONE_TB_BD = BigDecimal.valueOf(ONE_TB);
 
-    private static final FileFilter filter = pathname -> pathname.isDirectory() || pathname.getName().endsWith("mkv");
+    private static final FileFilter filter = pathname -> pathname.isDirectory()
+                                                      || pathname.getName().endsWith("mkv")
+                                                      || pathname.getName().endsWith("avi");
     private static final Set<File> movies = new TreeSet<>();
 
     /**
