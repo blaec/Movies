@@ -6,6 +6,7 @@
 <html>
 
 <jsp:include page="fragments/headTag.jsp"/>
+<link rel="stylesheet" href="css/movieGallery.css" type="text/css">
 
 <body>
     <jsp:include page="fragments/bodyHeader.jsp"/>

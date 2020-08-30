@@ -1,18 +1,7 @@
-:root {
-    --movie-card-width: 200px;
-    --movie-card-height: 300px;
-    --movie-gallery-background: #24282f;
-    --menu-font-color: #fff;
-}
-
 /* ================== movie-gallery general ================== */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, var(--movie-card-width));
-}
-body {
-    background: var(--movie-gallery-background);
-    margin: 0 350px;
 }
 .movie-img {
     width: var(--movie-card-width);

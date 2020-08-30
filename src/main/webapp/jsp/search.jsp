@@ -5,14 +5,15 @@
 <html>
 
 <jsp:include page="fragments/headTag.jsp"/>
+<link rel="stylesheet" href="css/search.css" type="text/css">
 
 <body>
     <jsp:include page="fragments/bodyHeader.jsp"/>
 
     <form method="get" action="gallery">
-        <div class="form-group">
+        <div class="form-group search">
             <jsp:useBean id="genres" scope="request" type="java.util.Set<java.lang.String>"/>
-            <label for="movie-genre" style="color: white">Movie genre [${fn:length(genres)}]</label>
+            <label class="genre-label mr-2" for="movie-genre">Movie genre [${fn:length(genres)}]</label>
             <select id="movie-genre" class="form-control" name="selected-genre">
                 <option selected>${notSelected}</option>
                 <c:forEach items="${genres}" var="genre">
@@ -22,7 +23,7 @@
             </select>
 
             <jsp:useBean id="actors" scope="request" type="java.util.Set<java.lang.String>"/>
-            <label for="movie-actor" style="color: white">Movie actor [${fn:length(actors)}]</label>
+            <label class="actor-label mr-2" for="movie-actor">Movie actor [${fn:length(actors)}]</label>
             <select id="movie-actor" class="form-control" name="selected-actor">
                 <option selected>${notSelected}</option>
                 <c:forEach items="${actors}" var="actor">

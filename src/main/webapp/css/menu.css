@@ -1,3 +1,16 @@
+/* ================== global settings ================== */
+:root {
+    --movie-card-width: 200px;
+    --movie-card-height: 300px;
+    --movie-gallery-background: #24282f;
+    --menu-font-color: #fff;
+}
+body {
+    background: var(--movie-gallery-background);
+    margin: 0 350px;
+}
+
+/* ================== menu settings ================== */
 .menu {
     display: grid;
     grid-template-columns: 10% 90%;

@@ -1,0 +1,28 @@
+.search {
+    display: grid;
+    grid-template-columns: 15% 30% 10% 15% 30%;
+    grid-template-areas:"label-left select-left space label-right select-right";
+}
+
+.genre-label,
+.actor-label {
+    color: lightgray;
+    justify-self: end;
+    align-self: center;
+}
+
+.genre-label {
+    grid-area: label-left;
+}
+
+#movie-genre {
+    grid-area: select-left;
+}
+
+.actor-label {
+    grid-area: label-right;
+}
+
+#movie-actor {
+    grid-area: select-right;
+}
