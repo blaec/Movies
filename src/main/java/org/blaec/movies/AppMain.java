@@ -24,6 +24,7 @@ public class AppMain {
     private static final String VIDEOS = "C:/Users/blaec/Videos";
     private static final String MOVIES = "//LDLKONSTANTIN/Movies";
     private static final String CARTOONS = "//LDLKONSTANTIN/Cartoons";
+    private static final String SERIAL_MOVIES = "//LDLKONSTANTIN/Serial Movies";
     public static final Gson gson = new Gson();
 
     static {
@@ -35,7 +36,7 @@ public class AppMain {
 //        LoadMovies.getMoviesFromFolder(VIDEOS).forEach(System.out::println);
 //        LoadMovies.getMoviesFromFolder(CARTOONS).forEach(System.out::println);
 
-        List<MovieFileObject> folderMovies = FilesUtils.getMoviesFromFolder(MOVIES);
+        List<MovieFileObject> folderMovies = FilesUtils.getMoviesFromFolder(SERIAL_MOVIES);
         MovieDao dao = DBIProvider.getDao(MovieDao.class);
         List<MovieDbObject> dbMovies = dao.getAll();
         Set<String> genres = dbMovies.stream()

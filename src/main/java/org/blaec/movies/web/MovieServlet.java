@@ -31,6 +31,8 @@ public class MovieServlet extends HttpServlet {
         if (request.getParameterMap().size() > 0) {
             String selectedGenre = request.getParameter("selected-genre");
             dbMovies = filterMovies(selectedGenre, dbMovies, m -> m.getGenre().contains(selectedGenre));
+            String selectedActor = request.getParameter("selected-actor");
+            dbMovies = filterMovies(selectedActor, dbMovies, m -> m.getActors().contains(selectedActor));
         }
         request.setAttribute("movies", dbMovies);
         request.getRequestDispatcher("/jsp/gallery.jsp").forward(request, response);
