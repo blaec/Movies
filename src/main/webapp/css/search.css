@@ -1,7 +1,7 @@
 .search {
     display: grid;
     grid-template-columns: 15% 30% 10% 15% 30%;
-    grid-template-areas:"label-left select-left space label-right select-right";
+    grid-template-areas:"label-left select-left empty-space label-right select-right";
 }
 
 .genre-label,
@@ -23,6 +23,6 @@
     grid-area: label-right;
 }
 
-#movie-actor {
+.movie-actor {
     grid-area: select-right;
 }
