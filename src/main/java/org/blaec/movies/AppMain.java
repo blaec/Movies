@@ -35,7 +35,7 @@ public class AppMain {
 //        LoadMovies.getMoviesFromFolder(VIDEOS).forEach(System.out::println);
 //        LoadMovies.getMoviesFromFolder(CARTOONS).forEach(System.out::println);
 
-        List<MovieFileObject> folderMovies = FilesUtils.getMoviesFromFolder(CARTOONS);
+        List<MovieFileObject> folderMovies = FilesUtils.getMoviesFromFolder(SERIAL_MOVIES);
         MovieDao dao = DBIProvider.getDao(MovieDao.class);
         List<MovieDbObject> dbMovies = dao.getAll();
         for (MovieFileObject movieFile : folderMovies) {

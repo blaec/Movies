@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS movies;
 DROP SEQUENCE IF EXISTS movie_seq;
 DROP TYPE IF EXISTS resolution_type;
 
-CREATE TYPE resolution_type AS ENUM ('HD', 'FullHD');
+CREATE TYPE resolution_type AS ENUM ('VGA', 'HD', 'FullHD');
 
 CREATE SEQUENCE movie_seq START 100000;
 
