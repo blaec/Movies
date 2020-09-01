@@ -27,7 +27,7 @@ public class MovieFileObject {
 
     private static final Pattern MOVIE = Pattern.compile(
             "(?<order>\\d{3}. )?" +
-            "(?<name>[ ,-.\\w'&ampéÆ;]+?) " +
+            "(?<name>[ ,-.\\w'&ampéÆ!;]+?) " +
             "(\\[(?<description>.*)] )?" +
             "\\((?<year>\\d{4})\\) " +
             "\\[(?<resolution>\\d+p)]" +
