@@ -29,8 +29,12 @@ public class MovieServlet extends HttpServlet {
                         : m.getTitle())
                 .thenComparing(MovieDbObject::getYear));
         if (request.getParameterMap().size() > 0) {
+            String inputTitle = request.getParameter("input-title");
+            dbMovies = filterMovies(inputTitle, dbMovies, m -> m.getTitle().toLowerCase().contains(inputTitle.toLowerCase()));
+
             String selectedGenre = request.getParameter("selected-genre");
             dbMovies = filterMovies(selectedGenre, dbMovies, m -> m.getGenre().contains(selectedGenre));
+
             String selectedActor = request.getParameter("selected-actor");
             dbMovies = filterMovies(selectedActor, dbMovies, m -> m.getActors().contains(selectedActor));
         }

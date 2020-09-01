@@ -19,10 +19,11 @@
                     <span class="alert-primary input-group-text" id="inputGroup-sizing-default">Movie name</span>
                 </div>
                 <input type="text"
+                       name="input-title"
                        class="form-control"
                        aria-label="Default"
                        aria-describedby="inputGroup-sizing-default"
-                       placeholder="Type in partial movie name separating non-adjusting words with %">
+                       placeholder="Type in any part of movie title, even word part or single letter">
             </div>
 
             <div class="movie-genre input-group mb-3">
