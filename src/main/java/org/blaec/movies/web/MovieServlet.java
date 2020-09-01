@@ -47,9 +47,15 @@ public class MovieServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log.info("delete movie with id: {}", request.getParameter("id"));
-//        final WebContext webContext = new WebContext(request, response, request.getServletContext(), request.getLocale());
-//        engine.process("upload", webContext, response.getWriter());
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        try {
+            dao.deleteMovie(id);
+            log.info("delete movie with id: {}", id);
+        } catch (Exception e) {
+            log.error("failed to delete movie with id {}", id, e);
+        }
+        response.sendRedirect("gallery");
     }
 
     private List<MovieDbObject> filterMovies(String selectParam, List<MovieDbObject> dbMovies, Predicate<MovieDbObject> filter) {

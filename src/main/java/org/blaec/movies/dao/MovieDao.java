@@ -2,10 +2,7 @@ package org.blaec.movies.dao;
 
 import com.bertoncelj.jdbi.entitymapper.EntityMapperFactory;
 import org.blaec.movies.objects.MovieDbObject;
-import org.skife.jdbi.v2.sqlobject.BindBean;
-import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 
 import java.util.List;
@@ -19,6 +16,9 @@ public abstract class MovieDao implements AbstractDao {
 
     @SqlQuery("SELECT * FROM movies")
     public abstract List<MovieDbObject> getAll();
+
+    @SqlUpdate("DELETE FROM movies WHERE id=:it")
+    public abstract void deleteMovie(@Bind int id);
 
     @SqlUpdate("INSERT INTO movies " +
                            "(title, " +
