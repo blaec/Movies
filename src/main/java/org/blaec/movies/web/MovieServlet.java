@@ -1,5 +1,6 @@
 package org.blaec.movies.web;
 
+import lombok.extern.slf4j.Slf4j;
 import org.blaec.movies.dao.MovieDao;
 import org.blaec.movies.objects.MovieDbObject;
 import org.blaec.movies.persist.DBIProvider;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 
 import static org.blaec.movies.definitions.Definitions.NOT_SELECTED;
 
-
+@Slf4j
 public class MovieServlet extends HttpServlet {
     private final MovieDao dao = DBIProvider.getDao(MovieDao.class);
 
@@ -37,6 +38,8 @@ public class MovieServlet extends HttpServlet {
 
             String selectedActor = request.getParameter("selected-actor");
             dbMovies = filterMovies(selectedActor, dbMovies, m -> m.getActors().contains(selectedActor));
+            log.info("looking for movies where title contains '{}', has genre '{}' and actor '{}' - found {}",
+                    inputTitle, selectedGenre, selectedActor, dbMovies.size());
         }
         request.setAttribute("movies", dbMovies);
         request.getRequestDispatcher("/jsp/gallery.jsp").forward(request, response);
@@ -44,6 +47,7 @@ public class MovieServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.info("delete movie with id: {}", request.getParameter("id"));
 //        final WebContext webContext = new WebContext(request, response, request.getServletContext(), request.getLocale());
 //        engine.process("upload", webContext, response.getWriter());
     }
