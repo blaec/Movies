@@ -3,6 +3,7 @@ package org.blaec.movies.enums;
 import java.util.Arrays;
 
 public enum Resolution {
+    VGA("480p"),
     HD("720p"),
     FullHD("1080p");
 
