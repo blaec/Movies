@@ -50,15 +50,15 @@
 /* ================== back movie card grid ================== */
 .movie-details {
     display: grid;
-    grid-template-columns: 33.3% 33.4% 33.3%;
+    grid-template-columns: 10.3% 23% 33.4% 23% 10.3%;
     grid-template-rows: 5% 10% 5% 10% 10% 60%;
     grid-template-areas:
-                "rated-caption rate-caption votes-caption"
-                "rated rate votes"
-                "runtime-caption year-caption size-caption"
-                "runtime year size"
-                "genre genre genre"
-                "updated updated updated";
+                "rated-caption rated-caption rate-caption votes-caption votes-caption"
+                "rated rated rate votes votes"
+                "runtime-caption runtime-caption year-caption size-caption size-caption"
+                "runtime runtime year size size"
+                "genre genre genre genre genre"
+                "refresh updated updated updated delete";
     justify-items: center;
     background: #1d2124;
     font-family: 'Kanit', sans-serif;
@@ -115,4 +115,10 @@
     grid-area: updated;
     justify-self: center;
     align-self: end;
+}
+.bi-trash-fill {
+    grid-area: delete;
+    justify-self: end;
+    align-self: end;
+    color: red;
 }
