@@ -28,12 +28,15 @@ public class MovieServlet extends HttpServlet {
         switch (action == null ? "all" : action) {
             case "delete":
                 int id = Integer.parseInt(request.getParameter("id"));
+                String imdbId = request.getParameter("imdbId");
                 try {
                     dao.deleteMovie(id);
-                    log.info("delete movie with id: {}", id);
+                    log.info("deleted movie: id={}, imdbId={}", id, imdbId);
                 } catch (Exception e) {
                     log.error("failed to delete movie with id {}", id, e);
                 }
+                //TODO for some reason redirects and returns updated page but does not reloads it
+                //     fixed in gallery.js within event listener
                 response.sendRedirect("gallery");
                 break;
             case "all":

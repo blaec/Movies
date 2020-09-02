@@ -47,7 +47,7 @@ public class AppMain {
                 try {
                     MovieJsonObject movieJson = gson.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
                     dao.insert(MovieConverter.combine(movieJson, movieFile));
-                    log.info("new movie added {} ({}) {}Gb", movieJson.getTitle(), movieJson.getYear(), movieFile.getSize());
+                    log.info("added new movie {} ({}) {}Gb | imdbId={}", movieJson.getTitle(), movieJson.getYear(), movieFile.getSize(), movieJson.getImdbID());
                 } catch (Exception e) {
                     log.error("failed to save movie {} into db", movieFile, e);
                 }

@@ -17,7 +17,7 @@
         <c:forEach items="${movies}" var="movie">
             <jsp:useBean id="movie" type="org.blaec.movies.objects.MovieDbObject"/>
             <div class="flip-container">
-<%--                <input id="${movie.imdbId}" class="movie-imdb-id" value="${movie.id}" type="hidden">--%>
+                <input id="${movie.imdbId}" class="movie-imdb-id" value="${movie.id}" type="hidden">
                 <div class="flipper">
                     <div class="front">
                         <img class="movie-img" src="${movie.poster}" alt="NO IMAGE">
@@ -41,8 +41,7 @@
                         <p class="m-0 font-6 movie-updated">
                             Last updated <fmt:formatDate value="${movie.updated}" pattern="yyyy-MM-dd HH:mm:ss"/>
                         </p>
-                        <svg value="${movie.id}"
-                             width="1em"
+                        <svg width="1em"
                              height="1em"
                              viewBox="0 0 16 16"
                              class="bi bi-trash-fill"
