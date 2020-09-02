@@ -6,5 +6,6 @@
         <a id="home" class="nav-link" href="index.jsp">Home</a>
         <a id="search" class="nav-link" href="search">Search</a>
         <a id="gallery" class="nav-link" href="gallery">Gallery</a>
+        <a id="upload" class="nav-link" href="upload">Upload</a>
     </nav>
 </header>

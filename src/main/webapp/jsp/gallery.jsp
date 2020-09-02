@@ -6,7 +6,7 @@
 <html>
 
 <jsp:include page="fragments/headTag.jsp"/>
-<link rel="stylesheet" href="css/movieGallery.css" type="text/css">
+<link rel="stylesheet" href="css/gallery.css" type="text/css">
 
 <body>
     <jsp:include page="fragments/bodyHeader.jsp"/>
@@ -54,7 +54,7 @@
                 </div>
             </div>
         </c:forEach>
-    </main>c
+    </main>
 </body>
 <script type="text/javascript" src="js/gallery.js" defer></script>
 </html>
