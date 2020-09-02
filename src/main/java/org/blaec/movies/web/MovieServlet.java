@@ -23,39 +23,47 @@ public class MovieServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<MovieDbObject> dbMovies = dao.getAll();
-        dbMovies.sort(Comparator
-                .comparing((MovieDbObject m) -> m.getTitle().startsWith("The ")
-                        ? m.getTitle().replace("The ", "")
-                        : m.getTitle())
-                .thenComparing(MovieDbObject::getYear));
-        if (request.getParameterMap().size() > 0) {
-            String inputTitle = request.getParameter("input-title");
-            dbMovies = filterMovies(inputTitle, dbMovies, m -> m.getTitle().toLowerCase().contains(inputTitle.toLowerCase()));
+        String action = request.getParameter("action");
 
-            String selectedGenre = request.getParameter("selected-genre");
-            dbMovies = filterMovies(selectedGenre, dbMovies, m -> m.getGenre().contains(selectedGenre));
+        switch (action == null ? "all" : action) {
+            case "delete":
+                int id = Integer.parseInt(request.getParameter("id"));
+                try {
+                    dao.deleteMovie(id);
+                    log.info("delete movie with id: {}", id);
+                } catch (Exception e) {
+                    log.error("failed to delete movie with id {}", id, e);
+                }
+                response.sendRedirect("gallery");
+                break;
+            case "all":
+            default:
+                List<MovieDbObject> dbMovies = dao.getAll();
+                dbMovies.sort(Comparator
+                        .comparing((MovieDbObject m) -> m.getTitle().startsWith("The ")
+                                ? m.getTitle().replace("The ", "")
+                                : m.getTitle())
+                        .thenComparing(MovieDbObject::getYear));
+                if (request.getParameterMap().size() > 0) {
+                    String inputTitle = request.getParameter("input-title");
+                    dbMovies = filterMovies(inputTitle, dbMovies, m -> m.getTitle().toLowerCase().contains(inputTitle.toLowerCase()));
 
-            String selectedActor = request.getParameter("selected-actor");
-            dbMovies = filterMovies(selectedActor, dbMovies, m -> m.getActors().contains(selectedActor));
-            log.info("looking for movies where title contains '{}', has genre '{}' and actor '{}' - found {}",
-                    inputTitle, selectedGenre, selectedActor, dbMovies.size());
+                    String selectedGenre = request.getParameter("selected-genre");
+                    dbMovies = filterMovies(selectedGenre, dbMovies, m -> m.getGenre().contains(selectedGenre));
+
+                    String selectedActor = request.getParameter("selected-actor");
+                    dbMovies = filterMovies(selectedActor, dbMovies, m -> m.getActors().contains(selectedActor));
+                    log.info("looking for movies where title contains '{}', has genre '{}' and actor '{}' - found {}",
+                            inputTitle, selectedGenre, selectedActor, dbMovies.size());
+                }
+                request.setAttribute("movies", dbMovies);
+                request.getRequestDispatcher("/jsp/gallery.jsp").forward(request, response);
+                break;
         }
-        request.setAttribute("movies", dbMovies);
-        request.getRequestDispatcher("/jsp/gallery.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-
-        try {
-            dao.deleteMovie(id);
-            log.info("delete movie with id: {}", id);
-        } catch (Exception e) {
-            log.error("failed to delete movie with id {}", id, e);
-        }
-        response.sendRedirect("gallery");
     }
 
     private List<MovieDbObject> filterMovies(String selectParam, List<MovieDbObject> dbMovies, Predicate<MovieDbObject> filter) {

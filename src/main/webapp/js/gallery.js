@@ -9,10 +9,10 @@ $(document).ready(() => {
             let id = $(event.currentTarget).attr('value');
             if (confirm('Are you sure?')) {
                 $.ajax({
-                    url: "gallery?id=" + id,
-                    type: "POST"
+                    url: "gallery?action=delete&id=" + id,
+                    type: "GET"
                 }).done(function () {
-                    // successNoty("Deleted");
+                    location.reload();
                 });
             }
         })
