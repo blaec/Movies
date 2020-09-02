@@ -51,12 +51,13 @@
 .movie-details {
     display: grid;
     grid-template-columns: 10.3% 23% 33.4% 23% 10.3%;
-    grid-template-rows: 5% 10% 5% 10% 10% 60%;
+    grid-template-rows: 5% 10% 5% 10% 35% 10% 25%;
     grid-template-areas:
                 "rated-caption rated-caption rate-caption votes-caption votes-caption"
                 "rated rated rate votes votes"
                 "runtime-caption runtime-caption year-caption size-caption size-caption"
                 "runtime runtime year size size"
+                "title title title title title"
                 "genre genre genre genre genre"
                 "refresh updated updated updated delete";
     justify-items: center;
@@ -110,6 +111,14 @@
     grid-area: genre;
     justify-self: center;
     text-align: center;
+}
+.movie-title {
+    grid-area: title;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 1.3em;
 }
 .movie-updated {
     grid-area: updated;
