@@ -37,6 +37,7 @@
                         <p class="m-0 font-8 movie-year">${movie.year}</p>
                         <p class="m-0 font-6 movie-size-caption">size</p>
                         <p class="m-0 font-8 movie-size">${movie.size}Gb</p>
+                        <p class="m-0 font-8 movie-title">${movie.title}</p>
                         <p class="m-0 font-8 movie-genre">${movie.genre}</p>
                         <p class="m-0 font-6 movie-updated">
                             Last updated <fmt:formatDate value="${movie.updated}" pattern="yyyy-MM-dd HH:mm:ss"/>
