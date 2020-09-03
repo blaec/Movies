@@ -15,10 +15,7 @@ public class MovieConfig {
     final private String paramYear;
     final private String paramApikey;
     final private String valueApikey;
-    final private String linkMovies;
-    final private String linkCartoons;
-    final private String linkVideos;
-    final private String linkSerialMovies;
+    final private Map<String, String> locations;
 
 
     private MovieConfig(Config conf) {
@@ -27,10 +24,12 @@ public class MovieConfig {
         paramYear = conf.getString("omdbapi.paramName.year");
         paramApikey = conf.getString("omdbapi.paramName.apikey");
         valueApikey = conf.getString("omdbapi.paramValue.apikey");
-        linkMovies = conf.getString("upload.movies");
-        linkCartoons = conf.getString("upload.cartoons");
-        linkVideos = conf.getString("upload.videos");
-        linkSerialMovies = conf.getString("upload.serialMovies");
+        locations = ImmutableMap.of(
+                conf.getString("upload.name.movies"), conf.getString("upload.location.movies"),
+                conf.getString("upload.name.cartoons"), conf.getString("upload.location.cartoons"),
+                conf.getString("upload.name.videos"), conf.getString("upload.location.videos"),
+                conf.getString("upload.name.serialMovies"), conf.getString("upload.location.serialMovies")
+        );
     }
 
     /**
@@ -54,12 +53,7 @@ public class MovieConfig {
      * @return map with key - for location description and value - for path to file location
      */
     public static Map<String, String> getFileLocations() {
-        return ImmutableMap.of(
-                "Movies", INSTANCE.linkMovies,
-                "Cartoons", INSTANCE.linkCartoons,
-                "Videos", INSTANCE.linkVideos,
-                "Serial Movies", INSTANCE.linkSerialMovies
-        );
+        return INSTANCE.locations;
     }
 
     /**
