@@ -14,7 +14,7 @@
         <div class="form-group search">
             <jsp:useBean id="genres" scope="request" type="java.util.Set<java.lang.String>"/>
 
-            <div class="movie-name input-group input-group mb-3">
+            <div class="movie-name input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="alert-primary input-group-text" id="inputGroup-sizing-default">Movie name</span>
                 </div>

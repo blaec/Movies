@@ -45,6 +45,8 @@ public class UploadServlet extends HttpServlet {
     @SneakyThrows
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String selectedLocation = request.getParameter("selected-location");
+        String imdbId = request.getParameter("imdb-id");
+        String manualImportTitle = request.getParameter("manual-import-title");
         if (!NOT_SELECTED.equals(selectedLocation)) {
             MovieDao dao = DBIProvider.getDao(MovieDao.class);
             List<MovieDbObject> dbMovies = dao.getAll();
@@ -59,12 +61,14 @@ public class UploadServlet extends HttpServlet {
             successUpload = new ArrayList<>();
             failUpload = new ArrayList<>();
             for (MovieFileObject movieFile : newUploadMovies) {
-                String url = MovieConfig.getApiRequestUrl(movieFile);
+                String url = imdbId == null || !movieFile.getName().equals(manualImportTitle)
+                        ? MovieConfig.getApiRequestUrl(movieFile)
+                        : MovieConfig.getApiRequestUrl(imdbId);
                 HttpResponse<String> stringHttpResponse = ApiUtils.sendRequest(url);
                 try {
                     MovieJsonObject movieJson = gson.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
                     dao.insert(MovieConverter.combine(movieJson, movieFile));
-                    successUpload.add(movieFile.toString());
+                    successUpload.add(String.format("%s <---> %s", movieFile.toString(), movieJson.getTitle()));
                     log.info("added new movie {} ({}) {}Gb | imdbId={}",
                             movieJson.getTitle(), movieJson.getYear(), movieFile.getSize(), movieJson.getImdbID());
                 } catch (Exception e) {
