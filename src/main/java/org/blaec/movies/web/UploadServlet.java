@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.blaec.movies.definitions.Definitions.NOT_SELECTED;
 
@@ -80,6 +81,14 @@ public class UploadServlet extends HttpServlet {
         request.setAttribute("success", successUpload);
         request.setAttribute("fail", failUpload);
         request.setAttribute("locations", locations);
+        String uploadMessage = Stream.of(getMessage(successUpload, "Successful"), getMessage(failUpload, "Failed"))
+                .filter(Objects::nonNull)
+                .collect(Collectors.joining("  |  "));
+        request.setAttribute("uploadMessage", uploadMessage);
         request.getRequestDispatcher("/jsp/upload.jsp").forward(request, response);
+    }
+
+    private String getMessage(List<String> result, String msg) {
+        return result.size() == 0 ? null : String.format("%s uploads: %d", msg, result.size());
     }
 }

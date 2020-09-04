@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
-<%--<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>--%>
 
 <html>
 
@@ -39,15 +37,14 @@
         </div>
 
         <div class="col col-12 mt-3">
+            <p class="stat-font m-1">${uploadMessage}</p>
             <ul class="list-group">
-                <jsp:useBean id="success" scope="request" type="java.util.List<java.lang.String>"/>
                 <c:forEach items="${success}" var="successItem">
                     <li class="list-group-item list-group-item-success">
                         <i class="fa fa-check-circle mr-1"></i>
                         ${successItem}
                     </li>
                 </c:forEach>
-                <jsp:useBean id="fail" scope="request" type="java.util.List<java.lang.String>"/>
                 <c:forEach items="${fail}" var="failItem">
                     <li class="list-group-item list-group-item-danger">
                         <i class="fa fa-times-circle mr-1"></i>

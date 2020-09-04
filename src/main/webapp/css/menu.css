@@ -9,6 +9,11 @@ body {
     background: var(--movie-gallery-background);
     margin: 0 350px;
 }
+.stat-font {
+    color: lightgray;
+    font-size: 0.8em;
+    font-family: 'Kanit', sans-serif;
+}
 
 /* ================== menu settings ================== */
 .menu {

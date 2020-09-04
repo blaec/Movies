@@ -89,7 +89,7 @@ public class MovieFileObject {
 
     @Override
     public String toString() {
-        return String.format("%s | %s%s (%d) [%s]%s | %f Gb",
+        return String.format("%s | %s%s (%d) [%s]%s | %.2f Gb",
                 location,
                 name,
                 description == null ? "" : String.format(" [%s]", description),
