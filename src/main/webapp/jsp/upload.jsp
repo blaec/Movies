@@ -24,6 +24,7 @@
                         <select id="movie-location"
                                 class="form-control selectpicker"
                                 name="selected-location">
+                            <option selected>${notSelected}</option>
                             <c:forEach items="${locations}" var="location">
                                 <jsp:useBean id="location" type="java.lang.String"/>
                                 <option>${location}</option>
@@ -41,11 +42,17 @@
             <ul class="list-group">
                 <jsp:useBean id="success" scope="request" type="java.util.List<java.lang.String>"/>
                 <c:forEach items="${success}" var="successItem">
-                    <li class="list-group-item list-group-item-success">${successItem}</li>
+                    <li class="list-group-item list-group-item-success">
+                        <i class="fa fa-check-circle mr-1"></i>
+                        ${successItem}
+                    </li>
                 </c:forEach>
                 <jsp:useBean id="fail" scope="request" type="java.util.List<java.lang.String>"/>
                 <c:forEach items="${fail}" var="failItem">
-                    <li class="list-group-item list-group-item-danger">${failItem}</li>
+                    <li class="list-group-item list-group-item-danger">
+                        <i class="fa fa-times-circle mr-1"></i>
+                        ${failItem}
+                    </li>
                 </c:forEach>
             </ul>
         </div>

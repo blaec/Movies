@@ -23,6 +23,8 @@ import java.net.http.HttpResponse;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.blaec.movies.definitions.Definitions.NOT_SELECTED;
+
 @Slf4j
 public class UploadServlet extends HttpServlet {
     private Map<String, String> locationsMap;
@@ -41,10 +43,11 @@ public class UploadServlet extends HttpServlet {
 
     @SneakyThrows
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameterMap().size() > 0) {
+        String selectedLocation = request.getParameter("selected-location");
+        if (!NOT_SELECTED.equals(selectedLocation)) {
             MovieDao dao = DBIProvider.getDao(MovieDao.class);
             List<MovieDbObject> dbMovies = dao.getAll();
-            String uploadLocation = locationsMap.get(request.getParameter("selected-location"));
+            String uploadLocation = locationsMap.get(selectedLocation);
             List<MovieFileObject> uploadMovies = FilesUtils.getMoviesFromFolder(uploadLocation);
             List<MovieFileObject> newUploadMovies = uploadMovies.stream()
                     .filter(um -> dbMovies.stream()
@@ -73,6 +76,7 @@ public class UploadServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("notSelected", NOT_SELECTED);
         request.setAttribute("success", successUpload);
         request.setAttribute("fail", failUpload);
         request.setAttribute("locations", locations);
