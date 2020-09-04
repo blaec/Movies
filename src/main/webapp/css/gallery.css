@@ -7,11 +7,6 @@
     width: var(--movie-card-width);
     height: var(--movie-card-height);
 }
-.movie-count {
-    color: lightgray;
-    font-size: 0.8em;
-    font-family: 'Kanit', sans-serif;
-}
 
 /* ================== flip movie card ================== */
 .flip-container {
