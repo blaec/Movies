@@ -68,7 +68,7 @@ public class UploadServlet extends HttpServlet {
                 try {
                     MovieJsonObject movieJson = gson.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
                     dao.insert(MovieConverter.combine(movieJson, movieFile));
-                    successUpload.add(movieFile.toString());
+                    successUpload.add(String.format("%s <---> %s", movieFile.toString(), movieJson.getTitle()));
                     log.info("added new movie {} ({}) {}Gb | imdbId={}",
                             movieJson.getTitle(), movieJson.getYear(), movieFile.getSize(), movieJson.getImdbID());
                 } catch (Exception e) {
