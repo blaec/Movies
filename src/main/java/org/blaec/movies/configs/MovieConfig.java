@@ -13,6 +13,7 @@ public class MovieConfig {
     final private String endpoint;
     final private String paramTitle;
     final private String paramYear;
+    final private String paramId;
     final private String paramApikey;
     final private String valueApikey;
     final private Map<String, String> locations;
@@ -22,6 +23,7 @@ public class MovieConfig {
         endpoint = conf.getString("omdbapi.endpoint");
         paramTitle = conf.getString("omdbapi.paramName.title");
         paramYear = conf.getString("omdbapi.paramName.year");
+        paramId = conf.getString("omdbapi.paramName.id");
         paramApikey = conf.getString("omdbapi.paramName.apikey");
         valueApikey = conf.getString("omdbapi.paramValue.apikey");
         locations = ImmutableMap.of(
@@ -37,12 +39,26 @@ public class MovieConfig {
      * sample url: http://www.omdbapi.com/?t=As+Good+as+It+Gets&y=1997&apikey=33ca5cbc
      *
      * @param movieFileObject movie file object
-     * @return url for api-request
+     * @return url for api-request by title
      */
     public static String getApiRequestUrl(MovieFileObject movieFileObject) {
         String params = joinParams(ImmutableMap.of(
                 INSTANCE.paramTitle, movieFileObject.getNameUrlStyled(),
                 INSTANCE.paramYear, String.valueOf(movieFileObject.getYear()),
+                INSTANCE.paramApikey, INSTANCE.valueApikey));
+        return String.format("%s?%s", INSTANCE.endpoint, params);
+    }
+
+    /**
+     * Create request api url imdb id
+     * sample url: http://www.omdbapi.com/?i=tt0378194&apikey=33ca5cbc
+     *
+     * @param id imdb id
+     * @return url for api-request by imdb id
+     */
+    public static String getApiRequestUrl(String id) {
+        String params = joinParams(ImmutableMap.of(
+                INSTANCE.paramId, id,
                 INSTANCE.paramApikey, INSTANCE.valueApikey));
         return String.format("%s?%s", INSTANCE.endpoint, params);
     }
