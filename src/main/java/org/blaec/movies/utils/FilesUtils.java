@@ -26,7 +26,7 @@ public class FilesUtils {
     private static final FileFilter filter = pathname -> pathname.isDirectory()
                                                       || pathname.getName().endsWith("mkv")
                                                       || pathname.getName().endsWith("avi");
-    private static final Set<File> movies = new TreeSet<>();
+    private static Set<File> movies;
 
     /**
      * Returns sorted list of movies from folder
@@ -35,6 +35,7 @@ public class FilesUtils {
      * @return sorted list of movie objects or empty list
      */
     public static List<MovieFileObject> getMoviesFromFolder(String dirPath) {
+        movies = new TreeSet<>();
         getFilesFromFolder(dirPath);
         return movies.stream()
                 .map(MovieFileObject::from)

@@ -9,29 +9,49 @@
 <link rel="stylesheet" href="css/upload.css" type="text/css">
 
 <body>
-    <jsp:include page="fragments/bodyHeader.jsp"/>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 
-    <form method="post" action="upload">
-        <div class="form-group search">
-            <jsp:useBean id="locations" scope="request" type="java.util.Set<java.lang.String>"/>
-            <div class="movie-location input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="alert-primary input-group-text location-label" for="movie-location">
-                        Upload locations
-                    </label>
+    <div class="row">
+        <div class="col col-12">
+
+            <form method="post" action="upload">
+                <div class="form-group search">
+                    <jsp:useBean id="locations" scope="request" type="java.util.Set<java.lang.String>"/>
+                    <div class="movie-location input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="alert-primary input-group-text location-label" for="movie-location">
+                                Upload locations
+                            </label>
+                        </div>
+                        <select id="movie-location"
+                                class="form-control selectpicker"
+                                name="selected-location">
+                            <c:forEach items="${locations}" var="location">
+                                <jsp:useBean id="location" type="java.lang.String"/>
+                                <option>${location}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
                 </div>
-                <select id="movie-location"
-                        class="form-control selectpicker"
-                        name="selected-location">
-                    <c:forEach items="${locations}" var="location">
-                        <jsp:useBean id="location" type="java.lang.String"/>
-                        <option>${location}</option>
-                    </c:forEach>
-                </select>
-            </div>
+                <button type="submit" class="btn btn-outline-primary float-right col-2">Upload</button>
+            </form>
         </div>
-        <button type="submit" class="btn btn-outline-primary float-right col-2">Upload</button>
-    </form>
+
+        <div class="col col-12 mt-3">
+            <ul class="list-group">
+                <jsp:useBean id="success" scope="request" type="java.util.List<java.lang.String>"/>
+                <c:forEach items="${success}" var="successItem">
+                    <li class="list-group-item list-group-item-success">${successItem}</li>
+                </c:forEach>
+                <jsp:useBean id="fail" scope="request" type="java.util.List<java.lang.String>"/>
+                <c:forEach items="${fail}" var="failItem">
+                    <li class="list-group-item list-group-item-danger">${failItem}</li>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+
+
 </body>
 <script type="text/javascript" src="js/upload.js" defer></script>
 </html>
