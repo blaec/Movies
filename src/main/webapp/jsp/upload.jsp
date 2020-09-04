@@ -10,10 +10,8 @@
 
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
-
     <div class="row">
         <div class="col col-12">
-
             <form method="post" action="upload">
                 <div class="form-group search">
                     <jsp:useBean id="locations" scope="request" type="java.util.Set<java.lang.String>"/>
@@ -31,9 +29,11 @@
                                 <option>${location}</option>
                             </c:forEach>
                         </select>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-primary">Upload</button>
+                        </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-outline-primary float-right col-2">Upload</button>
             </form>
         </div>
 
@@ -50,8 +50,6 @@
             </ul>
         </div>
     </div>
-
-
 </body>
 <script type="text/javascript" src="js/upload.js" defer></script>
 </html>
