@@ -32,12 +32,44 @@
                             <button type="submit" class="btn btn-outline-primary">Upload</button>
                         </div>
                     </div>
+
+                    <p class="stat-font">
+                        Manual import by imdb id for single movie from selected location (Optional)
+                    </p>
+                    <div class="row">
+                        <div class="col col-5 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="alert-primary input-group-text" id="imdb id">
+                                    Imdb Id
+                                </span>
+                            </div>
+                            <input type="text"
+                                   name="imdb-id"
+                                   class="form-control"
+                                   aria-label="Default"
+                                   aria-describedby="imdb id"
+                                   placeholder="Type imdb id, like tt0378194">
+                        </div>
+                        <div class=" col col-7 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="alert-primary input-group-text" id="manual-title">
+                                    Manual Title
+                                </span>
+                            </div>
+                            <input type="text"
+                                   name="manual-import-title"
+                                   class="form-control"
+                                   aria-label="Default"
+                                   aria-describedby="manual-title"
+                                   placeholder="Type in exact file movie title for manual import">
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
 
         <div class="col col-12 mt-3">
-            <p class="stat-font m-1">${uploadMessage}</p>
+            <p class="stat-font">${uploadMessage}</p>
             <ul class="list-group">
                 <c:forEach items="${success}" var="successItem">
                     <li class="list-group-item list-group-item-success">
