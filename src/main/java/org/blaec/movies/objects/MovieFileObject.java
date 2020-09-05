@@ -3,7 +3,9 @@ package org.blaec.movies.objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.blaec.movies.enums.FailType;
 import org.blaec.movies.enums.Resolution;
+import org.blaec.movies.utils.FailureAccumulator;
 import org.blaec.movies.utils.FilesUtils;
 
 import java.io.File;
@@ -44,7 +46,9 @@ public class MovieFileObject {
         Matcher matcher = MOVIE.matcher(fileName);
         MovieFileObject movieFileObject = null;
         if (!matcher.find()) {
-            log.error("failed to parse movie {}{}{}", file.getParent(), File.separator, fileName);
+            String fullPath = String.format("%s%s%s", file.getParent(), File.separator, fileName);
+            log.error("failed to parse movie {}", fullPath);
+            FailureAccumulator.addToFailList(FailType.PARSE, fullPath);
         } else {
             int frameRate = parseInt(matcher, "frameRate");
             movieFileObject = new MovieFileObject(

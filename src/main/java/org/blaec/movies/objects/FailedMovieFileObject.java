@@ -10,6 +10,6 @@ public class FailedMovieFileObject {
 
     @Override
     public String toString() {
-        return String.format("%s | %s", failType, description);
+        return String.format("%s | %s", failType.getDescription(), description);
     }
 }
