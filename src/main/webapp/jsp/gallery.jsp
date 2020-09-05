@@ -12,6 +12,8 @@
     <jsp:include page="fragments/bodyHeader.jsp"/>
 
     <jsp:useBean id="movies" scope="request" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"/>
+    <jsp:useBean id="totalRuntime" scope="request" type="java.lang.String"/>
+    <jsp:useBean id="totalSize" scope="request" type="java.lang.Double"/>
     <p class="stat-font">
         movies found: <b>${fn:length(movies)}</b>  |
         total runtime: <b>${totalRuntime}</b>  |

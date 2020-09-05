@@ -22,6 +22,7 @@
                         <select id="movie-location"
                                 class="form-control selectpicker"
                                 name="selected-location">
+                            <jsp:useBean id="notSelected" scope="request" type="java.lang.String"/>
                             <option selected>${notSelected}</option>
                             <c:forEach items="${locations}" var="location">
                                 <jsp:useBean id="location" type="java.lang.String"/>
@@ -69,14 +70,17 @@
         </div>
 
         <div class="col col-12 mt-3">
+            <jsp:useBean id="uploadMessage" scope="request" type="java.lang.String"/>
             <p class="stat-font">${uploadMessage}</p>
             <ul class="list-group">
+                <jsp:useBean id="success" scope="request" type="java.util.List<org.blaec.movies.objects.SuccessMovieFileObject>"/>
                 <c:forEach items="${success}" var="successItem">
-                    <li class="list-group-item list-group-item-success">
+                    <li class="list-group-item list-group-item-success" value="${successItem.movieJsonObjectTitle}">
                         <i class="fa fa-check-circle mr-1"></i>
-                        ${successItem}
+                        ${successItem.movieFileObject}
                     </li>
                 </c:forEach>
+                <jsp:useBean id="fail" scope="request" type="java.util.List<java.lang.String>"/>
                 <c:forEach items="${fail}" var="failItem">
                     <li class="list-group-item list-group-item-danger">
                         <i class="fa fa-times-circle mr-1"></i>
