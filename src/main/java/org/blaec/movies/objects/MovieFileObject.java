@@ -29,7 +29,7 @@ public class MovieFileObject {
 
     private static final Pattern MOVIE = Pattern.compile(
             "(?<order>\\d{3}. )?" +
-            "(?<name>[ ,-.\\w'&ampéÆ!;]+?) " +
+            "(?<name>[ ,-.\\w'&ampéÆ!·³;]+?) " +
             "(\\[(?<description>.*)] )?" +
             "\\((?<year>\\d{4})\\) " +
             "\\[(?<resolution>\\d+p)]" +
@@ -70,12 +70,13 @@ public class MovieFileObject {
     }
 
     /**
-     * Replace some symbols in file name to new symbols as they are saved in db
+     * Replace some symbols (that aren't allowed in file name) to new symbols as they are saved in db
      *
      * @return file movie name converted for comparing with db movie name
      */
     public String getNameDbStyled() {
-        return name.replace("..", ":");
+        return name.replace("..", ":")
+                   .replace(",.","?");
     }
 
     /**
@@ -86,9 +87,12 @@ public class MovieFileObject {
     public String getNameUrlStyled() {
         return name.replace(" ", "+")
                    .replace("..", "%3A")
+                   .replace(",.", "%3F")
                    .replace("'", "%27")
                    .replace("é", "%C3%A9")
-                   .replace("&", "%26");
+                   .replace("&", "%26")
+                   .replace("·", "%C2%B7")
+                   .replace("³", "%C2%B3");
     }
 
     @Override
