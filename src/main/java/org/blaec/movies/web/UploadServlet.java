@@ -6,11 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.blaec.movies.configs.MovieConfig;
 import org.blaec.movies.dao.MovieDao;
+import org.blaec.movies.enums.FailType;
 import org.blaec.movies.objects.MovieDbObject;
 import org.blaec.movies.objects.MovieFileObject;
 import org.blaec.movies.objects.MovieJsonObject;
 import org.blaec.movies.persist.DBIProvider;
 import org.blaec.movies.utils.ApiUtils;
+import org.blaec.movies.utils.FailureAccumulator;
 import org.blaec.movies.utils.FilesUtils;
 import org.blaec.movies.utils.MovieConverter;
 
@@ -31,7 +33,6 @@ public class UploadServlet extends HttpServlet {
     private Map<String, String> locationsMap;
     private Set<String> locations;
     private List<String> successUpload;
-    private List<String> failUpload;
 
     @Override
     public void init() throws ServletException {
@@ -39,7 +40,6 @@ public class UploadServlet extends HttpServlet {
         locationsMap = MovieConfig.getFileLocations();
         locations = locationsMap.keySet();
         successUpload = new ArrayList<>();
-        failUpload = new ArrayList<>();
     }
 
     @SneakyThrows
@@ -48,6 +48,7 @@ public class UploadServlet extends HttpServlet {
         String imdbId = request.getParameter("imdb-id");
         String manualImportTitle = request.getParameter("manual-import-title");
         if (!NOT_SELECTED.equals(selectedLocation)) {
+            FailureAccumulator.initFailList();
             MovieDao dao = DBIProvider.getDao(MovieDao.class);
             List<MovieDbObject> dbMovies = dao.getAll();
             String uploadLocation = locationsMap.get(selectedLocation);
@@ -59,7 +60,6 @@ public class UploadServlet extends HttpServlet {
                     .collect(Collectors.toList());
             Gson gson = new Gson();
             successUpload = new ArrayList<>();
-            failUpload = new ArrayList<>();
             for (MovieFileObject movieFile : newUploadMovies) {
                 String url = imdbId == null || !movieFile.getName().equals(manualImportTitle)
                         ? MovieConfig.getApiRequestUrl(movieFile)
@@ -73,7 +73,7 @@ public class UploadServlet extends HttpServlet {
                             movieJson.getTitle(), movieJson.getYear(), movieFile.getSize(), movieJson.getImdbID());
                 } catch (Exception e) {
                     log.error("failed to save movie {} into db", movieFile, e);
-                    failUpload.add(movieFile.toString());
+                    FailureAccumulator.addToFailList(FailType.DB_SAVE, movieFile.toString());
                 }
             }
         }
@@ -83,6 +83,7 @@ public class UploadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("notSelected", NOT_SELECTED);
         request.setAttribute("success", successUpload);
+        List<String> failUpload = FailureAccumulator.getFailUploadList();
         request.setAttribute("fail", failUpload);
         request.setAttribute("locations", locations);
         String uploadMessage = Stream.of(getMessage(successUpload, "Successful"), getMessage(failUpload, "Failed"))
