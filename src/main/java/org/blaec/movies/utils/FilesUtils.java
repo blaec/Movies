@@ -13,15 +13,15 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class FilesUtils {
-    public static final long ONE_KB = 1024;
-    public static final long ONE_MB = ONE_KB * ONE_KB;
-    public static final long ONE_GB = ONE_KB * ONE_MB;
-    public static final long ONE_TB = ONE_KB * ONE_GB;
+    private static final long ONE_KB = 1024;
+    private static final long ONE_MB = ONE_KB * ONE_KB;
+    private static final long ONE_GB = ONE_KB * ONE_MB;
+    private static final long ONE_TB = ONE_KB * ONE_GB;
 
-    public static final BigDecimal ONE_KB_BD = BigDecimal.valueOf(ONE_KB);
-    public static final BigDecimal ONE_MB_BD = BigDecimal.valueOf(ONE_MB);
-    public static final BigDecimal ONE_GB_BD = BigDecimal.valueOf(ONE_GB);
-    public static final BigDecimal ONE_TB_BD = BigDecimal.valueOf(ONE_TB);
+    private static final BigDecimal ONE_KB_BD = BigDecimal.valueOf(ONE_KB);
+    private static final BigDecimal ONE_MB_BD = BigDecimal.valueOf(ONE_MB);
+    private static final BigDecimal ONE_GB_BD = BigDecimal.valueOf(ONE_GB);
+    private static final BigDecimal ONE_TB_BD = BigDecimal.valueOf(ONE_TB);
 
     private static final FileFilter filter = pathname -> pathname.isDirectory()
                                                       || pathname.getName().endsWith("mkv")
