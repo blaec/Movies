@@ -46,7 +46,7 @@
 .movie-details {
     display: grid;
     grid-template-columns: 9% 24.3% 33.4% 24.3% 9%;
-    grid-template-rows: 5% 10% 5% 10% 35% 10% 25%;
+    grid-template-rows: 5% 10% 5% 10% 35% 22% 7% 6%;
     grid-template-areas:
                 "rated-caption rated-caption rate-caption votes-caption votes-caption"
                 "rated rated rate votes votes"
@@ -54,6 +54,7 @@
                 "runtime runtime year size size"
                 "title title title title title"
                 "genre genre genre genre genre"
+                "location location location location location"
                 "refresh updated updated updated delete";
     justify-items: center;
     background: #1d2124;
@@ -102,11 +103,6 @@
 .movie-size {
     grid-area: size;
 }
-.movie-genre {
-    grid-area: genre;
-    justify-self: center;
-    text-align: center;
-}
 .movie-title {
     grid-area: title;
     justify-self: center;
@@ -114,6 +110,16 @@
     text-align: center;
     font-family: 'Yanone Kaffeesatz', sans-serif;
     font-size: 1.3em;
+}
+.movie-genre {
+    grid-area: genre;
+    justify-self: center;
+    text-align: center;
+}
+.movie-location {
+    grid-area: location;
+    justify-self: center;
+    text-align: center;
 }
 .movie-updated {
     grid-area: updated;

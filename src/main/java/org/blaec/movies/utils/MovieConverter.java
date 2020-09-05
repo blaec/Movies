@@ -1,5 +1,6 @@
 package org.blaec.movies.utils;
 
+import org.blaec.movies.configs.MovieConfig;
 import org.blaec.movies.objects.MovieDbObject;
 import org.blaec.movies.objects.MovieFileObject;
 import org.blaec.movies.objects.MovieJsonObject;
@@ -8,6 +9,7 @@ import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
+import java.util.Map;
 
 public class MovieConverter {
     public static MovieDbObject combine(MovieJsonObject movieJsonObject, MovieFileObject movieFileObject) throws ParseException {
@@ -39,5 +41,12 @@ public class MovieConverter {
         // additional fields
         movieDbObject.setUpdated(new Timestamp(System.currentTimeMillis()));
         return movieDbObject;
+    }
+
+    public static String getKeyLocation(String fullLocation) {
+        return MovieConfig.getFileLocations().entrySet().stream()
+                .filter(e -> fullLocation.contains(e.getValue()))
+                .map(Map.Entry::getKey)
+                .findFirst().orElse(fullLocation);
     }
 }

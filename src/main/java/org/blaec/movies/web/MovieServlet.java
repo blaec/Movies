@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.blaec.movies.dao.MovieDao;
 import org.blaec.movies.objects.MovieDbObject;
 import org.blaec.movies.persist.DBIProvider;
+import org.blaec.movies.utils.MovieConverter;
 import org.blaec.movies.utils.RuntimeUtils;
 
 import javax.servlet.ServletException;
@@ -62,6 +63,7 @@ public class MovieServlet extends HttpServlet {
                     log.info("looking for movies where title contains '{}', has genre '{}' and actor '{}' - found {}",
                             inputTitle, selectedGenre, selectedActor, dbMovies.size());
                 }
+                dbMovies.forEach(m -> m.setLocation(MovieConverter.getKeyLocation(m.getLocation())));
                 request.setAttribute("movies", dbMovies);
                 request.setAttribute("totalSize",
                         dbMovies.stream().mapToDouble(MovieDbObject::getSize).sum());
