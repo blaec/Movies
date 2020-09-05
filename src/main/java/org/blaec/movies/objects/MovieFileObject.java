@@ -29,7 +29,7 @@ public class MovieFileObject {
 
     private static final Pattern MOVIE = Pattern.compile(
             "(?<order>\\d{3}. )?" +
-            "(?<name>[ ,-.\\w'&ampéÆ!;]+?) " +
+            "(?<name>[ ,-.\\w'&ampéÆ!·³;]+?) " +
             "(\\[(?<description>.*)] )?" +
             "\\((?<year>\\d{4})\\) " +
             "\\[(?<resolution>\\d+p)]" +
@@ -88,7 +88,9 @@ public class MovieFileObject {
                    .replace("..", "%3A")
                    .replace("'", "%27")
                    .replace("é", "%C3%A9")
-                   .replace("&", "%26");
+                   .replace("&", "%26")
+                   .replace("·", "%C2%B7")
+                   .replace("³", "%C2%B3");
     }
 
     @Override
