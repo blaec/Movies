@@ -48,7 +48,7 @@
                         <p class="m-0 font-6 movie-updated">
                             Last updated <fmt:formatDate value="${movie.updated}" pattern="yyyy-MM-dd HH:mm:ss"/>
                         </p>
-                        <i class="fa fa-trash bi-trash-fill"></i>
+                        <i class="fa fa-trash movie-delete"></i>
                     </div>
                 </div>
             </div>

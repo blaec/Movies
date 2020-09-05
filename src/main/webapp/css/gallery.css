@@ -120,9 +120,12 @@
     justify-self: center;
     align-self: end;
 }
-.bi-trash-fill {
+.movie-delete {
     grid-area: delete;
     justify-self: end;
     align-self: end;
+}
+.movie-delete:hover {
+    cursor: pointer;
     color: red;
 }
