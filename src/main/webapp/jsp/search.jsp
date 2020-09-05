@@ -35,6 +35,7 @@
                 <select id="movie-genre"
                         class="form-control selectpicker"
                         name="selected-genre">
+                    <jsp:useBean id="notSelected" scope="request" type="java.lang.String"/>
                     <option selected>${notSelected}</option>
                     <c:forEach items="${genres}" var="genre">
                         <jsp:useBean id="genre" type="java.lang.String"/>

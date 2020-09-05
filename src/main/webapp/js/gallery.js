@@ -5,7 +5,7 @@ $(document).ready(() => {
 
         // ======================== listeners ========================
         // delete movie
-        $(".bi-trash-fill").on('click', (event)=> {
+        $(".movie-delete").on('click', (event)=> {
             let movieIds = $(event.currentTarget).parents(".flip-container").children("input");
             let id = movieIds.attr("value");
             let imdbId = movieIds.attr("id");

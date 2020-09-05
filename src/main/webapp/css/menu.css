@@ -30,9 +30,9 @@ body {
     justify-self: end;
 }
 
-a,
-a:focus,
-a:hover,
+.nav-link,
+.nav-link:focus,
+.nav-link:hover,
 .caption {
     color: var(--menu-font-color);
 }

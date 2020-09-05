@@ -10,6 +10,7 @@ import org.blaec.movies.enums.FailType;
 import org.blaec.movies.objects.MovieDbObject;
 import org.blaec.movies.objects.MovieFileObject;
 import org.blaec.movies.objects.MovieJsonObject;
+import org.blaec.movies.objects.SuccessMovieFileObject;
 import org.blaec.movies.persist.DBIProvider;
 import org.blaec.movies.utils.ApiUtils;
 import org.blaec.movies.utils.FailureAccumulator;
@@ -32,7 +33,7 @@ import static org.blaec.movies.definitions.Definitions.NOT_SELECTED;
 public class UploadServlet extends HttpServlet {
     private Map<String, String> locationsMap;
     private Set<String> locations;
-    private List<String> successUpload;
+    private List<SuccessMovieFileObject> successUpload;
 
     @Override
     public void init() throws ServletException {
@@ -68,7 +69,7 @@ public class UploadServlet extends HttpServlet {
                 try {
                     MovieJsonObject movieJson = gson.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
                     dao.insert(MovieConverter.combine(movieJson, movieFile));
-                    successUpload.add(String.format("%s <---> %s", movieFile.toString(), movieJson.getTitle()));
+                    successUpload.add(SuccessMovieFileObject.from(movieFile.toString(), movieJson.getTitle()));
                     log.info("added new movie {} ({}) {}Gb | imdbId={}",
                             movieJson.getTitle(), movieJson.getYear(), movieFile.getSize(), movieJson.getImdbID());
                 } catch (Exception e) {
@@ -86,14 +87,15 @@ public class UploadServlet extends HttpServlet {
         List<String> failUpload = FailureAccumulator.getFailUploadList();
         request.setAttribute("fail", failUpload);
         request.setAttribute("locations", locations);
-        String uploadMessage = Stream.of(getMessage(successUpload, "Successful"), getMessage(failUpload, "Failed"))
+        String uploadMessage = Stream
+                .of(getMessage(successUpload.size(), "Successful"), getMessage(failUpload.size(), "Failed"))
                 .filter(Objects::nonNull)
                 .collect(Collectors.joining("  |  "));
         request.setAttribute("uploadMessage", uploadMessage);
         request.getRequestDispatcher("/jsp/upload.jsp").forward(request, response);
     }
 
-    private String getMessage(List<String> result, String msg) {
-        return result.size() == 0 ? null : String.format("%s uploads: %d", msg, result.size());
+    private String getMessage(int size, String msg) {
+        return size == 0 ? null : String.format("%s uploads: %d", msg, size);
     }
 }

@@ -75,7 +75,7 @@ public class MovieServlet extends HttpServlet {
     }
 
     private List<MovieDbObject> filterMovies(String selectParam, List<MovieDbObject> dbMovies, Predicate<MovieDbObject> filter) {
-        if (!selectParam.equals(NOT_SELECTED)) {
+        if (selectParam != null && !selectParam.equals(NOT_SELECTED)) {
             dbMovies = dbMovies.stream()
                     .filter(filter)
                     .collect(Collectors.toList());

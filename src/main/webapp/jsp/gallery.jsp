@@ -12,6 +12,8 @@
     <jsp:include page="fragments/bodyHeader.jsp"/>
 
     <jsp:useBean id="movies" scope="request" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"/>
+    <jsp:useBean id="totalRuntime" scope="request" type="java.lang.String"/>
+    <jsp:useBean id="totalSize" scope="request" type="java.lang.Double"/>
     <p class="stat-font">
         movies found: <b>${fn:length(movies)}</b>  |
         total runtime: <b>${totalRuntime}</b>  |
@@ -46,7 +48,7 @@
                         <p class="m-0 font-6 movie-updated">
                             Last updated <fmt:formatDate value="${movie.updated}" pattern="yyyy-MM-dd HH:mm:ss"/>
                         </p>
-                        <i class="fa fa-trash bi-trash-fill"></i>
+                        <i class="fa fa-trash movie-delete"></i>
                     </div>
                 </div>
             </div>
