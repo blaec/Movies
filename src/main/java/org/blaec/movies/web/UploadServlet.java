@@ -56,7 +56,7 @@ public class UploadServlet extends HttpServlet {
             List<MovieFileObject> uploadMovies = FilesUtils.getMoviesFromFolder(uploadLocation);
             List<MovieFileObject> newUploadMovies = uploadMovies.stream()
                     .filter(um -> dbMovies.stream()
-                            .noneMatch(dbm -> StringUtils.containsIgnoreCase(dbm.getTitle(), um.getNameDbStyled())
+                            .noneMatch(dbm -> StringUtils.equalsIgnoreCase(dbm.getTitle(), um.getNameDbStyled())
                                             && dbm.getYear() == um.getYear()))
                     .collect(Collectors.toList());
             Gson gson = new Gson();
