@@ -46,7 +46,9 @@ public class MovieServlet extends HttpServlet {
                 dbMovies.sort(Comparator
                         .comparing((MovieDbObject m) -> m.getTitle().startsWith("The ")
                                 ? m.getTitle().replace("The ", "")
-                                : m.getTitle())
+                                : m.getTitle().startsWith("A ")
+                                    ? m.getTitle().replace("A ", "")
+                                    : m.getTitle())
                         .thenComparing(MovieDbObject::getYear));
                 if (request.getParameterMap().size() > 0) {
                     String inputTitle = request.getParameter("input-title");
