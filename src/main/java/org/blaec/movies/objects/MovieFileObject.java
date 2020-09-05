@@ -70,12 +70,13 @@ public class MovieFileObject {
     }
 
     /**
-     * Replace some symbols in file name to new symbols as they are saved in db
+     * Replace some symbols (that aren't allowed in file name) to new symbols as they are saved in db
      *
      * @return file movie name converted for comparing with db movie name
      */
     public String getNameDbStyled() {
-        return name.replace("..", ":");
+        return name.replace("..", ":")
+                   .replace(",.","?");
     }
 
     /**
@@ -86,6 +87,7 @@ public class MovieFileObject {
     public String getNameUrlStyled() {
         return name.replace(" ", "+")
                    .replace("..", "%3A")
+                   .replace(",.", "%3F")
                    .replace("'", "%27")
                    .replace("é", "%C3%A9")
                    .replace("&", "%26")
