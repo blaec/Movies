@@ -12,7 +12,11 @@
     <jsp:include page="fragments/bodyHeader.jsp"/>
 
     <jsp:useBean id="movies" scope="request" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"/>
-    <p class="stat-font">${fn:length(movies)} movies found</p>
+    <p class="stat-font">
+        movies found: <b>${fn:length(movies)}</b>  |
+        total runtime: <b>${totalRuntime}</b>  |
+        total size: <b><fmt:formatNumber type = "number" value = "${totalSize}"/>Gb</b>
+    </p>
     <main class="gallery">
         <c:forEach items="${movies}" var="movie">
             <jsp:useBean id="movie" type="org.blaec.movies.objects.MovieDbObject"/>
