@@ -55,7 +55,7 @@
                 "title title title title title"
                 "genre genre genre genre genre"
                 "location location location location location"
-                "refresh updated updated updated delete";
+                "sync updated updated updated delete";
     justify-items: center;
     background: #1d2124;
     font-family: 'Kanit', sans-serif;
@@ -121,6 +121,11 @@
     justify-self: center;
     text-align: center;
 }
+.movie-sync {
+    grid-area: sync;
+    justify-self: end;
+    align-self: end;
+}
 .movie-updated {
     grid-area: updated;
     justify-self: center;
@@ -131,6 +136,7 @@
     justify-self: end;
     align-self: end;
 }
+.movie-sync:hover,
 .movie-delete:hover {
     cursor: pointer;
     color: red;

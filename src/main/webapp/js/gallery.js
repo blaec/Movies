@@ -5,11 +5,12 @@ $(document).ready(() => {
 
         // ======================== listeners ========================
         // delete movie
-        $(".movie-delete").on('click', (event)=> {
+        $(".movie-delete").on('click', (event) => {
             let movieIds = $(event.currentTarget).parents(".flip-container").children("input");
             let id = movieIds.attr("value");
             let imdbId = movieIds.attr("id");
-            if (confirm('Are you sure?')) {
+            let title = $(event.currentTarget).parents(".movie-details").children(".movie-title").text();
+            if (confirm(`Do you really want to delete movie '${title}'?`)) {
                 $.ajax({
                     url: `gallery?action=delete&id=${id}&imdbId=${imdbId}`,
                     type: "GET"
@@ -17,7 +18,10 @@ $(document).ready(() => {
                     location.reload();
                 });
             }
-        })
+        });
+        $(".movie-sync").on('click', (event) => {
+            alert("sync not implemented yet.")
+        });
     }
 );
 

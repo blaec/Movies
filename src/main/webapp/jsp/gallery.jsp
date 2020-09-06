@@ -46,13 +46,14 @@
                         <p class="m-0 font-8 movie-title">${movie.title}</p>
                         <p class="m-0 font-8 movie-genre">${movie.genre}</p>
                         <p class="m-0 font-8 movie-location">
-                            <i class="fa fa-save mr-1"></i>
+                            <i class="fas fa-hdd mr-1"></i>
                             ${movie.location}
                         </p>
+                        <i class="fas fa-sync-alt movie-sync"></i>
                         <p class="m-0 font-6 movie-updated">
                             Last updated <fmt:formatDate value="${movie.updated}" pattern="yyyy-MM-dd HH:mm:ss"/>
                         </p>
-                        <i class="fa fa-trash movie-delete"></i>
+                        <i class="fas fa-trash-alt movie-delete"></i>
                     </div>
                 </div>
             </div>
