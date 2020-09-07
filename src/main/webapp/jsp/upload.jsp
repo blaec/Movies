@@ -91,5 +91,5 @@
         </div>
     </div>
 </body>
-<script type="text/javascript" src="js/upload.js" defer></script>
+<script type="text/javascript" src="js/upload.js" async></script>
 </html>
