@@ -67,5 +67,5 @@
     </form>
 
 </body>
-<script type="text/javascript" src="js/search.js" defer></script>
+<script type="text/javascript" src="js/search.js" async></script>
 </html>

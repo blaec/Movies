@@ -7,6 +7,7 @@
 
 <jsp:include page="fragments/headTag.jsp"/>
 <link rel="stylesheet" href="css/gallery.css" type="text/css">
+<script type="text/javascript" src="js/gallery.js" async></script>
 
 <body>
     <jsp:include page="fragments/bodyHeader.jsp"/>
@@ -26,7 +27,7 @@
                 <input id="${movie.imdbId}" class="movie-imdb-id" value="${movie.id}" type="hidden">
                 <div class="flipper">
                     <div class="front">
-                        <img class="movie-img" src="${movie.poster}" alt="NO IMAGE">
+                        <img class="movie-img"  src="${movie.poster}" loading="lazy" alt="NO IMAGE"/>
                     </div>
                     <div class="back movie-details p-2">
                         <p class="font-6 movie-rated-caption">rated</p>
@@ -60,5 +61,4 @@
         </c:forEach>
     </main>
 </body>
-<script type="text/javascript" src="js/gallery.js" defer></script>
 </html>

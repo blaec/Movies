@@ -22,7 +22,7 @@
     <link rel="shortcut icon" href="images/movie.png">
 
     <%-- inner scripts --%>
-    <script type="text/javascript" src="js/main.js" defer></script>
+    <script type="text/javascript" src="js/main.js" async></script>
 
     <%-- external scripts --%>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
