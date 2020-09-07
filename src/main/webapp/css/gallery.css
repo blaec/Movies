@@ -129,6 +129,10 @@
 .movie-delete {
     align-self: center;
 }
+.movie-sync,
+.movie-delete {
+    display: none;
+}
 .movie-sync {
     grid-area: sync;
     justify-self: start;
