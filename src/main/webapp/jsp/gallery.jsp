@@ -54,11 +54,31 @@
                         <p class="font-6 movie-updated">
                             Updated: <fmt:formatDate value="${movie.updated}" pattern="yyyy-MM-dd HH:mm:ss"/>
                         </p>
-                        <i class="fas fa-trash-alt movie-delete"></i>
+                        <i class="fas fa-trash-alt movie-delete" data-toggle="modal" data-target="#removeMovie"></i>
                     </div>
                 </div>
             </div>
         </c:forEach>
     </main>
+
+    <div class="modal fade" id="removeMovie" tabindex="-1" aria-labelledby="removeMovieLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="removeMovieLabel">Delete movie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to delete movie ${movie.title}?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary allow-delete">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
