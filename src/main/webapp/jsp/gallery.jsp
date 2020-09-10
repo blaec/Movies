@@ -24,7 +24,6 @@
         <c:forEach items="${movies}" var="movie">
             <jsp:useBean id="movie" type="org.blaec.movies.objects.MovieDbObject"/>
             <div class="flip-container">
-                <input id="${movie.imdbId}" class="movie-imdb-id" value="${movie.id}" type="hidden">
                 <div class="flipper">
                     <div class="front">
                         <img class="movie-img"  src="${movie.poster}" loading="lazy" alt="NO IMAGE"/>
@@ -54,28 +53,38 @@
                         <p class="font-6 movie-updated">
                             Updated: <fmt:formatDate value="${movie.updated}" pattern="yyyy-MM-dd HH:mm:ss"/>
                         </p>
-                        <i class="fas fa-trash-alt movie-delete" data-toggle="modal" data-target="#removeMovie"></i>
+                        <i class="fas fa-trash-alt movie-delete"
+                           data-id="${movie.id}"
+                           data-imdb-id="${movie.imdbId}"
+                           data-location="${movie.location}"
+                           data-title="${movie.title}"
+                           data-toggle="modal"
+                           data-target="#removeMovie"></i>
                     </div>
                 </div>
             </div>
         </c:forEach>
     </main>
 
+    <%-- delete movie modal --%>
     <div class="modal fade" id="removeMovie" tabindex="-1" aria-labelledby="removeMovieLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-sm">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="removeMovieLabel">Delete movie</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-header modal-danger">
+                    <h5 class="modal-title heading text-center" id="removeMovieLabel">Delete movie</h5>
                 </div>
                 <div class="modal-body">
-                    <p>Do you really want to delete movie ${movie.title}?</p>
+                    <input type="hidden" name="movie-id" id="movie-id"/>
+                    <input type="hidden" name="movie-imdb-id" id="movie-imdb-id"/>
+                    <input type="hidden" name="movie-location" id="movie-location"/>
+                    <div class="row">
+                        <i class="col col-3 fas fa-times fa-4x text-danger rotate"></i>
+                        <p class="col col-9 mt-2 mb-0">Do you really want to delete this movie?</p>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary allow-delete">Delete</button>
+                    <button type="button" class="btn  btn-outline-danger" data-dismiss="modal">No</button>
+                    <button type="button" class="btn  btn-danger allow-delete">Yes</button>
                 </div>
             </div>
         </div>

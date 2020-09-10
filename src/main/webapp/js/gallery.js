@@ -6,25 +6,25 @@ $(document).ready(() => {
     let movieSync = $(".movie-sync");
 
     // ======================== listeners ========================
-    // delete movie
-    $('.allow-delete').on('click', function (event) {
-        $("#removeMovie").modal('hide');
-        let title = $(event.relatedTarget).parents(".movie-details").children(".movie-title").text();
-        alert(`Do you really want to delete movie '${title}'?`);
-    });
+    // init delete movie modal
     movieDelete.on('click', (event) => {
-        // let movieIds = $(event.currentTarget).parents(".flip-container").children("input");
-        // let id = movieIds.attr("value");
-        // let imdbId = movieIds.attr("id");
-        // let title = $(event.currentTarget).parents(".movie-details").children(".movie-title").text();
-        // if (confirm(`Do you really want to delete movie '${title}'?`)) {
-        //     $.ajax({
-        //         url: `gallery?action=delete&id=${id}&imdbId=${imdbId}`,
-        //         type: "GET"
-        //     }).done(function () {
-        //         location.reload();
-        //     });
-        // }
+        $(".modal-body #movie-id").val($(event.currentTarget).data("id"));
+        $(".modal-body #movie-imdb-id").val($(event.currentTarget).data("imdb-id"));
+        $(".modal-body #movie-location").val($(event.currentTarget).data("location"));
+        $("#removeMovieLabel").html(`${$(event.currentTarget).data("title")}`);
+    });
+    // delete movie
+    $('.allow-delete').on('click', () => {
+        $("#removeMovie").modal('hide');
+        let id = $("#movie-id").val();
+        let imdbId = $("#movie-imdb-id").val();
+        let loc = $("#movie-location").val();
+        $.ajax({
+            url: `gallery?action=delete&id=${id}&imdbId=${imdbId}&location=${loc}`,
+            type: "GET"
+        }).done(function () {
+            location.reload();
+        });
     });
     movieSync.on('click', (event) => {
         alert("sync not implemented yet.")
