@@ -150,3 +150,11 @@
     cursor: pointer;
     color: red;
 }
+
+/* ================== modal style ================== */
+.modal-danger {
+    background-color: #dc3545;
+}
+.modal-dialog .heading {
+    color: #fff;
+}
