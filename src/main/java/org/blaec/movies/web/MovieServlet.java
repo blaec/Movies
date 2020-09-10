@@ -31,9 +31,10 @@ public class MovieServlet extends HttpServlet {
             case "delete":
                 int id = Integer.parseInt(request.getParameter("id"));
                 String imdbId = request.getParameter("imdbId");
+                String location = request.getParameter("location");
                 try {
                     dao.deleteMovie(id);
-                    log.info("deleted movie: id={}, imdbId={}", id, imdbId);
+                    log.info("deleted movie: imdbId={} from '{}'", imdbId, location);
                 } catch (Exception e) {
                     log.error("failed to delete movie with id {}", id, e);
                 }
