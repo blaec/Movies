@@ -21,7 +21,7 @@ public class DBIProvider {
             } else {
                 try {
                     InitialContext ctx = new InitialContext();
-                    dbi = new DBI((DataSource) ctx.lookup("java:/comp/env/jdbc/movies"));
+                    dbi = new DBI((DataSource) ctx.lookup("java:/comp/env/jdbc/db7dj3f913ke3q"));
                 } catch (Exception ex) {
                     throw new IllegalStateException("PostgreSQL initialization failed", ex);
                 }
