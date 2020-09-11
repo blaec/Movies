@@ -3,6 +3,5 @@ activateMenu(loc);
 
 $(document).ready(() => {
 
-    }
-);
+});
 
