@@ -3,3 +3,6 @@
     color: blue;
     text-decoration: underline;
 }
+.movie-location-list {
+    color: var(--font-color);
+}

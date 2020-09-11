@@ -1,0 +1,22 @@
+/* ================== global settings ================== */
+:root {
+    --movie-card-width: 185px;
+    --movie-card-height: 280px;
+    --movie-gallery-background: #24282f;
+    --font-color: #fff;
+}
+body {
+    background: var(--movie-gallery-background);
+}
+.stat-font {
+    color: lightgray;
+    font-size: 0.8em;
+    font-family: 'Kanit', sans-serif;
+    margin: .25rem;
+}
+header {
+    margin-top: 20px;
+}
+.input-group-text {
+    min-width: 160px;
+}

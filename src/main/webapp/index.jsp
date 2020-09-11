@@ -2,7 +2,7 @@
 <html>
 <jsp:include page="jsp/fragments/headTag.jsp"/>
 <body>
-    <jsp:include page="jsp/fragments/bodyHeader.jsp"/>
+    <jsp:include page="jsp/fragments/menu.jsp"/>
 </body>
 <script type="text/javascript" src="js/home.js" defer></script>
 </html>
