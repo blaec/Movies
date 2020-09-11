@@ -19,7 +19,7 @@
     <header>
         <div class="container">
             <div class="row">
-                <div class="col col-12">
+                <div class="col">
                     <p class="stat-font mt-0">
                         movies found: <b>${fn:length(movies)}</b> |
                         total runtime: <b>${totalRuntime}</b> |

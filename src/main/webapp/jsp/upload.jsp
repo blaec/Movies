@@ -11,7 +11,13 @@
 
     <header>
         <div class="container">
-
+            <div class="row">
+                <div class="col">
+                    <p class="stat-font mt-0">
+                        Choose any movie location and press Upload button.
+                    </p>
+                </div>
+            </div>
         </div>
     </header>
     <main role="main" class="container">
@@ -29,11 +35,11 @@
                         </div>
                     </c:forEach>
                 </div>
-                <div class="col-12 col-lg-9">
+                <div class="col-12 col-lg-9 mt-1">
                     <div class="row">
                         <div class="col">
                             <p class="stat-font">
-                                Manual import by imdb id for single movie from selected location (Optional)
+                                (Optional) Manual import by imdb id for single movie from selected location
                             </p>
                         </div>
                     </div>
