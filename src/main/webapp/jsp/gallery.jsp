@@ -36,9 +36,13 @@
                     <jsp:useBean id="movie" type="org.blaec.movies.objects.MovieDbObject"/>
                     <div class="flip-container">
                         <div class="flipper">
+
+                            <%-- front movie card --%>
                             <div class="front">
                                 <img class="movie-img" src="${movie.poster}" loading="lazy" alt="NO IMAGE"/>
                             </div>
+
+                            <%-- back movie card --%>
                             <div class="back movie-details p-2">
                                 <p class="font-6 movie-rated-caption">rated</p>
                                 <p class="font-8 movie-rated">${movie.rated}</p>

@@ -38,7 +38,7 @@
                     </c:forEach>
                 </div>
 
-                <%-- movie locations list --%>
+                <%-- manual import block --%>
                 <div class="col-12 col-lg-9 mt-1">
                     <div class="row">
                         <div class="col">
@@ -47,6 +47,8 @@
                             </p>
                         </div>
                     </div>
+
+                    <%-- imdb id input --%>
                     <div class="row mt-1">
                         <div class="col">
                             <div class="input-group">
@@ -62,6 +64,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <%-- movie title input --%>
                     <div class="row mt-1">
                         <div class="col">
                             <div class="input-group">
@@ -86,26 +90,35 @@
             </div>
         </form>
 
-        <div class="col col-12 mt-3">
-            <jsp:useBean id="uploadMessage" scope="request" type="java.lang.String"/>
-            <p class="stat-font">${uploadMessage}</p>
-            <ul class="list-group">
-                <jsp:useBean id="success" scope="request"
-                             type="java.util.List<org.blaec.movies.objects.SuccessMovieFileObject>"/>
-                <c:forEach items="${success}" var="successItem">
-                    <li class="list-group-item list-group-item-success" value="${successItem.movieJsonObjectTitle}">
-                        <i class="fa fa-check-circle mr-1"></i>
+        <%-- upload results --%>
+        <div class="row">
+            <div class="col mt-3">
+                <jsp:useBean id="uploadMessage" scope="request" type="java.lang.String"/>
+                <p class="stat-font">${uploadMessage}</p>
+                <ul class="list-group">
+
+                    <%-- success results --%>
+                    <jsp:useBean id="success"
+                                 scope="request"
+                                 type="java.util.List<org.blaec.movies.objects.SuccessMovieFileObject>"/>
+                    <c:forEach items="${success}" var="successItem">
+                        <li class="list-group-item list-group-item-success text-break"
+                            value="${successItem.movieJsonObjectTitle}">
+                            <i class="fa fa-check-circle mr-1"></i>
                             ${successItem.movieFileObject}
-                    </li>
-                </c:forEach>
-                <jsp:useBean id="fail" scope="request" type="java.util.List<java.lang.String>"/>
-                <c:forEach items="${fail}" var="failItem">
-                    <li class="list-group-item list-group-item-danger">
-                        <i class="fa fa-times-circle mr-1"></i>
+                        </li>
+                    </c:forEach>
+
+                    <%-- failure results --%>
+                    <jsp:useBean id="fail" scope="request" type="java.util.List<java.lang.String>"/>
+                    <c:forEach items="${fail}" var="failItem">
+                        <li class="list-group-item list-group-item-danger text-break">
+                            <i class="fa fa-times-circle mr-1"></i>
                             ${failItem}
-                    </li>
-                </c:forEach>
-            </ul>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
         </div>
     </main>
     <footer class="footer">

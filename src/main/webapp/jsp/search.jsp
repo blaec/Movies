@@ -17,14 +17,14 @@
     <main role="main" class="container">
         <form method="get" action="gallery">
             <div class="form-group search">
-                <jsp:useBean id="genres" scope="request" type="java.util.Set<java.lang.String>"/>
 
+                <%-- Search by title input --%>
                 <div class="row">
                     <div class="col col-12">
                         <div class="movie-name input-group mb-3">
                             <div class="input-group-prepend d-none d-md-block">
                                 <span class="alert-primary input-group-text"
-                                      id="inputGroup-sizing-default">Movie name</span>
+                                      id="inputGroup-sizing-default">Movie title</span>
                             </div>
                             <input type="text"
                                    name="input-title"
@@ -35,8 +35,10 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
+
+                    <%-- Search by genres select --%>
+                    <jsp:useBean id="genres" scope="request" type="java.util.Set<java.lang.String>"/>
                     <div class="col-12 col-lg-5">
                         <div class="movie-genre input-group mb-3">
                             <div class="input-group-prepend d-none d-md-block">
@@ -56,6 +58,8 @@
                             </select>
                         </div>
                     </div>
+
+                    <%-- Search by actor searchable-select --%>
                     <div class="col-12 col-lg-7">
                         <jsp:useBean id="actors" scope="request" type="java.util.Set<java.lang.String>"/>
                         <div class="movie-actor input-group mb-3">
