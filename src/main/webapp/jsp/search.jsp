@@ -20,56 +20,66 @@
             <div class="form-group search">
                 <jsp:useBean id="genres" scope="request" type="java.util.Set<java.lang.String>"/>
 
-                <div class="movie-name input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="alert-primary input-group-text" id="inputGroup-sizing-default">Movie name</span>
+                <div class="row">
+                    <div class="col col-12">
+                        <div class="movie-name input-group mb-3">
+                            <div class="input-group-prepend d-none d-md-block">
+                                <span class="alert-primary input-group-text"
+                                      id="inputGroup-sizing-default">Movie name</span>
+                            </div>
+                            <input type="text"
+                                   name="input-title"
+                                   class="form-control"
+                                   aria-label="Default"
+                                   aria-describedby="inputGroup-sizing-default"
+                                   placeholder="Type in any part of movie title">
+                        </div>
                     </div>
-                    <input type="text"
-                           name="input-title"
-                           class="form-control"
-                           aria-label="Default"
-                           aria-describedby="inputGroup-sizing-default"
-                           placeholder="Type in any part of movie title, even word part or single letter">
                 </div>
 
-                <div class="movie-genre input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="alert-primary input-group-text genre-label" for="movie-genre">
-                            Movie genre [${fn:length(genres)}]
-                        </label>
+                <div class="row">
+                    <div class="col-12 col-lg-5">
+                        <div class="movie-genre input-group mb-3">
+                            <div class="input-group-prepend d-none d-md-block">
+                                <label class="alert-primary input-group-text genre-label" for="movie-genre">
+                                    Movie genre [${fn:length(genres)}]
+                                </label>
+                            </div>
+                            <select id="movie-genre"
+                                    class="form-control selectpicker"
+                                    name="selected-genre">
+                                <jsp:useBean id="notSelected" scope="request" type="java.lang.String"/>
+                                <option selected>${notSelected}</option>
+                                <c:forEach items="${genres}" var="genre">
+                                    <jsp:useBean id="genre" type="java.lang.String"/>
+                                    <option>${genre}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
                     </div>
-                    <select id="movie-genre"
-                            class="form-control selectpicker"
-                            name="selected-genre">
-                        <jsp:useBean id="notSelected" scope="request" type="java.lang.String"/>
-                        <option selected>${notSelected}</option>
-                        <c:forEach items="${genres}" var="genre">
-                            <jsp:useBean id="genre" type="java.lang.String"/>
-                            <option>${genre}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-
-                <jsp:useBean id="actors" scope="request" type="java.util.Set<java.lang.String>"/>
-                <div class="movie-actor input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="alert-primary input-group-text actor-label" for="movie-actor">
-                            Movie actor [${fn:length(actors)}]
-                        </label>
+                    <div class="col-12 col-lg-7">
+                        <jsp:useBean id="actors" scope="request" type="java.util.Set<java.lang.String>"/>
+                        <div class="movie-actor input-group mb-3">
+                            <div class="input-group-prepend d-none d-md-block">
+                                <label class="alert-primary input-group-text actor-label" for="movie-actor">
+                                    Movie actor [${fn:length(actors)}]
+                                </label>
+                            </div>
+                            <select id="movie-actor"
+                                    class="form-control selectpicker"
+                                    name="selected-actor"
+                                    data-live-search="true">
+                                <option selected>${notSelected}</option>
+                                <c:forEach items="${actors}" var="actor">
+                                    <jsp:useBean id="actor" type="java.lang.String"/>
+                                    <option>${actor}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
                     </div>
-                    <select id="movie-actor"
-                            class="form-control selectpicker"
-                            name="selected-actor"
-                            data-live-search="true">
-                        <option selected>${notSelected}</option>
-                        <c:forEach items="${actors}" var="actor">
-                            <jsp:useBean id="actor" type="java.lang.String"/>
-                            <option>${actor}</option>
-                        </c:forEach>
-                    </select>
                 </div>
             </div>
-            <button type="submit" class="btn btn-outline-primary float-right col-2">Search</button>
+            <button type="submit" class="btn btn-outline-primary float-right col-4 col-md-2">Search</button>
         </form>
     </main>
     <footer class="footer">

@@ -1,24 +1,24 @@
-.search {
-    display: grid;
-    grid-template-columns: 49% 2% 49%;
-    grid-template-areas:"input input input"
-                        "select-left empty-space select-right";
-}
+/*.search {*/
+/*    display: grid;*/
+/*    grid-template-columns: 49% 2% 49%;*/
+/*    grid-template-areas:"input input input"*/
+/*                        "select-left empty-space select-right";*/
+/*}*/
 
-.genre-label,
-.actor-label {
-    justify-self: end;
-    align-self: center;
-}
+/*.genre-label,*/
+/*.actor-label {*/
+/*    justify-self: end;*/
+/*    align-self: center;*/
+/*}*/
 
-.movie-name {
-    grid-area: input;
-}
+/*.movie-name {*/
+/*    grid-area: input;*/
+/*}*/
 
-.movie-genre {
-    grid-area: select-left;
-}
+/*.movie-genre {*/
+/*    grid-area: select-left;*/
+/*}*/
 
-.movie-actor {
-    grid-area: select-right;
-}
+/*.movie-actor {*/
+/*    grid-area: select-right;*/
+/*}*/
