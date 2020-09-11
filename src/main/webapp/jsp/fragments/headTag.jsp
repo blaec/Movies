@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
 
     <%-- inner css --%>
-    <link rel="stylesheet" href="css/menu.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
 
     <%-- images --%>
     <link rel="shortcut icon" href="images/movie.png">

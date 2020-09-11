@@ -20,7 +20,7 @@
         <div class="container">
             <div class="row">
                 <div class="col col-12">
-                    <p class="stat-font">
+                    <p class="stat-font mt-0">
                         movies found: <b>${fn:length(movies)}</b> |
                         total runtime: <b>${totalRuntime}</b> |
                         total size: <b><fmt:formatNumber type="number" value="${totalSize}"/>Gb</b>

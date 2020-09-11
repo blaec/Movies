@@ -15,3 +15,6 @@ body {
     font-family: 'Kanit', sans-serif;
     margin: .25rem;
 }
+header {
+    margin-top: 20px;
+}
