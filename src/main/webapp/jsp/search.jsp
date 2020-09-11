@@ -12,7 +12,6 @@
 
     <header>
         <div class="container">
-
         </div>
     </header>
     <main role="main" class="container">
