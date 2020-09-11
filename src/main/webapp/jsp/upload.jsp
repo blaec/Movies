@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/upload.css" type="text/css">
 
 <body>
-<jsp:include page="fragments/bodyHeader.jsp"/>
+<jsp:include page="fragments/menu.jsp"/>
     <div class="row">
         <div class="col col-12">
             <form method="post" action="upload">

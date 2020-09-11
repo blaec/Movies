@@ -10,7 +10,7 @@
 <script type="text/javascript" src="js/gallery.js" async></script>
 
 <body>
-    <jsp:include page="fragments/bodyHeader.jsp"/>
+    <jsp:include page="fragments/menu.jsp"/>
 
     <jsp:useBean id="movies" scope="request" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"/>
     <jsp:useBean id="totalRuntime" scope="request" type="java.lang.String"/>

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="css/search.css" type="text/css">
 
 <body>
-    <jsp:include page="fragments/bodyHeader.jsp"/>
+    <jsp:include page="fragments/menu.jsp"/>
 
     <form method="get" action="gallery">
         <div class="form-group search">
