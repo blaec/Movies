@@ -1,13 +1,12 @@
 /* ================== global settings ================== */
 :root {
-    --movie-card-width: 200px;
-    --movie-card-height: 300px;
+    --movie-card-width: 185px;
+    --movie-card-height: 280px;
     --movie-gallery-background: #24282f;
-    --menu-font-color: #fff;
+    --font-color: #fff;
 }
 body {
     background: var(--movie-gallery-background);
-    /*margin: 0 350px;*/
 }
 .stat-font {
     color: lightgray;

@@ -23,7 +23,9 @@
     <main role="main" class="container">
         <form method="post" action="upload">
             <div class="row">
-                <div class="col-12 col-lg-3" style="color: white">
+
+                <%-- movie locations list --%>
+                <div class="col-12 col-lg-3 movie-location-list">
                     <jsp:useBean id="locations" scope="request" type="java.util.Set<java.lang.String>"/>
                     <c:set var="count" value="0" scope="page"/>
                     <c:forEach items="${locations}" var="location">
@@ -35,6 +37,8 @@
                         </div>
                     </c:forEach>
                 </div>
+
+                <%-- movie locations list --%>
                 <div class="col-12 col-lg-9 mt-1">
                     <div class="row">
                         <div class="col">
