@@ -1,13 +1,13 @@
 package org.blaec.movies.persist;
 
-import com.typesafe.config.Config;
 import lombok.extern.slf4j.Slf4j;
-import org.blaec.movies.configs.Configs;
 import org.blaec.movies.dao.AbstractDao;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.logging.SLF4JLog;
 import org.skife.jdbi.v2.tweak.ConnectionFactory;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.DriverManager;
 
 @Slf4j
@@ -19,8 +19,19 @@ public class DBIProvider {
         static final DBI jDBI;
 
         static {
-            Config db = Configs.getConfig("persist.conf","db");
-            initDBI(db.getString("url"), db.getString("user"), db.getString("password"));
+            URI dbUri = null;
+            try {
+                dbUri = new URI(System.getenv("DATABASE_URL"));
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+
+            String username = dbUri.getUserInfo().split(":")[0];
+            String password = dbUri.getUserInfo().split(":")[1];
+            String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+
+            initDBI(dbUrl, username, password);
+
             jDBI = new DBI(connectionFactory);
             jDBI.setSQLLog(new SLF4JLog());
         }
