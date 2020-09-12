@@ -1,12 +1,16 @@
 package org.blaec.movies.persist;
 
+import com.typesafe.config.Config;
+import lombok.extern.slf4j.Slf4j;
+import org.blaec.movies.configs.Configs;
 import org.blaec.movies.dao.AbstractDao;
 import org.skife.jdbi.v2.DBI;
+import org.skife.jdbi.v2.logging.SLF4JLog;
 import org.skife.jdbi.v2.tweak.ConnectionFactory;
 
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+import java.sql.DriverManager;
 
+@Slf4j
 public class DBIProvider {
 
     private volatile static ConnectionFactory connectionFactory = null;
@@ -15,19 +19,10 @@ public class DBIProvider {
         static final DBI jDBI;
 
         static {
-            final DBI dbi;
-            if (connectionFactory != null) {
-                dbi = new DBI(connectionFactory);
-            } else {
-                try {
-                    InitialContext ctx = new InitialContext();
-                    dbi = new DBI((DataSource) ctx.lookup("java:/comp/env/jdbc/db7dj3f913ke3q"));
-                } catch (Exception ex) {
-                    throw new IllegalStateException("PostgreSQL initialization failed", ex);
-                }
-            }
-            jDBI = dbi;
-//            jDBI.setSQLLog(new SLF4JLog());
+            Config db = Configs.getConfig("persist.conf","db");
+            initDBI(db.getString("url"), db.getString("user"), db.getString("password"));
+            jDBI = new DBI(connectionFactory);
+            jDBI.setSQLLog(new SLF4JLog());
         }
     }
 
@@ -35,8 +30,15 @@ public class DBIProvider {
         DBIProvider.connectionFactory = connectionFactory;
     }
 
-    public static DBI getDBI() {
-        return DBIHolder.jDBI;
+    public static void initDBI(String dbUrl, String dbUser, String dbPassword) {
+        init(() -> {
+            try {
+                Class.forName("org.postgresql.Driver");
+            } catch (ClassNotFoundException e) {
+                throw new IllegalStateException("PostgreSQL driver not found", e);
+            }
+            return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+        });
     }
 
     public static <T extends AbstractDao> T getDao(Class<T> daoClass) {
