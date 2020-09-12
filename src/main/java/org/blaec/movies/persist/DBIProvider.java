@@ -1,6 +1,8 @@
 package org.blaec.movies.persist;
 
+import com.typesafe.config.Config;
 import lombok.extern.slf4j.Slf4j;
+import org.blaec.movies.configs.Configs;
 import org.blaec.movies.dao.AbstractDao;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.logging.SLF4JLog;
@@ -12,6 +14,8 @@ import java.sql.DriverManager;
 
 @Slf4j
 public class DBIProvider {
+//    public static final String profile = "local";
+    public static final String profile = "heroku";
 
     private volatile static ConnectionFactory connectionFactory = null;
 
@@ -19,18 +23,23 @@ public class DBIProvider {
         static final DBI jDBI;
 
         static {
-            URI dbUri = null;
             try {
-                dbUri = new URI(System.getenv("DATABASE_URL"));
+                switch (profile) {
+                    case "local":
+                        Config db = Configs.getConfig("persist.conf", "db");
+                        initDBI(db.getString("url"), db.getString("user"), db.getString("password"));
+                        break;
+                    case "heroku":
+                        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+                        String username = dbUri.getUserInfo().split(":")[0];
+                        String password = dbUri.getUserInfo().split(":")[1];
+                        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+                        initDBI(dbUrl, username, password);
+                        break;
+                }
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
-
-            String username = dbUri.getUserInfo().split(":")[0];
-            String password = dbUri.getUserInfo().split(":")[1];
-            String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-
-            initDBI(dbUrl, username, password);
 
             jDBI = new DBI(connectionFactory);
             jDBI.setSQLLog(new SLF4JLog());
