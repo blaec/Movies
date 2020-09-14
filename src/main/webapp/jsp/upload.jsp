@@ -21,7 +21,7 @@
         </div>
     </header>
     <main role="main" class="container">
-        <form method="post" action="upload" onsubmit="return setLoader(this);">
+        <form method="post" action="upload">
             <div class="row">
 
                 <%-- movie locations list --%>
@@ -85,7 +85,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col">
-                    <button name="btnUpload" type="submit" class="btn btn-outline-primary float-right col-4 col-md-2">
+                    <button id="btn-upload" type="submit" class="btn btn-outline-primary float-right col-4 col-md-2">
                         <span class="spinner-border spinner-border-sm loader loader-hidden"></span>
                         Upload
                     </button>

@@ -6,10 +6,10 @@ $(document).ready(() => {
         let movieIds = $(event.currentTarget).attr("value");
         window.location.href = `gallery?input-title=${movieIds}`;
     });
-});
 
-setLoader = (form) => {
-    $(".loader").removeClass("loader-hidden");
-    form.btnUpload.disabled = true;
-    return true;
-}
+    $( "form" ).on('submit', (form) => {
+        $(".loader").removeClass("loader-hidden");
+        $("#btn-upload").attr("disabled", true);
+        return true;
+    })
+});
