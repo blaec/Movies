@@ -6,3 +6,6 @@
 .movie-location-list {
     color: var(--font-color);
 }
+.loader-hidden {
+    display: none;
+}
