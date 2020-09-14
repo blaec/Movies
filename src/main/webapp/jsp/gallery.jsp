@@ -16,6 +16,11 @@
     <jsp:useBean id="totalRuntime" scope="request" type="java.lang.String"/>
     <jsp:useBean id="totalSize" scope="request" type="java.lang.Double"/>
 
+    <!-- Back to top button -->
+    <a id="back-to-top" class="fas fa-chevron-up fa-3x"></a>
+<%--        <i class="fas fa-chevron-up fa-3x"></i>--%>
+
+
     <header>
         <div class="container">
             <div class="row">
