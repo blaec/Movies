@@ -85,7 +85,10 @@
             </div>
             <div class="row mt-3">
                 <div class="col">
-                    <button type="submit" class="btn btn-outline-primary float-right col-4 col-md-2">Upload</button>
+                    <button id="btn-upload" type="submit" class="btn btn-outline-primary float-right col-4 col-md-2">
+                        <span class="spinner-border spinner-border-sm loader loader-hidden"></span>
+                        Upload
+                    </button>
                 </div>
             </div>
         </form>
