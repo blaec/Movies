@@ -20,3 +20,30 @@ header {
 .input-group-text {
     min-width: 160px;
 }
+
+/* ================== back-to-top button ================== */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transition: background-color .3s,
+    opacity .5s, visibility .5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+}
+a#back-to-top {
+    color: #484e58;
+}
+#back-to-top:hover {
+    cursor: pointer;
+    color: #808080;
+    text-decoration: none;
+}
+#back-to-top:active {
+    color: #555;
+}
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
