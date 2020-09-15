@@ -17,9 +17,7 @@
     <jsp:useBean id="totalSize" scope="request" type="java.lang.Double"/>
 
     <!-- Back to top button -->
-    <a id="back-to-top" class="fas fa-chevron-up fa-3x"></a>
-<%--        <i class="fas fa-chevron-up fa-3x"></i>--%>
-
+    <a id="back-to-top" class="far fa-arrow-alt-circle-up fa-3x"></a>
 
     <header>
         <div class="container">
