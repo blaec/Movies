@@ -29,6 +29,9 @@
             <li id="gallery"  class="nav-item">
                 <a class="nav-link" href="gallery">Gallery</a>
             </li>
+            <li id="wishlist"  class="nav-item">
+                <a class="nav-link" href="wishlist">Wishlist</a>
+            </li>
             <li id="upload" class="nav-item">
                 <a class="nav-link" href="upload">Upload</a>
             </li>

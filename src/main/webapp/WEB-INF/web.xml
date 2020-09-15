@@ -36,4 +36,14 @@
         <url-pattern>/upload</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>wishListServlet</servlet-name>
+        <servlet-class>org.blaec.movies.web.WishListServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>wishListServlet</servlet-name>
+        <url-pattern>/wishlist</url-pattern>
+    </servlet-mapping>
+
 </web-app>
