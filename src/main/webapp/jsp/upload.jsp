@@ -21,7 +21,7 @@
         </div>
     </header>
     <main role="main" class="container">
-        <form method="post" action="upload">
+        <form method="post" action="upload" class="upload">
             <div class="row">
 
                 <%-- movie locations list --%>
@@ -88,6 +88,42 @@
                     <button id="btn-upload" type="submit" class="btn btn-outline-primary float-right col-4 col-md-2">
                         <span class="spinner-border spinner-border-sm loader loader-hidden"></span>
                         Upload
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="row mt-3">
+            <div class="col">
+                <p class="stat-font">
+                    Add movie to wishlist by imdb-id
+                </p>
+            </div>
+        </div>
+        <form method="post" action="wishlist" class="wishlist">
+            <div class="row">
+                <div class="col-12 mt-1">
+                    <div class="row mt-1">
+                        <div class="col">
+                            <div class="input-group">
+                            <div class="input-group-prepend d-none d-md-block">
+                                <span class="alert-success input-group-text">Imdb Id</span>
+                            </div>
+                            <input type="text"
+                                   name="imdb-id"
+                                   class="form-control"
+                                   aria-label="Default"
+                                   aria-describedby="imdb-id"
+                                   placeholder="Type imdb id, like tt0378194">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <button id="btn-wishlist" type="submit" class="btn btn-outline-success float-right col-4 col-md-2">
+                        <span class="spinner-border spinner-border-sm loader loader-hidden"></span>
+                        Add to Wishlist
                     </button>
                 </div>
             </div>
