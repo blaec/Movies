@@ -17,6 +17,9 @@ public abstract class WishListDao implements AbstractDao {
     @SqlQuery("SELECT * FROM wish_list")
     public abstract List<WishListDbObject> getAll();
 
+    @SqlQuery("SELECT * FROM wish_list WHERE imdb_id LIKE :it")
+    public abstract WishListDbObject getByImdbId(@Bind String imdbId);
+
     @SqlUpdate("DELETE FROM wish_list WHERE id=:it")
     public abstract void deleteMovie(@Bind int id);
 

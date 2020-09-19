@@ -109,7 +109,7 @@
                                 <span class="alert-success input-group-text">Imdb Id</span>
                             </div>
                             <input type="text"
-                                   name="imdb-id"
+                                   name="wishlist-imdb-id"
                                    class="form-control"
                                    aria-label="Default"
                                    aria-describedby="imdb-id"
