@@ -2,7 +2,9 @@ package org.blaec.movies.enums;
 
 public enum FailType {
     PARSE("parsing error"),
-    DB_SAVE("db save error");
+    DB_SAVE("db save error"),
+    IN_GALLERY("is in gallery"),
+    IN_WISHLIST("is in wishlist");
 
     private final String description;
 

@@ -22,6 +22,7 @@
     </header>
     <main role="main" class="container">
         <form method="post" action="upload" class="upload">
+            <input type='hidden' name='action' value='gallery' />
             <div class="row">
 
                 <%-- movie locations list --%>
@@ -99,7 +100,8 @@
                 </p>
             </div>
         </div>
-        <form method="post" action="wishlist" class="wishlist">
+        <form method="post" action="upload" class="wishlist">
+            <input type='hidden' name='action' value='wishlist' />
             <div class="row">
                 <div class="col-12 mt-1">
                     <div class="row mt-1">

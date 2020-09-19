@@ -1,26 +1,17 @@
 package org.blaec.movies.web;
 
-import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
-import org.blaec.movies.configs.MovieConfig;
-import org.blaec.movies.dao.MovieDao;
-import org.blaec.movies.dao.WishListDao;
-import org.blaec.movies.objects.MovieJsonObject;
-import org.blaec.movies.persist.DBIProvider;
-import org.blaec.movies.utils.ApiUtils;
-import org.blaec.movies.utils.MovieConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.http.HttpResponse;
 
 @Slf4j
 public class WishListServlet extends HttpServlet {
-    private final WishListDao wishlistDao = DBIProvider.getDao(WishListDao.class);
-    private final MovieDao movieDao = DBIProvider.getDao(MovieDao.class);
+//    private final WishListDao wishlistDao = DBIProvider.getDao(WishListDao.class);
+//    private final MovieDao movieDao = DBIProvider.getDao(MovieDao.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -77,23 +68,6 @@ public class WishListServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String imdbId = request.getParameter("wishlist-imdb-id");
-        boolean isInDb = movieDao.getByImdbId(imdbId) != null;
-        boolean isInWishlist = wishlistDao.getByImdbId(imdbId) != null;
-        if (!isInDb && !isInWishlist) {
-            Gson gson = new Gson();
-            String url = MovieConfig.getApiRequestUrl(imdbId);
-            try {
-                HttpResponse<String> stringHttpResponse = ApiUtils.sendRequest(url);
-                MovieJsonObject movieJson = gson.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
-                wishlistDao.insert(MovieConverter.toWishList(movieJson));
-                log.info("added new movie {} ({}) | imdbId={}",
-                        movieJson.getTitle(), movieJson.getYear(), movieJson.getImdbID());
-            } catch (Exception e) {
-                log.error("failed to save movie {} into db", wishlistDao, e);
-//                FailureAccumulator.addToFailList(FailType.DB_SAVE, wishlistDao.toString());
-            }
-        }
 
         // TODO display upload results: both fail and success
         response.sendRedirect("upload");
