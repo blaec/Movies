@@ -39,34 +39,38 @@ public class UploadServlet extends HttpServlet {
         locationsMap = MovieConfig.getFileLocations();
         locations = locationsMap.keySet();
         successUpload = new ArrayList<>();
-        FailureAccumulator.initFailList();
     }
 
     @SneakyThrows
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         MovieDao movieDao = DBIProvider.getDao(MovieDao.class);
+        successUpload = new ArrayList<>();
+        FailureAccumulator.initFailList();
 
         switch (action == null ? "default" : action) {
             case "gallery":
                 String selectedLocation = request.getParameter("selected-location");
-                String imdbId = request.getParameter("imdb-id");
                 if (selectedLocation != null) {
-                    List<MovieDbObject> dbMovies = movieDao.getAll();
-                    String uploadLocation = locationsMap.get(selectedLocation);
-                    List<MovieFileObject> uploadMovies = FilesUtils.getMoviesFromFolder(uploadLocation);
-                    List<MovieFileObject> newUploadMovies = uploadMovies.stream()
-                            .filter(um -> dbMovies.stream()
-                                    .noneMatch(dbm -> StringUtils.equalsIgnoreCase(dbm.getTitle(), um.getNameDbStyled())
-                                            && dbm.getYear() == um.getYear()))
-                            .collect(Collectors.toList());
-                    Gson gson = new Gson();
-                    successUpload = new ArrayList<>();
+
+                    // Get list of movies that should be added to gallery
+                    // movies with equal title and year will not be uploaded (filtered out without warning)
+                    List<MovieFileObject> uploadMovies = FilesUtils.getMoviesFromFolder(locationsMap.get(selectedLocation)).stream()
+                                    .filter(um -> movieDao.getAll().stream()
+                                            .noneMatch(dbm -> StringUtils.equalsIgnoreCase(dbm.getTitle(), um.getNameDbStyled())
+                                                    && dbm.getYear() == um.getYear()))
+                                    .collect(Collectors.toList());
+
+                    // Get request params and reset result lists
                     String manualImportTitle = request.getParameter("manual-import-title");
-                    for (MovieFileObject movieFile : newUploadMovies) {
-                        String url = imdbId == null || !movieFile.getName().equals(manualImportTitle)
-                                ? MovieConfig.getApiRequestUrl(movieFile)
-                                : MovieConfig.getApiRequestUrl(imdbId);
+                    String imdbId = request.getParameter("imdb-id");
+                    Gson gson = new Gson();
+
+                    // Get via api data about each movie and save it to db
+                    for (MovieFileObject movieFile : uploadMovies) {
+                        String url = imdbId != null && movieFile.getName().equalsIgnoreCase(manualImportTitle)
+                                ? MovieConfig.getApiRequestUrl(imdbId)
+                                : MovieConfig.getApiRequestUrl(movieFile);
                         HttpResponse<String> stringHttpResponse = ApiUtils.sendRequest(url);
                         try {
                             MovieJsonObject movieJson = gson.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
@@ -82,28 +86,30 @@ public class UploadServlet extends HttpServlet {
                 }
                 break;
             case "wishlist":
-                WishListDao wishlistDao = DBIProvider.getDao(WishListDao.class);
                 String wishlistImdbId = request.getParameter("wishlist-imdb-id");
-                MovieDbObject galleryMovie = movieDao.getByImdbId(wishlistImdbId);
-                WishListDbObject wishlistMovie = wishlistDao.getByImdbId(wishlistImdbId);
-                if (galleryMovie == null && wishlistMovie == null) {
-                    Gson gson = new Gson();
-                    String url = MovieConfig.getApiRequestUrl(wishlistImdbId);
-                    try {
+                if (wishlistImdbId.length() > 0) {
+                    WishListDao wishlistDao = DBIProvider.getDao(WishListDao.class);
+                    MovieDbObject galleryMovie = movieDao.getByImdbId(wishlistImdbId);
+                    WishListDbObject wishlistMovie = wishlistDao.getByImdbId(wishlistImdbId);
+                    if (galleryMovie == null && wishlistMovie == null) {
+                        Gson gson = new Gson();
+                        String url = MovieConfig.getApiRequestUrl(wishlistImdbId);
                         HttpResponse<String> stringHttpResponse = ApiUtils.sendRequest(url);
-                        MovieJsonObject movieJson = gson.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
-                        wishlistDao.insert(MovieConverter.toWishList(movieJson));
-                        successUpload.add(SuccessMovieFileObject.from(movieJson.getTitle()));
-                        log.info("added to wishlist {} ({}) | imdbId={}",
-                                movieJson.getTitle(), movieJson.getYear(), movieJson.getImdbID());
-                    } catch (Exception e) {
-                        log.error("failed to save movie {} into db", wishlistDao, e);
-                        FailureAccumulator.addToFailList(FailType.DB_SAVE, wishlistImdbId);
+                        try {
+                            MovieJsonObject movieJson = gson.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
+                            wishlistDao.insert(MovieConverter.toWishList(movieJson));
+                            successUpload.add(SuccessMovieFileObject.from(movieJson.toString(), movieJson.getTitle()));
+                            log.info("added to wishlist {} ({}) | imdbId={}",
+                                    movieJson.getTitle(), movieJson.getYear(), movieJson.getImdbID());
+                        } catch (Exception e) {
+                            log.error("failed to save movie {} into db", wishlistDao, e);
+                            FailureAccumulator.addToFailList(FailType.DB_SAVE, wishlistImdbId);
+                        }
+                    } else if (galleryMovie != null) {
+                        FailureAccumulator.addToFailList(FailType.IN_GALLERY, galleryMovie.toString());
+                    } else if (wishlistMovie != null) {
+                        FailureAccumulator.addToFailList(FailType.IN_WISHLIST, wishlistMovie.toString());
                     }
-                } else if (galleryMovie != null) {
-                    FailureAccumulator.addToFailList(FailType.IN_GALLERY, galleryMovie.getTitle());
-                } else if (wishlistMovie != null) {
-                    FailureAccumulator.addToFailList(FailType.IN_WISHLIST, wishlistMovie.getTitle());
                 }
                 break;
             case "default":

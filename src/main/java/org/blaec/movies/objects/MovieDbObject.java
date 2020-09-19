@@ -10,7 +10,6 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 public class MovieDbObject extends BaseEntity {
     @Column("title") private @NonNull String title;
     @Column("year") private @NonNull int year;
@@ -72,5 +71,10 @@ public class MovieDbObject extends BaseEntity {
              frameRate,
              updated);
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s (%d)", title, year);
     }
 }

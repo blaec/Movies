@@ -12,8 +12,4 @@ public class SuccessMovieFileObject {
     public static SuccessMovieFileObject from(String movieFileObject, String movieJsonObjectTitle) {
         return new SuccessMovieFileObject(movieFileObject, movieJsonObjectTitle);
     }
-
-    public static SuccessMovieFileObject from(String movieJsonObjectTitle) {
-        return from("", movieJsonObjectTitle);
-    }
 }

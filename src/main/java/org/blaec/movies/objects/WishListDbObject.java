@@ -9,7 +9,6 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 public class WishListDbObject extends BaseEntity {
     @Column("title") private @NonNull String title;
     @Column("year") private @NonNull int year;
@@ -44,5 +43,10 @@ public class WishListDbObject extends BaseEntity {
              imdbVotes,
              added);
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s (%d)", title, year);
     }
 }
