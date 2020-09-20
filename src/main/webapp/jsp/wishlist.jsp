@@ -7,7 +7,7 @@
 
 <jsp:include page="fragments/headTag.jsp"/>
 <link rel="stylesheet" href="css/wishlist.css" type="text/css">
-<link rel="stylesheet" href="css/gallery.css" type="text/css">
+<link rel="stylesheet" href="css/card.css" type="text/css">
 <script type="text/javascript" src="js/wishlist.js" async></script>
 
 <body>
