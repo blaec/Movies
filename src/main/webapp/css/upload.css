@@ -9,3 +9,14 @@
 .loader-hidden {
     display: none;
 }
+form.upload,
+form.wishlist {
+    border: solid 1px;
+    padding: 10px;
+}
+form.upload {
+    border-color: #007bff;
+}
+form.wishlist {
+    border-color: #28a745;
+}

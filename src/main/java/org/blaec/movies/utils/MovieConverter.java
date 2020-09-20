@@ -4,6 +4,7 @@ import org.blaec.movies.configs.MovieConfig;
 import org.blaec.movies.objects.MovieDbObject;
 import org.blaec.movies.objects.MovieFileObject;
 import org.blaec.movies.objects.MovieJsonObject;
+import org.blaec.movies.objects.WishListDbObject;
 
 import java.sql.Timestamp;
 import java.text.NumberFormat;
@@ -26,9 +27,7 @@ public class MovieConverter {
         movieDbObject.setAwards(movieJsonObject.getAwards());
         movieDbObject.setImdbRating(Double.parseDouble(movieJsonObject.getImdbRating()));
         movieDbObject.setImdbId(movieJsonObject.getImdbID());
-        movieDbObject.setPoster(movieJsonObject.getPoster().equals("N/A")
-                ? String.format("https://via.placeholder.com/200x300.png?text=%s", movieJsonObject.getTitle().replace(" ", "%20"))
-                : movieJsonObject.getPoster());
+        movieDbObject.setPoster(getPoster(movieJsonObject));
         movieDbObject.setImdbVotes(NumberFormat.getNumberInstance(Locale.US).parse(movieJsonObject.getImdbVotes()).intValue());
         movieDbObject.setType(movieJsonObject.getType());
 
@@ -48,5 +47,28 @@ public class MovieConverter {
                 .filter(e -> fullLocation.contains(e.getValue()))
                 .map(Map.Entry::getKey)
                 .findFirst().orElse(fullLocation);
+    }
+
+    public static WishListDbObject toWishList(MovieJsonObject movieJsonObject) throws ParseException {
+        WishListDbObject wishlistMovie = new WishListDbObject();
+        wishlistMovie.setTitle(movieJsonObject.getTitle());
+        wishlistMovie.setYear(Integer.parseInt(movieJsonObject.getYear()));
+        wishlistMovie.setRated(movieJsonObject.getRated());
+        wishlistMovie.setRuntime(Integer.parseInt(movieJsonObject.getRuntime().replace("min","").trim()));
+        wishlistMovie.setGenre(movieJsonObject.getGenre());
+        wishlistMovie.setImdbRating(Double.parseDouble(movieJsonObject.getImdbRating()));
+        wishlistMovie.setImdbId(movieJsonObject.getImdbID());
+        wishlistMovie.setPoster(getPoster(movieJsonObject));
+        wishlistMovie.setImdbVotes(NumberFormat.getNumberInstance(Locale.US).parse(movieJsonObject.getImdbVotes()).intValue());
+
+        // additional fields
+        wishlistMovie.setAdded(new Timestamp(System.currentTimeMillis()));
+        return wishlistMovie;
+    }
+
+    private static String getPoster(MovieJsonObject movieJsonObject) {
+        return movieJsonObject.getPoster().equals("N/A")
+                ? String.format("https://via.placeholder.com/200x300.png?text=%s", movieJsonObject.getTitle().replace(" ", "%20"))
+                : movieJsonObject.getPoster();
     }
 }

@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     <%-- Navbar --%>
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">MY MOVIE LIBRARY</a>
 
     <%-- menu button for small resolutions --%>
     <button class="navbar-toggler"
@@ -28,6 +28,9 @@
             </li>
             <li id="gallery"  class="nav-item">
                 <a class="nav-link" href="gallery">Gallery</a>
+            </li>
+            <li id="wishlist"  class="nav-item">
+                <a class="nav-link" href="wishlist">Wishlist</a>
             </li>
             <li id="upload" class="nav-item">
                 <a class="nav-link" href="upload">Upload</a>

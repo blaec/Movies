@@ -14,6 +14,9 @@ public abstract class MovieDao implements AbstractDao {
     @Override
     public abstract void clean();
 
+    @SqlQuery("SELECT * FROM movies WHERE imdb_id LIKE :it")
+    public abstract MovieDbObject getByImdbId(@Bind String imdbId);
+
     @SqlQuery("SELECT * FROM movies")
     public abstract List<MovieDbObject> getAll();
 

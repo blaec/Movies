@@ -3,11 +3,9 @@ package org.blaec.movies.objects;
 import com.bertoncelj.jdbi.entitymapper.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
 
 @Getter
 @AllArgsConstructor
-@ToString
 public class MovieJsonObject {
     private final @Column("title") String Title;
     private final @Column("year") String Year;
@@ -22,4 +20,9 @@ public class MovieJsonObject {
     private final @Column("poster") String Poster;
     private final @Column("imdb_votes") String imdbVotes;
     private final @Column("type") String Type;
+
+    @Override
+    public String toString() {
+        return String.format("%s (%s)", Title, Year);
+    }
 }

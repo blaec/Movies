@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import static org.blaec.movies.definitions.Definitions.NOT_SELECTED;
 
 @Slf4j
-public class MovieServlet extends HttpServlet {
+public class GelleryServlet extends HttpServlet {
     private final MovieDao dao = DBIProvider.getDao(MovieDao.class);
 
     @Override
