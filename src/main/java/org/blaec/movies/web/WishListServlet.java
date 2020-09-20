@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.blaec.movies.dao.WishListDao;
 import org.blaec.movies.objects.WishListDbObject;
 import org.blaec.movies.persist.DBIProvider;
+import org.blaec.movies.utils.RuntimeUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,8 @@ public class WishListServlet extends HttpServlet {
         List<WishListDbObject> wishlist = wishlistDao.getAll();
         wishlist.sort(Comparator.comparing(WishListDbObject::getAdded));
         request.setAttribute("movies", wishlist);
+        request.setAttribute("totalRuntime",
+                RuntimeUtils.format(wishlist.stream().mapToInt(WishListDbObject::getRuntime).sum()));
         request.getRequestDispatcher("/jsp/wishlist.jsp").forward(request, response);
     }
 
