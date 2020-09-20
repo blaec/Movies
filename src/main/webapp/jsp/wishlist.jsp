@@ -1,26 +1,27 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
-<%--<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 
 <jsp:include page="fragments/headTag.jsp"/>
 <link rel="stylesheet" href="css/wishlist.css" type="text/css">
+<link rel="stylesheet" href="css/gallery.css" type="text/css">
 <script type="text/javascript" src="js/wishlist.js" async></script>
 
 <body>
     <jsp:include page="fragments/menu.jsp"/>
 
-<%--    <jsp:useBean id="movies" scope="request" type="java.util.List<org.blaec.movies.objects.MovieDbObject>"/>--%>
+    <jsp:useBean id="movies" scope="request" type="java.util.List<org.blaec.movies.objects.WishListDbObject>"/>
 <%--    <jsp:useBean id="totalRuntime" scope="request" type="java.lang.String"/>--%>
 <%--    <jsp:useBean id="totalSize" scope="request" type="java.lang.Double"/>--%>
 
-<%--    <!-- Back to top button -->--%>
-<%--    <a id="back-to-top" class="far fa-arrow-alt-circle-up fa-3x"></a>--%>
+    <!-- Back to top button -->
+    <a id="back-to-top" class="far fa-arrow-alt-circle-up fa-3x"></a>
 
-<%--    <header>--%>
-<%--        <div class="container">--%>
+    <header>
+        <div class="container">
 <%--            <div class="row">--%>
 <%--                <div class="col">--%>
 <%--                    <p class="stat-font mt-0">--%>
@@ -30,66 +31,65 @@
 <%--                    </p>--%>
 <%--                </div>--%>
 <%--            </div>--%>
-<%--        </div>--%>
-<%--    </header>--%>
-<%--    <main role="main" class="container">--%>
-<%--        <div class="row">--%>
-<%--            <div class="col col-12 gallery">--%>
-<%--                <c:forEach items="${movies}" var="movie">--%>
-<%--                    <jsp:useBean id="movie" type="org.blaec.movies.objects.MovieDbObject"/>--%>
-<%--                    <div class="flip-container">--%>
-<%--                        <div class="flipper">--%>
+        </div>
+    </header>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col col-12 gallery">
+                <c:forEach items="${movies}" var="movie">
+                    <jsp:useBean id="movie" type="org.blaec.movies.objects.WishListDbObject"/>
+                    <div class="flip-container">
+                        <div class="flipper">
 
-<%--                            &lt;%&ndash; front movie card &ndash;%&gt;--%>
-<%--                            <div class="front">--%>
-<%--                                <img class="movie-img" src="${movie.poster}" loading="lazy" alt="NO IMAGE"/>--%>
-<%--                            </div>--%>
+                            <%-- front movie card --%>
+                            <div class="front">
+                                <img class="movie-img" src="${movie.poster}" loading="lazy" alt="NO IMAGE"/>
+                            </div>
 
-<%--                            &lt;%&ndash; back movie card &ndash;%&gt;--%>
-<%--                            <div class="back movie-details p-2">--%>
-<%--                                <p class="font-6 movie-rated-caption">rated</p>--%>
-<%--                                <p class="font-8 movie-rated">${movie.rated}</p>--%>
-<%--                                <p class="font-6 movie-rate-caption">rate</p>--%>
-<%--                                <p class="font-8 movie-rate">${movie.imdbRating}</p>--%>
-<%--                                <p class="font-6 movie-votes-caption">votes</p>--%>
-<%--                                <p class="font-8 movie-votes">--%>
-<%--                                    <fmt:formatNumber type="number" value="${movie.imdbVotes}"/>--%>
-<%--                                </p>--%>
-<%--                                <p class="font-6 movie-runtime-caption">runtime</p>--%>
-<%--                                <p class="font-8 movie-runtime">${movie.runtime}min</p>--%>
-<%--                                <p class="font-6 movie-year-caption">year</p>--%>
-<%--                                <p class="font-8 movie-year">${movie.year}</p>--%>
-<%--                                <p class="font-6 movie-size-caption">size</p>--%>
-<%--                                <p class="font-8 movie-size">${movie.size}Gb</p>--%>
-<%--                                <p class="font-8 movie-title">${movie.title}</p>--%>
-<%--                                <p class="font-8 movie-genre">${movie.genre}</p>--%>
-<%--                                <p class="font-8 movie-location">--%>
-<%--                                    <i class="fas fa-hdd mr-1"></i>--%>
-<%--                                        ${movie.location}--%>
-<%--                                </p>--%>
-<%--                                <i class="fas fa-sync-alt movie-sync"></i>--%>
-<%--                                <p class="font-6 movie-updated">--%>
-<%--                                    Updated: <fmt:formatDate value="${movie.updated}" pattern="yyyy-MM-dd HH:mm:ss"/>--%>
-<%--                                </p>--%>
-<%--                                <i class="fas fa-trash-alt movie-delete"--%>
-<%--                                   data-id="${movie.id}"--%>
-<%--                                   data-imdb-id="${movie.imdbId}"--%>
-<%--                                   data-location="${movie.location}"--%>
-<%--                                   data-title="${movie.title}"--%>
-<%--                                   data-toggle="modal"--%>
-<%--                                   data-target="#removeMovie"></i>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </c:forEach>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </main>--%>
-<%--    <footer class="footer">--%>
-<%--        <div class="container">--%>
-<%--&lt;%&ndash;            <span class="text-muted">Place sticky footer content here.</span>&ndash;%&gt;--%>
-<%--        </div>--%>
-<%--    </footer>--%>
+                            <%-- back movie card --%>
+                            <div class="back movie-details p-2">
+                                <p class="font-6 movie-rated-caption">rated</p>
+                                <p class="font-8 movie-rated">${movie.rated}</p>
+                                <p class="font-6 movie-rate-caption">rate</p>
+                                <p class="font-8 movie-rate">${movie.imdbRating}</p>
+                                <p class="font-6 movie-votes-caption">votes</p>
+                                <p class="font-8 movie-votes">
+                                    <fmt:formatNumber type="number" value="${movie.imdbVotes}"/>
+                                </p>
+                                <p class="font-6 movie-runtime-caption">runtime</p>
+                                <p class="font-8 movie-runtime">${movie.runtime}min</p>
+                                <p class="font-6 movie-year-caption">year</p>
+                                <p class="font-8 movie-year">${movie.year}</p>
+                                <p class="font-6 movie-size-caption">size</p>
+                                <p class="font-8 movie-size">---Gb</p>
+                                <p class="font-8 movie-title">${movie.title}</p>
+                                <p class="font-8 movie-genre">${movie.genre}</p>
+                                <p class="font-8 movie-location">
+                                    <i class="fas fa-hdd mr-1"></i>
+                                        ---
+                                </p>
+                                <i class="fas fa-sync-alt movie-sync"></i>
+                                <p class="font-6 movie-updated">
+                                    Added: <fmt:formatDate value="${movie.added}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                </p>
+                                <i class="fas fa-trash-alt movie-delete"
+                                   data-id="${movie.id}"
+                                   data-imdb-id="${movie.imdbId}"
+                                   data-title="${movie.title}"
+                                   data-toggle="modal"
+                                   data-target="#removeMovie"></i>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+<%--            <span class="text-muted">Place sticky footer content here.</span>--%>
+        </div>
+    </footer>
 
 
 <%--    &lt;%&ndash; delete movie modal &ndash;%&gt;--%>
