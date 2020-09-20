@@ -17,12 +17,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>movieServlet</servlet-name>
-        <servlet-class>org.blaec.movies.web.MovieServlet</servlet-class>
+        <servlet-name>galleryServlet</servlet-name>
+        <servlet-class>org.blaec.movies.web.GelleryServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>movieServlet</servlet-name>
+        <servlet-name>galleryServlet</servlet-name>
         <url-pattern>/gallery</url-pattern>
     </servlet-mapping>
 
