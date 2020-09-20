@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     <%-- Navbar --%>
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">MY MOVIE LIBRARY</a>
 
     <%-- menu button for small resolutions --%>
     <button class="navbar-toggler"
