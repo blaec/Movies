@@ -7,7 +7,7 @@
 
 <jsp:include page="fragments/headTag.jsp"/>
 <link rel="stylesheet" href="css/wishlist.css" type="text/css">
-<link rel="stylesheet" href="css/gallery.css" type="text/css">
+<link rel="stylesheet" href="css/card.css" type="text/css">
 <script type="text/javascript" src="js/wishlist.js" async></script>
 
 <body>
@@ -38,49 +38,21 @@
             <div class="col col-12 gallery">
                 <c:forEach items="${movies}" var="movie">
                     <jsp:useBean id="movie" type="org.blaec.movies.objects.WishListDbObject"/>
-                    <div class="flip-container">
-                        <div class="flipper">
-
-                            <%-- front movie card --%>
-                            <div class="front">
-                                <img class="movie-img" src="${movie.poster}" loading="lazy" alt="NO IMAGE"/>
-                            </div>
-
-                            <%-- back movie card --%>
-                            <div class="back movie-details p-2">
-                                <p class="font-6 movie-rated-caption">rated</p>
-                                <p class="font-8 movie-rated">${movie.rated}</p>
-                                <p class="font-6 movie-rate-caption">rate</p>
-                                <p class="font-8 movie-rate">${movie.imdbRating}</p>
-                                <p class="font-6 movie-votes-caption">votes</p>
-                                <p class="font-8 movie-votes">
-                                    <fmt:formatNumber type="number" value="${movie.imdbVotes}"/>
-                                </p>
-                                <p class="font-6 movie-runtime-caption">runtime</p>
-                                <p class="font-8 movie-runtime">${movie.runtime}min</p>
-                                <p class="font-6 movie-year-caption">year</p>
-                                <p class="font-8 movie-year">${movie.year}</p>
-                                <p class="font-6 movie-size-caption">size</p>
-                                <p class="font-8 movie-size">---Gb</p>
-                                <p class="font-8 movie-title">${movie.title}</p>
-                                <p class="font-8 movie-genre">${movie.genre}</p>
-                                <p class="font-8 movie-location">
-                                    <i class="fas fa-hdd mr-1"></i>
-                                        ---
-                                </p>
-                                <i class="fas fa-sync-alt movie-sync"></i>
-                                <p class="font-6 movie-updated">
-                                    Added: <fmt:formatDate value="${movie.added}" pattern="yyyy-MM-dd HH:mm:ss"/>
-                                </p>
-                                <i class="fas fa-trash-alt movie-delete"
-                                   data-id="${movie.id}"
-                                   data-imdb-id="${movie.imdbId}"
-                                   data-title="${movie.title}"
-                                   data-toggle="modal"
-                                   data-target="#removeMovie"></i>
-                            </div>
-                        </div>
-                    </div>
+                    <jsp:include page="fragments/card.jsp">
+                        <jsp:param name="poster" value="${movie.poster}" />
+                        <jsp:param name="rated" value="${movie.rated}" />
+                        <jsp:param name="imdbRating" value="${movie.imdbRating}" />
+                        <jsp:param name="imdbVotes" value="${movie.imdbVotes}" />
+                        <jsp:param name="runtime" value="${movie.runtime}" />
+                        <jsp:param name="year" value="${movie.year}" />
+                        <jsp:param name="size" value="---" />
+                        <jsp:param name="title" value="${movie.title}" />
+                        <jsp:param name="genre" value="${movie.genre}" />
+                        <jsp:param name="location" value="---" />
+                        <jsp:param name="updatedCaption" value="Added" />
+                        <jsp:param name="updated" value="${movie.added}" />
+                        <jsp:param name="id" value="${movie.id}" />
+                    </jsp:include>
                 </c:forEach>
             </div>
         </div>
