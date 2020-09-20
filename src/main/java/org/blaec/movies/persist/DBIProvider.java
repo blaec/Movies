@@ -26,7 +26,7 @@ public class DBIProvider {
             try {
                 switch (profile) {
                     case "local":
-                        Config db = Configs.getConfig("persist.conf", "db");
+                        Config db = Configs.getConfig("heroku.conf", "db");
                         initDBI(db.getString("url"), db.getString("user"), db.getString("password"));
                         break;
                     case "heroku":
