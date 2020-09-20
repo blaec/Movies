@@ -14,8 +14,8 @@ import java.sql.DriverManager;
 
 @Slf4j
 public class DBIProvider {
-    public static final String profile = "local";
-//    public static final String profile = "heroku";
+//    public static final String profile = "local";
+    public static final String profile = "heroku";
 
     private volatile static ConnectionFactory connectionFactory = null;
 
@@ -26,7 +26,7 @@ public class DBIProvider {
             try {
                 switch (profile) {
                     case "local":
-                        Config db = Configs.getConfig("persist-heroku.conf", "db");
+                        Config db = Configs.getConfig("persist.conf", "db");
                         initDBI(db.getString("url"), db.getString("user"), db.getString("password"));
                         break;
                     case "heroku":
