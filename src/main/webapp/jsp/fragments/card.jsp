@@ -1,3 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <div class="flip-container">
     <div class="flipper">
 
@@ -29,9 +33,11 @@
                 ${param.location}
             </p>
             <i class="fas fa-sync-alt movie-sync"></i>
+
             <p class="font-6 movie-updated">
-<%--                ${param.captionUpdated}<fmt:formatDate value="${param.updated}" pattern="yyyy-MM-dd HH:mm:ss"/>--%>
-                ${param.updatedCaption}: ${param.updated}
+<%--                TODO try to format it, parameter arrives here as string, not as date, so formatDate not works--%>
+<%--                ${param.updatedCaption}: <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm:ss"/>--%>
+                ${param.updatedCaption}: ${fn:substring(param.updated, 0, 19)}
             </p>
             <i class="fas fa-trash-alt movie-delete"
                data-id="${param.id}"
