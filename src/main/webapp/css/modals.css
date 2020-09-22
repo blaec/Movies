@@ -1,0 +1,29 @@
+/* ================== modal style ================== */
+.modal-danger {
+    background-color: #dc3545;
+}
+.modal-dialog .heading {
+    color: #fff;
+}
+.rotate {
+    -webkit-animation: spin 1s ease-out normal;
+    -moz-animation: spin 1s ease-out normal;
+    animation: spin 1s ease-out normal;
+}
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(180deg);
+    }
+}
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(180deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+}
