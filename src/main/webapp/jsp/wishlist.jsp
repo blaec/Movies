@@ -8,6 +8,7 @@
 <jsp:include page="fragments/headTag.jsp"/>
 <link rel="stylesheet" href="css/wishlist.css" type="text/css">
 <link rel="stylesheet" href="css/card.css" type="text/css">
+<link rel="stylesheet" href="css/modals.css" type="text/css">
 <script type="text/javascript" src="js/wishlist.js" async></script>
 
 <body>
@@ -50,6 +51,7 @@
                         <jsp:param name="updatedCaption" value="Added" />
                         <jsp:param name="updated" value="${movie.added}" />
                         <jsp:param name="id" value="${movie.id}" />
+                        <jsp:param name="imdbId" value="${movie.imdbId}" />
                     </jsp:include>
                 </c:forEach>
             </div>
@@ -60,5 +62,7 @@
 <%--            <span class="text-muted">Place sticky footer content here.</span>--%>
         </div>
     </footer>
+
+    <jsp:include page="fragments/modals.jsp" />
 </body>
 </html>

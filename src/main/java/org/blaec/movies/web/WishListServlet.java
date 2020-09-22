@@ -21,12 +21,32 @@ public class WishListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<WishListDbObject> wishlist = wishlistDao.getAll();
-        wishlist.sort(Comparator.comparing(WishListDbObject::getAdded));
-        request.setAttribute("movies", wishlist);
-        request.setAttribute("totalRuntime",
-                RuntimeUtils.format(wishlist.stream().mapToInt(WishListDbObject::getRuntime).sum()));
-        request.getRequestDispatcher("/jsp/wishlist.jsp").forward(request, response);
+        String action = request.getParameter("action");
+
+        switch (action == null ? "all" : action) {
+            case "delete":
+                int id = Integer.parseInt(request.getParameter("id"));
+                String imdbId = request.getParameter("imdbId");
+                try {
+                    wishlistDao.deleteMovie(id);
+                    log.info("deleted movie: imdbId={} from wishlist", imdbId);
+                } catch (Exception e) {
+                    log.error("failed to delete movie with id {} from wishlist", id, e);
+                }
+                //TODO for some reason redirects and returns updated page but does not reloads it
+                //     fixed in wishlist.js within event listener
+                response.sendRedirect("wishlist");
+                break;
+            case "all":
+            default:
+                List<WishListDbObject> wishlist = wishlistDao.getAll();
+                wishlist.sort(Comparator.comparing(WishListDbObject::getAdded));
+                request.setAttribute("movies", wishlist);
+                request.setAttribute("totalRuntime",
+                        RuntimeUtils.format(wishlist.stream().mapToInt(WishListDbObject::getRuntime).sum()));
+                request.getRequestDispatcher("/jsp/wishlist.jsp").forward(request, response);
+                break;
+        }
     }
 
     @Override

@@ -53,6 +53,7 @@
                         <jsp:param name="updatedCaption" value="Updated" />
                         <jsp:param name="updated" value="${movie.updated}" />
                         <jsp:param name="id" value="${movie.id}" />
+                        <jsp:param name="imdbId" value="${movie.imdbId}" />
                     </jsp:include>
                 </c:forEach>
             </div>
