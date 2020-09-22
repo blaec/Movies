@@ -98,7 +98,7 @@ public class UploadServlet extends HttpServlet {
                         try {
                             MovieJsonObject movieJson = gson.fromJson(stringHttpResponse.body(), MovieJsonObject.class);
                             wishlistDao.insert(MovieConverter.toWishList(movieJson));
-                            successUpload.add(SuccessMovieFileObject.from(movieJson.toString(), movieJson.getTitle()));
+                            successUpload.add(SuccessMovieFileObject.from(movieJson.toString(), ""));
                             log.info("added to wishlist {} ({}) | imdbId={}",
                                     movieJson.getTitle(), movieJson.getYear(), movieJson.getImdbID());
                         } catch (Exception e) {

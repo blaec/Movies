@@ -145,6 +145,7 @@
                     <c:forEach items="${success}" var="successItem">
                         <li class="list-group-item list-group-item-success text-break"
                             value="${successItem.movieJsonObjectTitle}">
+
                             <i class="fa fa-check-circle mr-1"></i>
                             ${successItem.movieFileObject}
                         </li>
