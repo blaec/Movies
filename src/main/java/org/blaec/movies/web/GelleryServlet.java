@@ -2,10 +2,12 @@ package org.blaec.movies.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.blaec.movies.dao.MovieDao;
+import org.blaec.movies.enums.SettingsEnum;
 import org.blaec.movies.objects.MovieDbObject;
 import org.blaec.movies.persist.DBIProvider;
 import org.blaec.movies.utils.MovieConverter;
 import org.blaec.movies.utils.RuntimeUtils;
+import org.blaec.movies.utils.SettingsUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -70,6 +72,9 @@ public class GelleryServlet extends HttpServlet {
                         dbMovies.stream().mapToDouble(MovieDbObject::getSize).sum());
                 request.setAttribute("totalRuntime",
                         RuntimeUtils.format(dbMovies.stream().mapToInt(MovieDbObject::getRuntime).sum()));
+                String cardSize = SettingsUtils.settings.get(SettingsEnum.CARD_SIZE);
+                request.setAttribute("cardWidth", cardSize.split(",")[0]);
+                request.setAttribute("cardHeight", cardSize.split(",")[1]);
                 request.getRequestDispatcher("/jsp/gallery.jsp").forward(request, response);
                 break;
         }

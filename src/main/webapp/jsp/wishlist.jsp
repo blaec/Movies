@@ -4,6 +4,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
+<%-- Set width-height card properties before running main.js --%>
+<jsp:useBean id="cardHeight" scope="request" type="java.lang.String"/>
+<jsp:useBean id="cardWidth" scope="request" type="java.lang.String"/>
+<input type='hidden' id='cardHeight' value=${cardHeight} />
+<input type='hidden' id='cardWidth' value=${cardWidth} />
 
 <jsp:include page="fragments/headTag.jsp"/>
 <link rel="stylesheet" href="css/wishlist.css" type="text/css">

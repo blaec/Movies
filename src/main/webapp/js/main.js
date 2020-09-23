@@ -18,3 +18,11 @@ btn.on('click', function(e) {
     $('html, body').animate({scrollTop:0}, '300');
 });
 
+// override existing width-height card properties
+let cardHeight = $("#cardHeight").val();
+let cardWidth = $("#cardWidth").val();
+if (cardHeight !== undefined && cardWidth !== undefined) {
+    let root = document.documentElement;
+    root.style.setProperty('--movie-card-width', cardWidth);
+    root.style.setProperty('--movie-card-height', cardHeight);
+}
