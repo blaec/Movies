@@ -3,6 +3,14 @@ let activateMenu = (loc) => {
     $("#" + loc).addClass("active");
 };
 
+let overrideCardSize = () => {
+    let cardHeight = $("#cardHeight").val();
+    let cardWidth = $("#cardWidth").val();
+    let root = document.documentElement;
+    root.style.setProperty('--movie-card-width', cardWidth);
+    root.style.setProperty('--movie-card-height', cardHeight);
+};
+
 let btn = $('#back-to-top');
 
 $(window).scroll(function() {
@@ -17,12 +25,3 @@ btn.on('click', function(e) {
     e.preventDefault();
     $('html, body').animate({scrollTop:0}, '300');
 });
-
-// override existing width-height card properties
-let cardHeight = $("#cardHeight").val();
-let cardWidth = $("#cardWidth").val();
-if (cardHeight !== undefined && cardWidth !== undefined) {
-    let root = document.documentElement;
-    root.style.setProperty('--movie-card-width', cardWidth);
-    root.style.setProperty('--movie-card-height', cardHeight);
-}
