@@ -2,9 +2,11 @@ package org.blaec.movies.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.blaec.movies.dao.WishListDao;
+import org.blaec.movies.enums.SettingsEnum;
 import org.blaec.movies.objects.WishListDbObject;
 import org.blaec.movies.persist.DBIProvider;
 import org.blaec.movies.utils.RuntimeUtils;
+import org.blaec.movies.utils.SettingsUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -44,6 +46,7 @@ public class WishListServlet extends HttpServlet {
                 request.setAttribute("movies", wishlist);
                 request.setAttribute("totalRuntime",
                         RuntimeUtils.format(wishlist.stream().mapToInt(WishListDbObject::getRuntime).sum()));
+                request.setAttribute("cardSize", SettingsUtils.getVal(SettingsEnum.CARD_SIZE));
                 request.getRequestDispatcher("/jsp/wishlist.jsp").forward(request, response);
                 break;
         }

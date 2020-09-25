@@ -1,5 +1,6 @@
 let loc = "gallery";
 activateMenu(loc);
+overrideCardSize();
 
 $(document).ready(() => {
     let movieDelete = $(".movie-delete");

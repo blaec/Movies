@@ -4,6 +4,9 @@
     --movie-card-height: 280px;
     --movie-gallery-background: #24282f;
     --font-color: #fff;
+    --font-sm: 0.6em;
+    --font-md: 0.8em;
+    --font-lg: 1.3em;
 }
 body {
     background: var(--movie-gallery-background);
@@ -19,6 +22,17 @@ header {
 }
 .input-group-text {
     min-width: 160px;
+}
+
+/* ================== navbar-brand ================== */
+.navbar-brand-bold, .navbar-brand-thin {
+    font-family: 'Exo', sans-serif;
+}
+.navbar-brand-bold {
+    font-weight: 900;
+}
+.navbar-brand-thin {
+    font-weight: 200;
 }
 
 /* ================== back-to-top button ================== */

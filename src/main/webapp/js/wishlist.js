@@ -1,5 +1,6 @@
 let loc = "wishlist";
 activateMenu(loc);
+overrideCardSize();
 
 $(document).ready(() => {
     let movieDelete = $(".movie-delete");
