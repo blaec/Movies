@@ -29,7 +29,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <p class="stat-font mt-0">
+                        <p class="stat-font">
                             movies found: <b>${fn:length(movies)}</b> |
                             total runtime: <b>${totalRuntime}</b>
                         </p>

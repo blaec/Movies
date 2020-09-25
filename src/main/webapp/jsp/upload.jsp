@@ -13,7 +13,7 @@
 <%--            <div class="container">--%>
 <%--                <div class="row">--%>
 <%--                    <div class="col">--%>
-<%--                        <p class="stat-font mt-0">--%>
+<%--                        <p class="stat-font">--%>
 <%--                            Choose any movie location and press Upload button.--%>
 <%--                        </p>--%>
 <%--                    </div>--%>
