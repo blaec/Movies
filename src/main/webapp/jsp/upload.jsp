@@ -32,19 +32,35 @@
             </div>
             <form method="post" action="settings" class="settings">
                 <input type='hidden' name='action' value='settings'/>
+                <jsp:useBean id="cardSize" scope="request" type="org.blaec.movies.enums.CardSizeEnum"/>
 <%--                $("input[name='cardSize']:checked").val();--%>
                 <div class="row">
                     <div class="col-12">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="cardSize" id="smCard" value="sm_card_wh">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="cardSize"
+                                   <c:if test="${cardSize == 'sm_card_wh'}">checked</c:if>
+                                   id="smCard"
+                                   value="sm_card_wh">
                             <label class="form-check-label" for="smCard">small</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="cardSize" id="mdCard" value="md_card_wh">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="cardSize"
+                                   <c:if test="${cardSize == 'md_card_wh'}">checked</c:if>
+                                   id="mdCard"
+                                   value="md_card_wh">
                             <label class="form-check-label" for="mdCard">medium</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="cardSize" id="lgCard" value="lg_card_wh">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="cardSize"
+                                   <c:if test="${cardSize == 'lg_card_wh'}">checked</c:if>
+                                   id="lgCard"
+                                   value="lg_card_wh">
                             <label class="form-check-label" for="lgCard">large</label>
                         </div>
                     </div>

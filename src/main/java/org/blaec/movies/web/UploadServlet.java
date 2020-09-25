@@ -8,12 +8,10 @@ import org.blaec.movies.configs.MovieConfig;
 import org.blaec.movies.dao.MovieDao;
 import org.blaec.movies.dao.WishListDao;
 import org.blaec.movies.enums.FailType;
+import org.blaec.movies.enums.SettingsEnum;
 import org.blaec.movies.objects.*;
 import org.blaec.movies.persist.DBIProvider;
-import org.blaec.movies.utils.ApiUtils;
-import org.blaec.movies.utils.FailureAccumulator;
-import org.blaec.movies.utils.FilesUtils;
-import org.blaec.movies.utils.MovieConverter;
+import org.blaec.movies.utils.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -130,6 +128,7 @@ public class UploadServlet extends HttpServlet {
                 .filter(Objects::nonNull)
                 .collect(Collectors.joining("  |  "));
         request.setAttribute("uploadMessage", uploadMessage);
+        request.setAttribute("cardSize", SettingsUtils.get(SettingsEnum.CARD_SIZE));
         request.getRequestDispatcher("/jsp/upload.jsp").forward(request, response);
     }
 
