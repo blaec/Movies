@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.blaec.movies.configs.MovieConfig;
 import org.blaec.movies.dao.MovieDao;
 import org.blaec.movies.dao.WishListDao;
+import org.blaec.movies.enums.CardSizeEnum;
 import org.blaec.movies.enums.FailType;
 import org.blaec.movies.enums.SettingsEnum;
 import org.blaec.movies.objects.*;
@@ -109,6 +110,10 @@ public class UploadServlet extends HttpServlet {
                         FailureAccumulator.addToFailList(FailType.IN_WISHLIST, wishlistMovie.toString());
                     }
                 }
+                break;
+            case "settings":
+                String cardSize = request.getParameter("card-size");
+                SettingsUtils.update(SettingsEnum.CARD_SIZE, CardSizeEnum.valueOf(cardSize));
                 break;
             case "default":
             default:

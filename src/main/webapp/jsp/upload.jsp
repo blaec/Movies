@@ -30,7 +30,7 @@
                     </p>
                 </div>
             </div>
-            <form method="post" action="settings" class="settings">
+            <form method="post" action="upload" class="settings">
                 <input type='hidden' name='action' value='settings'/>
                 <jsp:useBean id="cardSize" scope="request" type="org.blaec.movies.enums.CardSizeEnum"/>
 <%--                $("input[name='cardSize']:checked").val();--%>
@@ -39,7 +39,7 @@
                         <div class="form-check form-check-inline">
                             <input class="form-check-input"
                                    type="radio"
-                                   name="cardSize"
+                                   name="card-size"
                                    <c:if test="${cardSize == 'sm_card_wh'}">checked</c:if>
                                    id="smCard"
                                    value="sm_card_wh">
@@ -48,7 +48,7 @@
                         <div class="form-check form-check-inline">
                             <input class="form-check-input"
                                    type="radio"
-                                   name="cardSize"
+                                   name="card-size"
                                    <c:if test="${cardSize == 'md_card_wh'}">checked</c:if>
                                    id="mdCard"
                                    value="md_card_wh">
@@ -57,7 +57,7 @@
                         <div class="form-check form-check-inline">
                             <input class="form-check-input"
                                    type="radio"
-                                   name="cardSize"
+                                   name="card-size"
                                    <c:if test="${cardSize == 'lg_card_wh'}">checked</c:if>
                                    id="lgCard"
                                    value="lg_card_wh">

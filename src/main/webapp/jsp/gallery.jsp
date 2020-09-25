@@ -50,7 +50,7 @@
                             <jsp:param name="imdbVotes" value="${movie.imdbVotes}" />
                             <jsp:param name="runtime" value="${movie.runtime}" />
                             <jsp:param name="year" value="${movie.year}" />
-                            <jsp:param name="size" value="${movie.size}Gb" />
+                            <jsp:param name="size" value="${movie.size}" />
                             <jsp:param name="title" value="${movie.title}" />
                             <jsp:param name="genre" value="${movie.genre}" />
                             <jsp:param name="location" value="${movie.location}" />
