@@ -39,27 +39,27 @@
                             <input class="form-check-input"
                                    type="radio"
                                    name="card-size"
-                                   <c:if test="${cardSize == 'sm_card_wh'}">checked</c:if>
+                                   <c:if test="${cardSize == 'sm_card'}">checked</c:if>
                                    id="smCard"
-                                   value="sm_card_wh">
+                                   value="sm_card">
                             <label class="form-check-label" for="smCard">small</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input"
                                    type="radio"
                                    name="card-size"
-                                   <c:if test="${cardSize == 'md_card_wh'}">checked</c:if>
+                                   <c:if test="${cardSize == 'md_card'}">checked</c:if>
                                    id="mdCard"
-                                   value="md_card_wh">
+                                   value="md_card">
                             <label class="form-check-label" for="mdCard">medium</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input"
                                    type="radio"
                                    name="card-size"
-                                   <c:if test="${cardSize == 'lg_card_wh'}">checked</c:if>
+                                   <c:if test="${cardSize == 'lg_card'}">checked</c:if>
                                    id="lgCard"
-                                   value="lg_card_wh">
+                                   value="lg_card">
                             <label class="form-check-label" for="lgCard">large</label>
                         </div>
                     </div>

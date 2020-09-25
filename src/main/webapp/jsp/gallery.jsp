@@ -9,10 +9,8 @@
     <link rel="stylesheet" href="css/card.css" type="text/css">
     <link rel="stylesheet" href="css/modals.css" type="text/css">
 
-    <jsp:useBean id="cardHeight" scope="request" type="java.lang.String"/>
-    <jsp:useBean id="cardWidth" scope="request" type="java.lang.String"/>
-    <input type='hidden' id='cardHeight' value=${cardHeight} />
-    <input type='hidden' id='cardWidth' value=${cardWidth} />
+    <jsp:useBean id="cardSize" scope="request" type="java.lang.String"/>
+    <input type='hidden' id='cardSize' value=${cardSize} />
     <script type="text/javascript" src="js/gallery.js" async></script>
 
     <body>

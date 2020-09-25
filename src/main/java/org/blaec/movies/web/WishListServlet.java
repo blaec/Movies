@@ -46,8 +46,7 @@ public class WishListServlet extends HttpServlet {
                 request.setAttribute("movies", wishlist);
                 request.setAttribute("totalRuntime",
                         RuntimeUtils.format(wishlist.stream().mapToInt(WishListDbObject::getRuntime).sum()));
-                request.setAttribute("cardWidth", SettingsUtils.getParam(SettingsEnum.CARD_SIZE, 0));
-                request.setAttribute("cardHeight", SettingsUtils.getParam(SettingsEnum.CARD_SIZE, 1));
+                request.setAttribute("cardSize", SettingsUtils.getVal(SettingsEnum.CARD_SIZE));
                 request.getRequestDispatcher("/jsp/wishlist.jsp").forward(request, response);
                 break;
         }

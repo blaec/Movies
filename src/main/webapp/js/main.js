@@ -4,16 +4,13 @@ let activateMenu = (loc) => {
 };
 
 let overrideCardSize = () => {
-    let cardHeight = $("#cardHeight").val();
-    let cardWidth = $("#cardWidth").val();
+    let cardSize = $("#cardSize").val().split(",");
     let root = document.documentElement;
-    root.style.setProperty('--movie-card-width', cardWidth);
-    root.style.setProperty('--movie-card-height', cardHeight);
-
-    let multiplier = cardWidth.slice(0, -2) / 185;
-    root.style.setProperty('--font-sm', multiplier * 0.6 + 'em');
-    root.style.setProperty('--font-md', multiplier * 0.8 + 'em');
-    root.style.setProperty('--font-lg', multiplier * 1.3 + 'em');
+    root.style.setProperty('--movie-card-width', cardSize[0]);
+    root.style.setProperty('--movie-card-height', cardSize[1]);
+    root.style.setProperty('--font-sm', cardSize[2]);
+    root.style.setProperty('--font-md', cardSize[3]);
+    root.style.setProperty('--font-lg', cardSize[4]);
 };
 
 let btn = $('#back-to-top');
