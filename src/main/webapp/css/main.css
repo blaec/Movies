@@ -21,6 +21,17 @@ header {
     min-width: 160px;
 }
 
+/* ================== navbar-brand ================== */
+.navbar-brand-bold, .navbar-brand-thin {
+    font-family: 'Exo', sans-serif;
+}
+.navbar-brand-bold {
+    font-weight: 900;
+}
+.navbar-brand-thin {
+    font-weight: 200;
+}
+
 /* ================== back-to-top button ================== */
 #back-to-top {
     position: fixed;
