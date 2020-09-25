@@ -1,15 +1,25 @@
+/* upload results */
 .list-group-item-success:hover {
     cursor: pointer;
     color: blue;
     text-decoration: underline;
 }
+
+/* radio controls */
 .movie-location-list,
 .form-check-label {
     color: var(--font-color);
 }
+.form-check-input {
+    margin-top: 0.4rem;
+}
+
+/* buttons */
 .loader-hidden {
     display: none;
 }
+
+/* form borders */
 form.upload,
 form.settings,
 form.wishlist {

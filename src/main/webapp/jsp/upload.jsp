@@ -33,7 +33,6 @@
             <form method="post" action="upload" class="settings">
                 <input type='hidden' name='action' value='settings'/>
                 <jsp:useBean id="cardSize" scope="request" type="org.blaec.movies.enums.CardSizeEnum"/>
-<%--                $("input[name='cardSize']:checked").val();--%>
                 <div class="row">
                     <div class="col-12">
                         <div class="form-check form-check-inline">
@@ -93,10 +92,13 @@
                         <c:set var="count" value="0" scope="page"/>
                         <c:forEach items="${locations}" var="location">
                             <c:set var="count" value="${count + 1}" scope="page"/>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="loc-${count}" name="selected-location" class="custom-control-input"
+                            <div class="form-check">
+                                <input type="radio"
+                                       id="loc-${count}"
+                                       name="selected-location"
+                                       class="form-check-input"
                                        value="${location}">
-                                <label class="custom-control-label" for="loc-${count}">${location}</label>
+                                <label class="form-check-label" for="loc-${count}">${location}</label>
                             </div>
                         </c:forEach>
                     </div>
