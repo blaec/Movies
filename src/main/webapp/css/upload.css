@@ -3,20 +3,23 @@
     color: blue;
     text-decoration: underline;
 }
-.movie-location-list {
+.movie-location-list,
+.form-check-label {
     color: var(--font-color);
 }
 .loader-hidden {
     display: none;
 }
 form.upload,
+form.settings,
 form.wishlist {
     border: solid 1px;
     padding: 10px;
 }
-form.upload {
+form.upload,
+form.wishlist {
     border-color: #007bff;
 }
-form.wishlist {
+form.settings {
     border-color: #28a745;
 }

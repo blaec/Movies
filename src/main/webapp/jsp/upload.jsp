@@ -10,17 +10,63 @@
         <jsp:include page="fragments/menu.jsp"/>
 
         <header>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <p class="stat-font mt-0">
-                            Choose any movie location and press Upload button.
-                        </p>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="container">--%>
+<%--                <div class="row">--%>
+<%--                    <div class="col">--%>
+<%--                        <p class="stat-font mt-0">--%>
+<%--                            Choose any movie location and press Upload button.--%>
+<%--                        </p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
         </header>
         <main role="main" class="container">
+
+            <%-- SITE SETTINGS --%>
+            <div class="row mt-3">
+                <div class="col">
+                    <p class="stat-font">
+                        Select movie card size
+                    </p>
+                </div>
+            </div>
+            <form method="post" action="settings" class="settings">
+                <input type='hidden' name='action' value='settings'/>
+<%--                $("input[name='cardSize']:checked").val();--%>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="cardSize" id="smCard" value="sm_card_wh">
+                            <label class="form-check-label" for="smCard">small</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="cardSize" id="mdCard" value="md_card_wh">
+                            <label class="form-check-label" for="mdCard">medium</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="cardSize" id="lgCard" value="lg_card_wh">
+                            <label class="form-check-label" for="lgCard">large</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        <button id="btn-settings" type="submit" class="btn btn-outline-success float-right col-4 col-md-2">
+                            <span class="spinner-border spinner-border-sm loader loader-hidden"></span>
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <%-- MOVIE UPLOAD --%>
+            <div class="row mt-3">
+                <div class="col">
+                    <p class="stat-font">
+                        Choose any movie location and press Upload button
+                    </p>
+                </div>
+            </div>
             <form method="post" action="upload" class="upload">
                 <input type='hidden' name='action' value='gallery' />
                 <div class="row">
@@ -93,6 +139,8 @@
                     </div>
                 </div>
             </form>
+
+            <%-- MOVIE WISHLIST --%>
             <div class="row mt-3">
                 <div class="col">
                     <p class="stat-font">
@@ -102,13 +150,12 @@
             </div>
             <form method="post" action="upload" class="wishlist">
                 <input type='hidden' name='action' value='wishlist' />
-                <div class="row">
-                    <div class="col-12 mt-1">
-                        <div class="row mt-1">
-                            <div class="col">
-                                <div class="input-group">
+                <div class="col-12 mt-1">
+                    <div class="row mt-1">
+                        <div class="col">
+                            <div class="input-group">
                                 <div class="input-group-prepend d-none d-md-block">
-                                    <span class="alert-success input-group-text">Imdb Id</span>
+                                    <span class="alert-primary input-group-text">Imdb Id</span>
                                 </div>
                                 <input type="text"
                                        name="wishlist-imdb-id"
@@ -116,14 +163,15 @@
                                        aria-label="Default"
                                        aria-describedby="imdb-id"
                                        placeholder="Type imdb id, like tt0378194">
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                </div>
                 <div class="row mt-3">
                     <div class="col">
-                        <button id="btn-wishlist" type="submit" class="btn btn-outline-success float-right col-4 col-md-2">
+                        <button id="btn-wishlist" type="submit" class="btn btn-outline-primary float-right col-4 col-md-2">
                             <span class="spinner-border spinner-border-sm loader loader-hidden"></span>
                             Add to Wishlist
                         </button>
