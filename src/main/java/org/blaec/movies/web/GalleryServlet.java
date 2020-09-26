@@ -9,6 +9,7 @@ import org.blaec.movies.utils.MovieConverter;
 import org.blaec.movies.utils.RuntimeUtils;
 import org.blaec.movies.utils.SettingsUtils;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +23,22 @@ import java.util.stream.Collectors;
 import static org.blaec.movies.definitions.Definitions.NOT_SELECTED;
 
 @Slf4j
-public class GelleryServlet extends HttpServlet {
+public class GalleryServlet extends HttpServlet {
     private final MovieDao dao = DBIProvider.getDao(MovieDao.class);
+    private static String encoding;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        ServletContext context = getServletContext();
+        encoding = context.getInitParameter("PARAMETER_ENCODING");
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (encoding != null) {
+            request.setCharacterEncoding(encoding);
+        }
         String action = request.getParameter("action");
 
         switch (action == null ? "all" : action) {
