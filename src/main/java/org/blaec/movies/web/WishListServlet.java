@@ -54,8 +54,6 @@ public class WishListServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        // TODO display upload results: both fail and success
         response.sendRedirect("upload");
     }
 }
