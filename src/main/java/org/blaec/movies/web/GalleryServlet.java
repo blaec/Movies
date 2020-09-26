@@ -22,11 +22,12 @@ import java.util.stream.Collectors;
 import static org.blaec.movies.definitions.Definitions.NOT_SELECTED;
 
 @Slf4j
-public class GelleryServlet extends HttpServlet {
+public class GalleryServlet extends HttpServlet {
     private final MovieDao dao = DBIProvider.getDao(MovieDao.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
 
         switch (action == null ? "all" : action) {

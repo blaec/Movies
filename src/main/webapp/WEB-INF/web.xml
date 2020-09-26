@@ -18,7 +18,7 @@
 
     <servlet>
         <servlet-name>galleryServlet</servlet-name>
-        <servlet-class>org.blaec.movies.web.GelleryServlet</servlet-class>
+        <servlet-class>org.blaec.movies.web.GalleryServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>
