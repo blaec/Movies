@@ -84,5 +84,4 @@ public class MovieConfig {
                 .map(k -> String.format("%s=%s", k, params.get(k)))
                 .collect(Collectors.joining("&"));
     }
-
 }
