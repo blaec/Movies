@@ -54,12 +54,12 @@ public class MovieConverter {
         wishlistMovie.setTitle(movieJsonObject.getTitle());
         wishlistMovie.setYear(Integer.parseInt(movieJsonObject.getYear()));
         wishlistMovie.setRated(movieJsonObject.getRated());
-        wishlistMovie.setRuntime(Integer.parseInt(movieJsonObject.getRuntime().replace("min","").trim()));
+        wishlistMovie.setRuntime(parseRuntime(movieJsonObject.getRuntime()));
         wishlistMovie.setGenre(movieJsonObject.getGenre());
-        wishlistMovie.setImdbRating(Double.parseDouble(movieJsonObject.getImdbRating()));
+        wishlistMovie.setImdbRating(parseImdbRating(movieJsonObject.getImdbRating()));
         wishlistMovie.setImdbId(movieJsonObject.getImdbID());
         wishlistMovie.setPoster(getPoster(movieJsonObject));
-        wishlistMovie.setImdbVotes(NumberFormat.getNumberInstance(Locale.US).parse(movieJsonObject.getImdbVotes()).intValue());
+        wishlistMovie.setImdbVotes(parseImdbVotes(movieJsonObject.getImdbVotes()));
 
         // additional fields
         wishlistMovie.setAdded(new Timestamp(System.currentTimeMillis()));
@@ -70,5 +70,17 @@ public class MovieConverter {
         return movieJsonObject.getPoster().equals("N/A")
                 ? String.format("https://via.placeholder.com/200x300.png?text=%s", movieJsonObject.getTitle().replace(" ", "%20"))
                 : movieJsonObject.getPoster();
+    }
+
+    private static Double parseImdbRating(String imdbRating) {
+        return "N/A".equals(imdbRating) ? 0 : Double.parseDouble(imdbRating);
+    }
+
+    private static int parseImdbVotes(String imdbVotes) throws ParseException {
+        return "N/A".equals(imdbVotes) ? 0 : NumberFormat.getNumberInstance(Locale.US).parse(imdbVotes).intValue();
+    }
+
+    private static int parseRuntime(String runtime) {
+        return "N/A".equals(runtime) ? 0 : Integer.parseInt(runtime.replace("min","").trim());
     }
 }
