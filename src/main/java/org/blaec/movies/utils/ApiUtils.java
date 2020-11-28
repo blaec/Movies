@@ -17,6 +17,7 @@ public class ApiUtils {
      * @throws InterruptedException if the operation is interrupted
      */
     public static HttpResponse<String> sendRequest(String url) throws IOException, InterruptedException {
+        // TODO handle exception for example upload imdb-id ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))

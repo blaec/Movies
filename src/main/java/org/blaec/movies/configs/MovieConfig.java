@@ -27,11 +27,11 @@ public class MovieConfig {
         paramApikey = conf.getString("omdbapi.paramName.apikey");
         valueApikey = conf.getString("omdbapi.paramValue.apikey");
         locations = ImmutableMap.of(
-                conf.getString("upload.name.movies"), conf.getString("upload.location.movies"),
                 conf.getString("upload.name.cartoons"), conf.getString("upload.location.cartoons"),
-                conf.getString("upload.name.videos"), conf.getString("upload.location.videos"),
+                conf.getString("upload.name.movies"), conf.getString("upload.location.movies"),
                 conf.getString("upload.name.serialMovies"), conf.getString("upload.location.serialMovies"),
-                conf.getString("upload.name.music"), conf.getString("upload.location.music")
+                conf.getString("upload.name.music"), conf.getString("upload.location.music"),
+                conf.getString("upload.name.videos"), conf.getString("upload.location.videos")
         );
     }
 

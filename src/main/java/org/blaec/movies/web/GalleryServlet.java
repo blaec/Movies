@@ -42,7 +42,7 @@ public class GalleryServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         switch (action == null ? "all" : action) {
-            case "delete":
+            case "delete": //TODO delete should be handled by post
                 int id = Integer.parseInt(request.getParameter("id"));
                 String imdbId = request.getParameter("imdbId");
                 String location = request.getParameter("location");
@@ -54,6 +54,7 @@ public class GalleryServlet extends HttpServlet {
                 }
                 //TODO for some reason redirects and returns updated page but does not reloads it
                 //     fixed in gallery.js within event listener
+                // try to resend it to doGet
                 response.sendRedirect("gallery");
                 break;
             case "all":
