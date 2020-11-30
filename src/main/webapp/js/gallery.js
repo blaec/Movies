@@ -21,7 +21,7 @@ $(document).ready(() => {
         let imdbId = $("#movie-imdb-id").val();
         let loc = $("#movie-location").val();
         $.ajax({
-            url: `gallery?action=delete&id=${id}&imdbId=${imdbId}&location=${loc}`,
+            url: `gallery?action=delete&id=${id}&imdbId=${imdbId}&location=${encodeURIComponent(loc)}`,
             type: "GET"
         }).done(function () {
             location.reload();

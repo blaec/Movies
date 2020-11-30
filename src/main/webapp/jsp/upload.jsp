@@ -80,7 +80,6 @@
                     <%-- movie locations list --%>
                     <div class="col-12 col-lg-3 movie-location-list">
                         <jsp:useBean id="locations" scope="request" type="java.util.Set<java.lang.String>"/>
-                        <c:set var="count" value="0" scope="page"/>
                         <c:forEach var="location" items="${locations}" varStatus="locationLoopCounter">
                             <div class="form-check">
                                 <input type="radio"
