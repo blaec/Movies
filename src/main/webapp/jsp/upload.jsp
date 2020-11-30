@@ -90,15 +90,14 @@
                     <div class="col-12 col-lg-3 movie-location-list">
                         <jsp:useBean id="locations" scope="request" type="java.util.Set<java.lang.String>"/>
                         <c:set var="count" value="0" scope="page"/>
-                        <c:forEach items="${locations}" var="location">
-                            <c:set var="count" value="${count + 1}" scope="page"/>
+                        <c:forEach var="location" items="${locations}" varStatus="locationLoopCounter">
                             <div class="form-check">
                                 <input type="radio"
-                                       id="loc-${count}"
+                                       id="loc-${locationLoopCounter.count}"
                                        name="selected-location"
                                        class="form-check-input"
                                        value="${location}">
-                                <label class="form-check-label" for="loc-${count}">${location}</label>
+                                <label class="form-check-label" for="loc-${locationLoopCounter.count}">${location}</label>
                             </div>
                         </c:forEach>
                     </div>
@@ -208,7 +207,7 @@
                         <jsp:useBean id="success"
                                      scope="request"
                                      type="java.util.List<org.blaec.movies.objects.SuccessMovieFileObject>"/>
-                        <c:forEach items="${success}" var="successItem">
+                        <c:forEach var="successItem" items="${success}">
                             <li class="list-group-item list-group-item-success text-break"
                                 value="${successItem.movieJsonObjectTitle}">
 
@@ -219,7 +218,7 @@
 
                         <%-- failure results --%>
                         <jsp:useBean id="fail" scope="request" type="java.util.List<java.lang.String>"/>
-                        <c:forEach items="${fail}" var="failItem">
+                        <c:forEach var="failItem" items="${fail}">
                             <li class="list-group-item list-group-item-danger text-break">
                                 <i class="fa fa-times-circle mr-1"></i>
                                 ${failItem}

@@ -38,7 +38,7 @@
         <main role="main" class="container">
             <div class="row">
                 <div class="col col-12 gallery">
-                    <c:forEach items="${movies}" var="movie">
+                    <c:forEach var="movie" items="${movies}">
                         <jsp:useBean id="movie" type="org.blaec.movies.objects.WishListDbObject"/>
                         <jsp:include page="fragments/card.jsp">
                             <jsp:param name="poster" value="${movie.poster}" />

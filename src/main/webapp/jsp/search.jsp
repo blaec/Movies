@@ -51,7 +51,7 @@
                                         name="selected-genre">
                                     <jsp:useBean id="notSelected" scope="request" type="java.lang.String"/>
                                     <option selected>${notSelected}</option>
-                                    <c:forEach items="${genres}" var="genre">
+                                    <c:forEach var="genre" items="${genres}">
                                         <jsp:useBean id="genre" type="java.lang.String"/>
                                         <option>${genre}</option>
                                     </c:forEach>
@@ -73,7 +73,7 @@
                                         name="selected-actor"
                                         data-live-search="true">
                                     <option selected>${notSelected}</option>
-                                    <c:forEach items="${actors}" var="actor">
+                                    <c:forEach var="actor" items="${actors}">
                                         <jsp:useBean id="actor" type="java.lang.String"/>
                                         <option>${actor}</option>
                                     </c:forEach>
