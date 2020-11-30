@@ -35,33 +35,24 @@
                 <jsp:useBean id="cardSize" scope="request" type="org.blaec.movies.enums.CardSizeEnum"/>
                 <div class="row">
                     <div class="col-12">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input"
-                                   type="radio"
-                                   name="card-size"
-                                   <c:if test="${cardSize == 'sm_card'}">checked</c:if>
-                                   id="smCard"
-                                   value="sm_card">
-                            <label class="form-check-label" for="smCard">small</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input"
-                                   type="radio"
-                                   name="card-size"
-                                   <c:if test="${cardSize == 'md_card'}">checked</c:if>
-                                   id="mdCard"
-                                   value="md_card">
-                            <label class="form-check-label" for="mdCard">medium</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input"
-                                   type="radio"
-                                   name="card-size"
-                                   <c:if test="${cardSize == 'lg_card'}">checked</c:if>
-                                   id="lgCard"
-                                   value="lg_card">
-                            <label class="form-check-label" for="lgCard">large</label>
-                        </div>
+                        <jsp:include page="fragments/formCheck.jsp">
+                            <jsp:param name="isChecked" value="${cardSize == 'sm_card'}" />
+                            <jsp:param name="id" value="smCard" />
+                            <jsp:param name="value" value="sm_card" />
+                            <jsp:param name="caption" value="small" />
+                        </jsp:include>
+                        <jsp:include page="fragments/formCheck.jsp">
+                            <jsp:param name="isChecked" value="${cardSize == 'md_card'}" />
+                            <jsp:param name="id" value="mdCard" />
+                            <jsp:param name="value" value="md_card" />
+                            <jsp:param name="caption" value="medium" />
+                        </jsp:include>
+                        <jsp:include page="fragments/formCheck.jsp">
+                            <jsp:param name="isChecked" value="${cardSize == 'lg_card'}" />
+                            <jsp:param name="id" value="lgCard" />
+                            <jsp:param name="value" value="lg_card" />
+                            <jsp:param name="caption" value="large" />
+                        </jsp:include>
                     </div>
                 </div>
                 <div class="row mt-3">
