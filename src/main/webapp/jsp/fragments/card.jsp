@@ -35,9 +35,8 @@
             <i class="fas fa-sync-alt movie-sync"></i>
 
             <p class="font-sm movie-updated">
-<%--                TODO try to format it, parameter arrives here as string, not as date, so formatDate not works, another option - tld [HF JSP-p.393]--%>
-<%--                ${param.updatedCaption}: <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm:ss"/>--%>
-                ${param.updatedCaption}: ${fn:substring(param.updated, 0, 19)}
+                <fmt:parseDate value="${param.updated}" var="parsedDate" pattern="yyyy-MM-dd HH:mm:ss"/>
+                ${param.updatedCaption}: <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
             </p>
             <i class="fas fa-trash-alt movie-delete"
                data-id="${param.id}"
