@@ -42,22 +42,20 @@
                 <div class="col col-12 gallery">
                     <c:forEach var="movie" items="${movies}">
                         <jsp:useBean id="movie" type="org.blaec.movies.objects.MovieDbObject"/>
-                        <jsp:include page="fragments/card.jsp">
-                            <jsp:param name="poster" value="${movie.poster}" />
-                            <jsp:param name="rated" value="${movie.rated}" />
-                            <jsp:param name="imdbRating" value="${movie.imdbRating}" />
-                            <jsp:param name="imdbVotes" value="${movie.imdbVotes}" />
-                            <jsp:param name="runtime" value="${movie.runtime}" />
-                            <jsp:param name="year" value="${movie.year}" />
-                            <jsp:param name="size" value="${movie.size}" />
-                            <jsp:param name="title" value="${movie.title}" />
-                            <jsp:param name="genre" value="${movie.genre}" />
-                            <jsp:param name="location" value="${movie.location}" />
-                            <jsp:param name="updatedCaption" value="Updated" />
-                            <jsp:param name="updated" value="${movie.updated}" />
-                            <jsp:param name="id" value="${movie.id}" />
-                            <jsp:param name="imdbId" value="${movie.imdbId}" />
-                        </jsp:include>
+                        <frag:card poster="${movie.poster}"
+                                   rated="${movie.rated}"
+                                   imdbRating="${movie.imdbRating}"
+                                   imdbVotes="${movie.imdbVotes}"
+                                   runtime="${movie.runtime}"
+                                   year="${movie.year}"
+                                   size="${movie.size}"
+                                   title="${movie.title}"
+                                   genre="${movie.genre}"
+                                   location="${movie.location}"
+                                   updated="${movie.updated}"
+                                   updatedCaption="Updated"
+                                   id="${movie.id}"
+                                   imdbId="${movie.imdbId}"/>
                     </c:forEach>
                 </div>
             </div>
