@@ -68,6 +68,6 @@
             </div>
         </footer>
 
-        <jsp:include page="fragments/modals.jsp" />
+        <frag:modals/>
     </body>
 </html>
