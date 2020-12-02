@@ -5,7 +5,7 @@
 
 <html>
 
-    <jsp:include page="fragments/headTag.jsp"/>
+    <frag:headTag/>
     <link rel="stylesheet" href="css/search.css" type="text/css">
 
     <body>

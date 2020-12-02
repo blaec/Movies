@@ -5,7 +5,7 @@
 <%@ taglib prefix="frag" tagdir="/WEB-INF/tags" %>
 
 <html>
-    <jsp:include page="fragments/headTag.jsp"/>
+    <frag:headTag/>
     <link rel="stylesheet" href="css/gallery.css" type="text/css">
     <link rel="stylesheet" href="css/card.css" type="text/css">
     <link rel="stylesheet" href="css/modals.css" type="text/css">
