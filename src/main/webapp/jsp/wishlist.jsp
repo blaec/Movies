@@ -2,9 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="frag" tagdir="/WEB-INF/tags" %>
 
 <html>
-    <jsp:include page="fragments/headTag.jsp"/>
+    <frag:headTag/>
     <link rel="stylesheet" href="css/wishlist.css" type="text/css">
     <link rel="stylesheet" href="css/card.css" type="text/css">
     <link rel="stylesheet" href="css/modals.css" type="text/css">
@@ -14,7 +15,7 @@
     <script type="text/javascript" src="js/wishlist.js" async></script>
 
     <body>
-        <jsp:include page="fragments/menu.jsp"/>
+        <frag:menu/>
 
         <jsp:useBean id="movies" scope="request" type="java.util.List<org.blaec.movies.objects.WishListDbObject>"/>
         <jsp:useBean id="totalRuntime" scope="request" type="java.lang.String"/>
@@ -40,22 +41,20 @@
                 <div class="col col-12 gallery">
                     <c:forEach var="movie" items="${movies}">
                         <jsp:useBean id="movie" type="org.blaec.movies.objects.WishListDbObject"/>
-                        <jsp:include page="fragments/card.jsp">
-                            <jsp:param name="poster" value="${movie.poster}" />
-                            <jsp:param name="rated" value="${movie.rated}" />
-                            <jsp:param name="imdbRating" value="${movie.imdbRating}" />
-                            <jsp:param name="imdbVotes" value="${movie.imdbVotes}" />
-                            <jsp:param name="runtime" value="${movie.runtime}" />
-                            <jsp:param name="year" value="${movie.year}" />
-                            <jsp:param name="size" value="---" />
-                            <jsp:param name="title" value="${movie.title}" />
-                            <jsp:param name="genre" value="${movie.genre}" />
-                            <jsp:param name="location" value="---" />
-                            <jsp:param name="updatedCaption" value="Added" />
-                            <jsp:param name="updated" value="${movie.added}" />
-                            <jsp:param name="id" value="${movie.id}" />
-                            <jsp:param name="imdbId" value="${movie.imdbId}" />
-                        </jsp:include>
+                        <frag:card poster="${movie.poster}"
+                                   rated="${movie.rated}"
+                                   imdbRating="${movie.imdbRating}"
+                                   imdbVotes="${movie.imdbVotes}"
+                                   runtime="${movie.runtime}"
+                                   year="${movie.year}"
+                                   size="---"
+                                   title="${movie.title}"
+                                   genre="${movie.genre}"
+                                   location="---"
+                                   updated="${movie.added}"
+                                   updatedCaption="Added"
+                                   id="${movie.id}"
+                                   imdbId="${movie.imdbId}"/>
                     </c:forEach>
                 </div>
             </div>
@@ -66,6 +65,6 @@
             </div>
         </footer>
 
-        <jsp:include page="fragments/modals.jsp" />
+        <frag:modals/>
     </body>
 </html>
