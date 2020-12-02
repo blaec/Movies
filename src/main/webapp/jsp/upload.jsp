@@ -36,24 +36,18 @@
                 <jsp:useBean id="cardSize" scope="request" type="org.blaec.movies.enums.CardSizeEnum"/>
                 <div class="row">
                     <div class="col-12">
-                        <jsp:include page="fragments/formCheck.jsp">
-                            <jsp:param name="isChecked" value="${cardSize == 'sm_card'}" />
-                            <jsp:param name="id" value="smCard" />
-                            <jsp:param name="value" value="sm_card" />
-                            <jsp:param name="caption" value="small" />
-                        </jsp:include>
-                        <jsp:include page="fragments/formCheck.jsp">
-                            <jsp:param name="isChecked" value="${cardSize == 'md_card'}" />
-                            <jsp:param name="id" value="mdCard" />
-                            <jsp:param name="value" value="md_card" />
-                            <jsp:param name="caption" value="medium" />
-                        </jsp:include>
-                        <jsp:include page="fragments/formCheck.jsp">
-                            <jsp:param name="isChecked" value="${cardSize == 'lg_card'}" />
-                            <jsp:param name="id" value="lgCard" />
-                            <jsp:param name="value" value="lg_card" />
-                            <jsp:param name="caption" value="large" />
-                        </jsp:include>
+                        <frag:formCheck isChecked="${cardSize == 'sm_card'}"
+                                        id="smCard"
+                                        value="sm_card"
+                                        caption="small"/>
+                        <frag:formCheck isChecked="${cardSize == 'md_card'}"
+                                        id="mdCard"
+                                        value="md_card"
+                                        caption="medium"/>
+                        <frag:formCheck isChecked="${cardSize == 'lg_card'}"
+                                        id="lgCard"
+                                        value="lg_card"
+                                        caption="large"/>
                     </div>
                 </div>
                 <div class="row mt-3">
