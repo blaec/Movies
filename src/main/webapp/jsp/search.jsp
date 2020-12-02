@@ -1,6 +1,7 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="frag" tagdir="/WEB-INF/tags" %>
 
 <html>
 
@@ -8,7 +9,7 @@
     <link rel="stylesheet" href="css/search.css" type="text/css">
 
     <body>
-        <jsp:include page="fragments/menu.jsp"/>
+        <frag:menu/>
 
         <header>
             <div class="container">

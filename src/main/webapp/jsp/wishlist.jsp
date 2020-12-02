@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="frag" tagdir="/WEB-INF/tags" %>
 
 <html>
     <jsp:include page="fragments/headTag.jsp"/>
@@ -14,7 +15,7 @@
     <script type="text/javascript" src="js/wishlist.js" async></script>
 
     <body>
-        <jsp:include page="fragments/menu.jsp"/>
+        <frag:menu/>
 
         <jsp:useBean id="movies" scope="request" type="java.util.List<org.blaec.movies.objects.WishListDbObject>"/>
         <jsp:useBean id="totalRuntime" scope="request" type="java.lang.String"/>
