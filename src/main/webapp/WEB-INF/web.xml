@@ -11,6 +11,21 @@
         <param-value>UTF-8</param-value>
     </context-param>
 
+    <filter>
+        <filter-name>GalleryRequest</filter-name>
+        <filter-class>org.blaec.movies.filters.GalleryFilter
+        </filter-class>
+        <init-param>
+            <param-name>LogFileName</param-name>
+            <param-value>UserLog.txt</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>GalleryRequest</filter-name>
+<!--        <url-pattern>*.do</url-pattern>-->
+        <servlet-name>galleryServlet</servlet-name>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>galleryServlet</servlet-name>
         <servlet-class>org.blaec.movies.web.GalleryServlet</servlet-class>
