@@ -14,7 +14,7 @@
     <servlet>
         <servlet-name>galleryServlet</servlet-name>
         <servlet-class>org.blaec.movies.web.GalleryServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>galleryServlet</servlet-name>
@@ -24,7 +24,7 @@
     <servlet>
         <servlet-name>wishListServlet</servlet-name>
         <servlet-class>org.blaec.movies.web.WishListServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+        <load-on-startup>2</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>wishListServlet</servlet-name>
@@ -44,7 +44,7 @@
     <servlet>
         <servlet-name>searchServlet</servlet-name>
         <servlet-class>org.blaec.movies.web.SearchServlet</servlet-class>
-        <load-on-startup>4</load-on-startup>
+        <load-on-startup>3</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>searchServlet</servlet-name>
